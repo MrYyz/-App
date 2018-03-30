@@ -1,0 +1,8 @@
+#app{
+    display: flex;
+    flex-direction:column;
+    #main{
+        flex:1;
+        overflow-x: hidden;
+    }
+}

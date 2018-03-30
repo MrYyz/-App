@@ -1,0 +1,8 @@
+<div id="footer">
+    <ul>
+      <li *ngFor="let lib of libs;let i = index" (click)="jumpTo(lib.route)" [class]="'footerLi'+(i+1)" [class.choose]="this.route['_routerState'].snapshot.url.slice(1)==lib.route">
+        <i></i>
+        <span>{{lib.name}}</span>
+      </li>
+    </ul>
+  </div>

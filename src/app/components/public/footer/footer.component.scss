@@ -1,0 +1,32 @@
+$num : 4;//当前footer中li个数
+#footer{
+    background-color:#fff;
+    ul{
+        display:flex;
+        // border-bottom:1px solid #ccc;
+        li{
+            flex:1;
+            height:3.5rem;
+            display:flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items:center;
+            border-top:1px solid #ccc;
+            i{
+                display: block;
+                width: 1.80rem;
+                height:1.60rem;
+                background-image:url(../../../../assets/images/footer.png);
+                background-size:100% * $num 200%;
+            }
+        }
+        // 思考：若新增一个li，是否有更好的方法适配? -- 可用以下方法处理(因为调动了图片顺序，暂不使用本方法)
+        // @for $i from 1 through $num {
+        //     .footerLi#{$i}{i{background-position-x:($i - 1) * ( 100% / ($num - 1))}}//sass运算符号前后一定要加 空格 否则会报错!!!
+        // }
+        li:nth-child(3){i{background-position:33.33% 0%;}}
+        li:nth-child(4){i{background-position:66.66% 0%;}}
+        li:nth-child(2){i{background-position:100.0% 0%;}}
+        .choose{color:#f00;i{background-position-y:100%!important;}}
+    }
+}
