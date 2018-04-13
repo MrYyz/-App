@@ -1,6 +1,21 @@
 <div id="mine">
   <div class="main">
-      <p>mine works!</p>
+      <div class="userInfo">
+          <div class="userPortrait">
+              <img src="{{userInfo.portrait?userInfo.portrait : '../../../assets/images/mine/kvrole_1.png'}}" alt="">
+              <i class="iconfont icon-survey1"></i>
+          </div>
+          <p>{{userInfo.userName}}</p>
+          <p>{{userInfo.workPlace}}</p>
+          <p>{{userInfo.zhicheng}}</p>
+          <p>{{'头衔：'+userInfo.rank}}</p>
+          <div class="experience clearfix"><p><span [style.width]='calculateWidth()'>{{userInfo.currentRich+'/'+userInfo.totalRich}}</span></p><i class="iconfont icon-help"></i></div>
+          <p>{{"打败"+userInfo.surpass+"的小伙伴"}}</p>
+      </div>
+      <custom-ul [data]='dataset'></custom-ul>
+      <div class="exitCurUser">
+          <div>安全退出</div>
+      </div>
   </div>
   <div class="footer">
       <footer></footer>

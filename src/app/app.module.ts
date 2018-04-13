@@ -18,7 +18,10 @@ import { ClassifyComponent } from './components/classify/classify.component';
 import { CartComponent } from './components/cart/cart.component';
 import { MineComponent } from './components/mine/mine.component';
 import { CarouselComponent } from './components/public/carousel/carousel.component';
-
+import { CustomUlComponent } from './components/public/custom-ul/custom-ul.component';
+import { SearchComponent } from './components/search/search.component';
+import { CoursewareComponent } from './components/courseware/courseware.component';
+import { SpinnerComponent } from './components/public/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,10 @@ import { CarouselComponent } from './components/public/carousel/carousel.compone
     CartComponent,
     MineComponent,
     CarouselComponent,
+    CustomUlComponent,
+    SearchComponent,
+    CoursewareComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

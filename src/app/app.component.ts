@@ -7,38 +7,22 @@ import * as titleReducer from './redux/reducers/title.reducer'
 import { Home, FAVORITE_ARTICLES } from './redux/models/home'
 import * as homeReducer from './redux/reducers/home.reducer'
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  // title:Observable<Title[]>;
-  // homes:Observable<Home[]>;
 
-  constructor(private store:Store<AppState>){
-    // this.title = store.select(titleReducer.getTitle);
-    // this.homes = store.select(homeReducer.getHomes);
-  }
-
-  // Ts: [{}] = [{titleContent:'HomeTest'}];
-  // test = [{titleContent:'test'}]
+  constructor(private store:Store<AppState>){ }
 
   ngOnInit(){
     setTimeout(this.giveAppHeight());
-    // console.log('---homes---',this.homes)
-    
   }
-  ngAfterViewInit() {
-    // this.Ts = this.selectState('titleState').title;
-  }
+  ngAfterViewInit() { }
 
-  showTitle(){
-    // this.router.navigate(['/students/10/admin']);
-    // this.Ts = this.selectState('titleState').title;
-    // console.log('this.Ts=',this.Ts)
-    // console.log('this.test=',this.test)
-  }
+  showTitle(){ }
 
   selectState(_shoose:string,_res?:any,_num?:number){
     if(typeof(arguments[0]) == 'string' && arguments.length == 1){
@@ -64,7 +48,7 @@ export class AppComponent implements OnInit {
   giveAppHeight(){
     var h = document.documentElement.clientHeight;
     var app = document.getElementById('app');
-    var header = document.getElementById('header');
+    var header = document.getElementById('appheader');
     var main = document.getElementById('main');
     app.style.height = h + 'px';
     main.style.height = (h-header.offsetHeight) + 'px';

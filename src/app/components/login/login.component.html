@@ -1,3 +1,22 @@
-<p>
-  login works!
-</p>
+<div class="login">
+  <div class="logo">
+    <img src="{{logoUrl}}" alt="">
+  </div>
+  <div class="usAndPwd">
+    <div class="curUserName">
+        <label for="username">用户名:</label><input type="text" placeholder="请输入您的用户名" [(ngModel)]="user" id="username" autofocus/>
+    </div>
+    <div class="curPwd">
+        <label for="password">密<em>一</em>码:</label><input type="password" minlength="6" placeholder="请输入您的密码" [(ngModel)]="psw" id="password"/>
+    </div>
+  </div>
+  <div class="btn">
+    <div class="submit" (click)="toLogin()">登录</div>
+    <div class="other clearfix">
+        <span class="register">新用户注册</span>
+        <span class="redeem">找回密码</span>
+    </div>
+  </div>
+  <!-- <p>{{user+','+psw}}</p> -->
+</div>
+<spinner *ngIf='showSpinner'></spinner>

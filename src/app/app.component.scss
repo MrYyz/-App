@@ -1,6 +1,9 @@
 #app{
+    width:100%;
+    overflow:hidden;
     display: flex;
     flex-direction:column;
+    background-color:rgba(245, 245, 245,1);
     #main{
         flex:1;
         overflow-x: hidden;

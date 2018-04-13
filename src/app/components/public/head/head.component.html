@@ -1,0 +1,18 @@
+<div *ngFor="let T of title | async">
+    <div id="header" *ngIf="T.isShowTitle && !isSearch" (click)="onClickHeader()">
+        <i *ngIf='T.isShowBack' class="iconfont icon-back"></i>
+        <p class="context">{{T.titleContent}}</p>
+        <em *ngIf='T.isShowQrCode' class="iconfont icon-qrcode"></em>
+        <em *ngIf='T.isShowPosition' class="iconfont icon-compass">定位</em>
+        <em *ngIf='T.isShowSearch' class="iconfont icon-search"></em>
+    </div>
+    <div class="search" *ngIf="isSearch" (click)="onClickHeader()">
+        <i *ngIf='T.isShowBack' class="iconfont icon-back"></i>
+        <div class="searchText">
+            <i class="iconfont icon-search i"></i>
+            <em class="iconfont icon-close" *ngIf="searchText" (click)="cleanSearchText()"></em>
+            <input type="text" placeholder="输入您要搜索的内容" [(ngModel)]='searchText' autofocus="autofocus"/>
+        </div>
+        <div class="btnSearch">搜索</div>
+    </div>
+</div>

@@ -21,24 +21,21 @@ export class FooterComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   libs:Array<object> = [
-    {name:'home',route:'home'},
-    {name:'classify',route:'classify'},
-    {name:'cart',route:'cart'},
-    {name:'nime',route:'mine'}]
+    {name:'首页',route:'home'},
+    {name:'课程',route:'classify'},
+    {name:'应用',route:'cart'},
+    {name:'我',route:'mine'}]
 
 
 
   ngOnInit() {
-    // console.log('this.route',this.route.url['_value'][0].path)
-    // console.log('this.route',this.route['_routerState'].snapshot.url)
-    
     if(this.route['_routerState'].snapshot.url == '/'){
       setTimeout(function(){document.getElementById('footer').children[0].firstElementChild.className = 'choose';})
     }
   }
 
   jumpTo(_route){
-    console.log(_route)
+    // console.log(_route)
     this.router.navigate([_route]);
   }
 

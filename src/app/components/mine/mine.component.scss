@@ -7,7 +7,93 @@
         // overflow-x:hidden; 
         // word-wrap: break-word;
         height:100%;
-
+        position:relative;
+        .userInfo{
+            background-color:rgba(245, 245, 245,1);
+            padding-bottom:0.5rem;
+            // border:1px solid #f00;
+            .userPortrait{
+                height:8rem;
+                // border:1px solid #ccc;
+                position:relative;
+                img{
+                    height:70%;
+                    position:absolute;
+                    bottom:0.5rem;
+                    left:50%;
+                    transform:translateX(-50%);
+                    border:1px solid #ccc;
+                    border-radius:50%;
+                }
+                i{
+                    width:1.8rem;
+                    height:1.8rem;
+                    line-height:1.8rem;
+                    padding-top:2px;
+                    padding-left:3px;
+                    text-align: center;
+                    position:absolute;
+                    top:0.5rem;
+                    right:0.5rem;
+                    border:1px solid rgb(136, 133, 133);
+                    border-radius:50%;
+                    font-weight:bold;
+                    font-size:1.2rem;
+                }
+            }
+            p{
+                text-align: center;
+                height:1.5rem;
+                line-height:1.5rem;
+                font-size:0.9rem;
+            }
+            .experience{
+                position:relative;
+                height:1.5rem;
+                p{
+                    width:60%;
+                    height:1rem;
+                    background-color:orange;
+                    border-radius:0.75rem;
+                    position:absolute;
+                    left:50%;
+                    top:50%;
+                    transform:translate(-50%,-50%);
+                    span{
+                        display: block;
+                        height:100%;
+                        border-radius:0.75rem;
+                        background-color:red;
+                        color:#fff;
+                        line-height:1rem;
+                    }
+                }
+                i{
+                    padding-left:83%;
+                    font-style:normal;
+                    // font-size:0.9rem;
+                    font-weight:bold;
+                }
+            }
+        }
+        .exitCurUser{
+            width:100%;
+            // border:1px solid #ccc;
+            position:absolute;
+            bottom:0;
+            div{
+                // border:1px solid #ccc;
+                width:60%;
+                margin:1rem 20%;
+                padding:0.5rem;
+                text-align: center;
+                border-radius:10px;
+                font-size:0.9rem;
+                background-color:#f00;
+                color:#fff;
+                box-shadow:1px 1px 1px 0 #E6252A;
+            }
+        }
     }
     .footer{
         width:100%;

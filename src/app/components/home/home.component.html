@@ -3,51 +3,55 @@
         <carousel></carousel>
         <div class="nav">
             <ul>
-                <li *ngFor="let navText of navTexts">
+                <li *ngFor="let navItem of navContent;let i = index" (click)="linkTo(navItem.route)">
                     <i></i>
-                    <p>{{navText}}</p>
+                    <p>{{navItem.txt}}</p>
                 </li>
             </ul>
         </div>
-        <!-- <p>home works!</p>
-        <button (click)="showJavaArticles()">Java Articles</button>
-        <button (click)="showAngularArticles()">Angular Articles</button>
-        <button (click)="showFavoriteArticles()">Favorite Articles</button>
-        <ul>
-            <li *ngFor="let item of homes | async">
-                {{item.id}} - {{item.title}} - {{item.category}}
-            </li>
-        </ul>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>
-        <p>home works!</p>   -->
+        <!-- 选项卡 -->
+        <div class="hometabcard">
+            <div class="swiper-pagination1" (click)="choose()" #pagination1></div>
+            <div class="swiper-container" id="swiper-container1">
+                <div class="swiper-wrapper">
+                    <!-- 新课抢先看 -->
+                    <div class="swiper-slide">
+                        <div *ngIf="showFirstTabCard">
+                            <div *ngFor="let courseItem of courseList;let i = index" class="newcourse clearfix">
+                                <div class="courseItemLeft"><img src="{{courseItem.image? '../../../assets/images/home/kvrole_2.png' : ''}}" alt="{{courseItem.category}}"></div>
+                                <div class="courseItemRight">
+                                    <h2>{{courseItem.title}}</h2>
+                                    <div *ngIf="courseItem.markcontent" class="courseFlag">
+                                        <span *ngIf="courseItem.finishnum=='1'">已学</span><span *ngFor="let markcontentItem of courseItem.markcontent">{{markcontentItem}}</span>
+                                    </div>
+                                    <p>
+                                        <span><i class="iconfont icon-comments"></i>{{courseItem.vc? courseItem.vc : '0'}}</span>
+                                        <span><i class="iconfont icon-code"></i>{{courseItem.pc? courseItem.pc : '0'}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 最近开班 -->
+                    <div class="swiper-slide">
+                        <div *ngIf = '!showFirstTabCard' class="realshow">
+                            <div *ngFor="let classesItem of classesList;let i = index" class="recent-class-item">
+                                <h2>{{(1+i)+'. '+classesItem.title}}</h2>
+                                <p>
+                                    <span><i class="iconfont icon-account"></i>{{classesItem.principal}}</span>
+                                    <span><i class="iconfont icon-task-management"></i>{{classesItem.traintime}}</span>
+                                </p>
+                                <div>
+                                    <img src="../../../assets/images/home/banner2.jpg" alt="默认图片"/>
+                                    <span *ngIf="classesItem.iscompletion == '0'">正在进行</span>
+                                </div>
+                                <p><i class="iconfont icon-map"></i>{{'位置：'+classesItem.address}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="footer">
         <footer></footer>

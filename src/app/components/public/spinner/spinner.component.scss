@@ -1,0 +1,52 @@
+.indicator{
+    width:100px;
+    height:100px;
+    // border:1px solid #ccc;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:0.9rem;
+    padding:15px;
+    .indicator-wrapper{
+        // border:1px solid #f00;
+        width:70px;
+        height:70px;
+        .indicator-spin{
+            display: block;
+            width:40px;
+            height:40px;
+            // border:1px solid #f0f;
+            margin-left:15px;
+            .spinner-snake{
+                width:100%;
+                height:100%;
+                border:5px solid #ccc;
+                border-radius:50%;
+                border-bottom-color:transparent;
+                transform-origin:50% 50%;
+            }
+        }
+        .indicator-text{
+            height:20px;
+            // width:100%;
+            margin-left:15px;
+            line-height:20px;
+            text-align: center;
+            font-size:0.9rem;
+            position:absolute;
+            bottom:15px;
+        }
+    }
+    // 蒙层
+    .indicator-mask{
+        width:100vw;
+        height:100vh;
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        background-color:rgba(204, 204, 204,.3);
+        z-index:-1;
+    }
+}

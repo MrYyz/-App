@@ -1,0 +1,11 @@
+<ul class="custom-ul">
+  <li *ngFor="let dataItem of data;let idx = index;" (click)="getRoute(dataItem.route)">
+    <div>
+      <img src="{{dataItem.url ? '../../../../assets/images/adhibition/c'+dataItem.url+'.png' : ''}}" alt="">
+    </div>
+    <p>
+        {{dataItem.txt}}
+        <i class="iconfont icon-more" *ngIf="dataItem.showIcon? dataItem.showIcon : true"></i>
+    </p>
+  </li>
+</ul>

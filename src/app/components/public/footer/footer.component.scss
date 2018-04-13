@@ -6,12 +6,13 @@ $num : 4;//当前footer中li个数
         // border-bottom:1px solid #ccc;
         li{
             flex:1;
-            height:3.5rem;
+            height:3.125rem;
             display:flex;
             flex-direction:column;
             justify-content: center;
             align-items:center;
             border-top:1px solid #ccc;
+            font-size:0.9rem;
             i{
                 display: block;
                 width: 1.80rem;
