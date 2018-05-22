@@ -6,6 +6,8 @@ import { AppState, Title } from '../../redux/app.states';
 import * as titleReducer from '../../redux/reducers/title.reducer';
 
 import * as Swiper from '../../../assets/js/swiper-4.1.0.min.js';
+
+import { firstChoice } from '../../utils/util';
 declare var require: any;
 
 @Component({
@@ -253,7 +255,7 @@ export class ClassifyComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch({type:'setTitle',payload:this.classifyTitle});
     this.showClassifyTabCard();
-    this.firstChoice();
+    firstChoice(this.pagination2.nativeElement);
     this.setEmptyHeight();
   }
   /**
@@ -266,10 +268,10 @@ export class ClassifyComponent implements OnInit {
       on:{
         slideChange: function () {
           this.curTabCardIdx = swiper2['activeIndex'];
-          // console.log(this.curTabCardIdx)
+          console.log('curTabCardIdx=',this.curTabCardIdx)
           // this.showFirstTabCard = !this.showFirstTabCard;
           // console.log(this.showFirstTabCard);
-          this.firstChoice();
+          firstChoice(this.pagination2.nativeElement);
         }.bind(this),
       },
       pagination:{
@@ -277,29 +279,17 @@ export class ClassifyComponent implements OnInit {
         clickable:true,
         renderBullet:function(index,className){
           let contentList:string[] = ['最新发布','最多浏览','最多点赞'];
-          let spanStyle:string = 'display:inline-block;width:33.333%;text-align:center;height:2.5rem;line-height:2.5rem;';
+          let spanStyle:string = 'display:inline-block;width:33.333%;text-align:center;height:3rem;line-height:3rem;';
           return '<span class="'+className+'" style="'+spanStyle+'">'+contentList[index]+'</span>';
         }
       }
     })
   }
   /**
-   * 功能简介：默认选中[新课抢先看]
-   * @memberof HomeComponent
+   * 显示/隐藏 -- 更多分类信息
+   * @param {any} e 事件源对象
+   * @memberof ClassifyComponent
    */
-  firstChoice(){// T_T?为什么会变成操纵dome节点?
-    var pagination = this.pagination2.nativeElement;
-    var spans = pagination.children;
-    for(let i=0;i<spans.length;i++){
-        spans[i].style['border-bottom'] = 'none';
-    }
-    for(let i=0;i<spans.length;i++){
-      if(spans[i].className == 'swiper-pagination-bullet swiper-pagination-bullet-active'){
-        spans[i].style['border-bottom'] = '0.15rem solid #E52425';
-      }
-    }
-  }
-
   hideShowMore(e){
     e = e || window.event;
     var target = e.target;
@@ -318,5 +308,4 @@ export class ClassifyComponent implements OnInit {
     var classesBox = document.getElementsByClassName('classesBox')[0];
     var slice = document.getElementsByClassName('classifytabcard')[0];
   }
-  
 }

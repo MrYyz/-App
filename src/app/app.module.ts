@@ -2,11 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RootRouter } from './router/router.js'
+import { RootRouter } from './router/router.js';
 
 import { StoreModule } from '@ngrx/store'
-import { reducers, metaReducers } from './redux/app.reducers'
+import { reducers, metaReducers } from './redux/app.reducers';
 // import { reducer } from './app.state'
+import { RangePipe, ToArrPipe } from './pipe/user-default.pipe';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -20,8 +21,11 @@ import { MineComponent } from './components/mine/mine.component';
 import { CarouselComponent } from './components/public/carousel/carousel.component';
 import { CustomUlComponent } from './components/public/custom-ul/custom-ul.component';
 import { SearchComponent } from './components/search/search.component';
-import { CoursewareComponent } from './components/courseware/courseware.component';
 import { SpinnerComponent } from './components/public/spinner/spinner.component';
+import { AdvertisingComponent } from './components/public/advertising/advertising.component';
+import { RulesComponent } from './components/rules/rules.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
+import { CourseDetailComponent } from './components/course-detail/course-detail.component';
 
 @NgModule({
   declarations: [
@@ -37,8 +41,14 @@ import { SpinnerComponent } from './components/public/spinner/spinner.component'
     CarouselComponent,
     CustomUlComponent,
     SearchComponent,
-    CoursewareComponent,
     SpinnerComponent,
+    AdvertisingComponent,
+    RulesComponent,
+    UserInfoComponent,
+    CourseDetailComponent,
+
+    RangePipe,
+    ToArrPipe,
   ],
   imports: [
     BrowserModule,

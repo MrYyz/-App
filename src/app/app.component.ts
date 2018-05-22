@@ -7,22 +7,29 @@ import * as titleReducer from './redux/reducers/title.reducer'
 import { Home, FAVORITE_ARTICLES } from './redux/models/home'
 import * as homeReducer from './redux/reducers/home.reducer'
 
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent implements OnInit {
 
-  constructor(private store:Store<AppState>){ }
+  constructor(private store:Store<AppState>,private route:ActivatedRoute,private router:Router){ }
 
   ngOnInit(){
-    setTimeout(this.giveAppHeight());
+    // setTimeout(this.giveAppHeight());
+    this.isNotLogined();
   }
-  ngAfterViewInit() { }
+  ngAfterViewInit() {setTimeout(this.giveAppHeight());}
 
-  showTitle(){ }
+  isNotLogined(){ 
+    if(!window.localStorage.getItem('user')){
+      this.router.navigate(['/login'])
+    }
+  }
 
   selectState(_shoose:string,_res?:any,_num?:number){
     if(typeof(arguments[0]) == 'string' && arguments.length == 1){
@@ -51,6 +58,10 @@ export class AppComponent implements OnInit {
     var header = document.getElementById('appheader');
     var main = document.getElementById('main');
     app.style.height = h + 'px';
-    main.style.height = (h-header.offsetHeight) + 'px';
+    if(header){
+      main.style.height = (h-50) + 'px';
+    }else{
+      main.style.height = (h-header.offsetHeight) + 'px';
+    }
   }
 }

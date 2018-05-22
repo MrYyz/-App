@@ -1,0 +1,40 @@
+.advertising{
+    width:100vw;
+    height:100vh;
+    position:relative;
+    .timeout{
+        position: absolute;
+        top:1rem;
+        right:1rem;
+        z-index:10;
+        font-size:0.8rem;
+        width:1.625rem;
+        height:1.625rem;
+        line-height:1.625rem;
+        border-radius:0.8125rem;
+        text-align: center;
+        background-color:rgba(204, 204, 204, 0.3);
+    }
+    .two{//下图
+        width:100%;
+        height:100%;
+        background-color:#ffd;
+        img{
+            width:100%;
+            height:100%;
+        }
+    }
+    .one{//上图
+        width:100%;
+        height:80%;
+        position:absolute;
+        top:0;
+        left:50%;
+        transform:translateX(-50%);
+        background:#dfd;
+        img{
+            width:100%;
+            height:100%;
+        }
+    }
+}

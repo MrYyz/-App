@@ -1,5 +1,5 @@
 #header{
-    border-bottom:1px solid rgba(255,48,48,0.5);
+    border-bottom:1px solid #CC2F2A;
     letter-spacing:4px;
     color:#CC2F2A;
     font-weight:bold;
@@ -9,6 +9,7 @@
     line-height:3.125rem;
     text-align: center;
     position:relative;
+    background-color:#fff;
     i{
         width:2.5rem;
         height:3.125rem;
@@ -25,17 +26,20 @@
         font-size:1.4rem;
         width:100%;
     }
-    em{ 
-        float:right;
-        font-size:1.4rem;
-        height:3.125rem;
-        line-height:3.125rem;
-        width:2.2rem;
+    span{
         position:absolute;
         top:0;right:0;
-     }
-     em:nth-child(4){right:2.2rem;}
-     em:nth-child(5){right:4.4rem;}
+        em{ 
+            float:right;
+            font-size:1.4rem;
+            height:3.125rem;
+            line-height:3.125rem;
+            width:2.2rem;
+         }
+        //  em:nth-child(4){right:2.2rem;}
+        //  em:nth-child(5){right:4.4rem;}
+
+    }
 }
 .search{
     // border-bottom:1px solid rgba(255,48,48,0.5);

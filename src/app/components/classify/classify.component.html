@@ -24,7 +24,7 @@
         <div class="swiper-wrapper">
           <!-- 最新发布 -->
           <div class="swiper-slide">
-            <div class="empty" *ngIf='!lastistRelease'>
+            <div class="empty" *ngIf='!lastistRelease' [style.backgroundColor]="lastistRelease? '': 'rgba(245, 245, 245,1)'">
               <img [src]="emptyImg" alt=""/>
             </div>
             <ng-template ngFor let-lastistItem [ngForOf]='lastistRelease' let-i="index" *ngIf="curTabCardIdx == 0">
@@ -48,7 +48,7 @@
           </div>
           <!-- 最多浏览 -->
           <div class="swiper-slide">
-            <div class="empty" *ngIf='!mostBrowse'>
+            <div class="empty" *ngIf='!mostBrowse' [style.backgroundColor]="mostBrowse? '': 'rgba(245, 245, 245,1)'">
               <img [src]="emptyImg" alt=""/>
             </div>
             <ng-template ngFor let-browseItem [ngForOf]='mostBrowse' let-i="index" *ngIf="curTabCardIdx == 1">
@@ -71,7 +71,7 @@
             </ng-template>
           </div>
           <!-- 最多点赞 -->
-          <div class="swiper-slide">
+          <div class="swiper-slide" [style.backgroundColor]="mostLike? '': 'rgba(245, 245, 245,1)'">
             <div class="empty" *ngIf='!mostLike'>
               <img [src]="emptyImg" alt=""/>
             </div>

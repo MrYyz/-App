@@ -2,9 +2,12 @@
     <div id="header" *ngIf="T.isShowTitle && !isSearch" (click)="onClickHeader()">
         <i *ngIf='T.isShowBack' class="iconfont icon-back"></i>
         <p class="context">{{T.titleContent}}</p>
-        <em *ngIf='T.isShowQrCode' class="iconfont icon-qrcode"></em>
-        <em *ngIf='T.isShowPosition' class="iconfont icon-compass">定位</em>
-        <em *ngIf='T.isShowSearch' class="iconfont icon-search"></em>
+        <span class="clearfix">
+                <em *ngIf='T.isShowQrCode' class="iconfont icon-qrcode"></em>
+                <em *ngIf='T.isShowPosition' class="iconfont icon-compass">定位</em>
+                <em *ngIf='T.isShowSearch' class="iconfont icon-search"></em>
+                <em *ngIf='T.isShowCollect' class="iconfont icon-favorite"></em>
+        </span>
     </div>
     <div class="search" *ngIf="isSearch" (click)="onClickHeader()">
         <i *ngIf='T.isShowBack' class="iconfont icon-back"></i>

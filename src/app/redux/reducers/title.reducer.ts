@@ -24,6 +24,7 @@ export function reducer(state = initialState, action:SetTitleAction): TitleState
                 isShowQrCode: false,
                 isShowSearch: false,
                 isShowPosition: false,
+                isShowCollect: false,
             }
             var lastPayload:object = action.payload[0];
             action.payload = [];

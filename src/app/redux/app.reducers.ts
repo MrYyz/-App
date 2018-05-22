@@ -3,12 +3,16 @@ import { AppState } from './app.states';
 
 import * as homeReducer from './reducers/home.reducer';
 import * as titleReducer from './reducers/title.reducer';
+import * as userInfoReducer from './reducers/userInfo.reducer';
+import * as dataListReducer from './reducers/dataList.reducer';
 
 import { environment } from '../../environments/environment';
 
 export const reducers: ActionReducerMap<AppState> = {
     homeState: homeReducer.reducer,
-    titleState: titleReducer.reducer
+    titleState: titleReducer.reducer,
+    userInfoState: userInfoReducer.reducer,
+    dataListState: dataListReducer.reducer
 };
 
 export function logger(reducer: ActionReducer<AppState>): ActionReducer<AppState> {

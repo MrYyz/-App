@@ -62,6 +62,10 @@ export class HeadComponent implements OnInit {
       case 'btnSearch':
         
         break;
+      // 执行收藏功能
+      case 'iconfont icon-favorite':
+        
+      break;
       default:
         console.log(e.target.className)
     }
@@ -73,7 +77,7 @@ export class HeadComponent implements OnInit {
     history.back();
   }
 
-  openSearch(){console.log('running openSearch')
+  openSearch(){
     this.isSearch = true;
     this.router.navigate(['/search'])
   }

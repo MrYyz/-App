@@ -1,0 +1,146 @@
+<div id="courseDetail">
+  <div class="courseHeader clearfix" *ngIf="courseHeaderData">
+    <div class="left">
+      <img src="{{courseHeaderData._image}}" alt="图片"  onerror="this.src='../../../assets/images/empty.png'">
+    </div>
+    <div class="right clearfix">
+      <h2>{{courseHeaderData._title}}</h2>
+      <div class="boxleft">
+        <p>学分&nbsp;&nbsp;{{courseHeaderData._credit}}</p>
+        <p>浏览&nbsp;&nbsp;{{courseHeaderData._vc?courseHeaderData._vc:'0'}}</p>
+      </div>
+      <div class="boxright" (click)="hateAndLike()">
+        <span [class.choose]="courseHeaderData._israted == '1'"><i class="iconfont icon-good"></i>{{courseHeaderData._pv?courseHeaderData._pv:'0'}}<em class="addMe"></em></span>
+        <span [class.choose]="courseHeaderData._isStepOned == '1'"><i class="iconfont icon-bad"></i>{{courseHeaderData._sc?courseHeaderData._sc:'0'}}<em class="addMe"></em></span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 选项卡 -->
+  <div class="courseDetailTabCard">
+    <div class="swiper-pagination3" #pagination3></div>
+    <div class="swiper-container" id="swiper-container3">
+      <div class="swiper-wrapper">
+        <!-- 目录 -->
+        <div class="swiper-slide">
+          <div class="empty" *ngIf='!coursewareList' [style.backgroundColor]="lastistRelease? '': 'rgba(245, 245, 245,1)'">
+            <img [src]="emptyImg" alt=""/>
+          </div>
+          <ng-template *ngIf="coursewareList" ngFor let-coursewareItem [ngForOf]='[] | toArr:coursewareList' let-i="index">
+            <div class="catalogue">
+              <h3><span>{{i+1 + '.'}}</span>{{coursewareItem._title}}</h3>
+              <p [ngSwitch]="coursewareItem._islearned" class="remarks">
+                <span *ngSwitchCase='1' style="color:green;">
+                  <i>已学</i>
+                  <i *ngIf='coursewareItem._userscore != ""'>{{'，考试成绩'+coursewareItem._userscore+'分'}}</i>
+                </span>
+                <span *ngSwitchCase='0' style="color:#888;">
+                  <i *ngIf="coursewareItem._learnedtime == '0'" style="color:rgb(250, 200, 120);">未学过</i>
+                  <i *ngIf="coursewareItem._learnedtime != '0'">{{'课件时长'+coursewareItem._playtime+'秒，已学'+coursewareItem._learnedtime+'秒，剩余'+(coursewareItem._playtime-coursewareItem._learnedtime)+'秒'}}</i>
+                  
+                </span>
+              </p>
+              <div [ngSwitch]="coursewareItem._type" class="kind clearfix">
+                <span *ngSwitchCase="'text/we'">微课</span>
+                <span *ngSwitchCase="'text/ppt'">PPT</span>
+                <span *ngSwitchCase="'video/mp4'">视频</span>
+                <span *ngSwitchCase="'audio/mp3'">MP3</span>
+                <span *ngSwitchCase="'text/html'">图文</span>
+                <span *ngSwitchCase="'application/pdf'">PDF</span>
+                <span *ngSwitchDefault>{{coursewareItem._type}}</span>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+        <!-- 简介 -->
+        <div class="swiper-slide">
+          <div *ngIf="courseHeaderData" class="synopsis">
+            <div class="tally">
+              <h3>标签：</h3>
+              <p [innerHTML]='this.sanitizer.bypassSecurityTrustHtml(this.tallyToHtml)'></p>
+            </div>
+            <div class="intro">
+              <h3>介绍：</h3>
+              <p>{{courseHeaderData._description?courseHeaderData._description:'暂无'}}</p>
+            </div>
+          </div>
+        </div>
+        <!-- 评论 -->
+        <div class="swiper-slide">
+          <!-- 240协议请求评论内容
+          252协议发送【自评价星级】 -->
+<!-- 数据 在 【课程介绍】 里
+          综合星级:_commonstar
+          评星人数:_starcount
+          自评星级:_mystar -->
+          <div class="comment">
+            <div class="firstFloor clearfix" *ngIf="courseHeaderData">
+              <div><label>综合星级</label>{{courseHeaderData._commonstar}}<i class="iconfont icon-favoritesfilling"></i></div>
+              <div><label>评星人数</label>{{courseHeaderData._starcount}}</div>
+              <div><label>自评星级</label>
+                <ng-template *ngIf="courseHeaderData" ngFor let-item [ngForOf]="[] | toArr: 5" let-idx="index"><i class="iconfont icon-favoritesfilling" [style.color]="idx+1<=courseHeaderData._mystar?'rgb(255, 165, 0)':''" (click)="yourStars(idx,courseHeaderData['_mystar'])"></i></ng-template>
+              </div>
+              <div [ngSwitch]="courseHeaderData._mystar" *ngIf="courseHeaderData">
+                <label *ngSwitchCase="1">(ノω<。)☆.。无力吐槽</label>
+                <label *ngSwitchCase="2">/(ㄒoㄒ)/~~实在难受</label>
+                <label *ngSwitchCase="3">(￣▽￣)"可以接受吧</label>
+                <label *ngSwitchCase="4">O(∩_∩)O 还不错</label>
+                <label *ngSwitchCase="5">(●'◡'●)超棒</label>
+                <label *ngSwitchDefault></label>
+              </div>
+            </div>
+            <div class="secondFloor">
+              <p *ngIf="courseComment && !courseComment.item">暂无内容</p>
+              <ng-template *ngIf="courseComment && courseComment.item" ngFor let-courseCommentItem [ngForOf]="[] | toArr:courseComment.item" let-i="index">
+                <!-- 单个评论div -->
+                <div class="courseCommentDiv clearfix">
+                  <div class="left">
+                    <img src="../../../assets/images/user.png" alt="默认头像">
+                    <p>{{courseCommentItem._datetime
+                      }}</p>
+                  </div>
+                  <div class="right">
+                    <div class="clearfix">
+                      <span>{{courseCommentItem._fullname}}</span>
+                      <div class="likeAndReply">
+                          <span [style.color]="courseCommentItem._isliked==1?'#CC2F2A':''" [style.borderColor]="courseCommentItem._isliked==1?'#CC2F2A':''" (click)="likeThisComment(courseCommentItem._isliked,courseCommentItem)"
+                          ><i class="iconfont icon-good-filling"></i>{{courseCommentItem._pv}}</span>
+                          <span (click)="submitTheComment(courseCommentItem)"><i class="iconfont icon-code"></i>{{courseCommentItem._reply}}</span>
+                        </div>
+                      </div>
+                    <div class="courseComment">
+                      <u>
+                        {{courseCommentItem._comment}}
+                        <i *ngIf="courseCommentItem.item"></i>
+                      </u>
+                      <!-- 评论回复 -->
+                      <ul *ngIf="courseCommentItem.item">
+                        <ng-template ngFor let-commentLi [ngForOf]="[] | toArr:courseCommentItem.item">
+                          <li>
+                            <div>
+                                <p>{{commentLi._fullname}}<span>{{commentLi._datetime}}</span>
+                                </p>
+                                <p>{{commentLi._comment}}</p>
+                            </div>
+                          </li>
+                        </ng-template>
+                      </ul>
+                    </div>
+                    
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+            <div class="thirdFloor clearfix">
+              <div>
+                <input class="myComment" type="text" placeholder="{{replyComments?'回复:'+replyComments:'我来评论'}}" [(ngModel)]="commentMsg">
+              </div>
+              <div class="submitComment" [class.red]="commentMsg" (click)="submitTheComment()">发送</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<spinner *ngIf='showSpinner'></spinner>

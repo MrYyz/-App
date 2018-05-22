@@ -1,51 +1,60 @@
 <div id="home">
     <div class="main">
-        <carousel></carousel>
+        <carousel [carouselDataFromHomePage]="carouselData"></carousel>
         <div class="nav">
-            <ul>
-                <li *ngFor="let navItem of navContent;let i = index" (click)="linkTo(navItem.route)">
-                    <i></i>
-                    <p>{{navItem.txt}}</p>
+            <ul class="navUL">
+                <li *ngFor="let navItem of navContent;let i = index" (click)="linkTo(navItem)">
+                    <i>
+                        <img src="{{navItem._image}}" alt="" onerror="this.src='../../../assets/images/home/banner_default.jpg'">
+                    </i>
+                    <p>{{navItem._title}}</p>
                 </li>
             </ul>
         </div>
         <!-- 选项卡 -->
         <div class="hometabcard">
-            <div class="swiper-pagination1" (click)="choose()" #pagination1></div>
+            <div class="swiper-pagination1" #pagination1></div>
             <div class="swiper-container" id="swiper-container1">
                 <div class="swiper-wrapper">
                     <!-- 新课抢先看 -->
-                    <div class="swiper-slide">
-                        <div *ngIf="showFirstTabCard">
-                            <div *ngFor="let courseItem of courseList;let i = index" class="newcourse clearfix">
-                                <div class="courseItemLeft"><img src="{{courseItem.image? '../../../assets/images/home/kvrole_2.png' : ''}}" alt="{{courseItem.category}}"></div>
+                    <div class="swiper-slide" [style.background]="courseList?'':'rgba(245, 245, 245,1)'">
+                        <div *ngIf="showFirstTabCard" class="newcourse">
+                        <!-- <div class="newcourse"> -->
+                            {{courseList?'':'暂无消息'}}
+                            <div *ngFor="let courseItem of [] | toArr:courseList;let i = index" class="newcourse-item clearfix"  (click)="linkTo(courseItem)">
+                                <div class="courseItemLeft"><img src="{{courseItem._image}}" onerror="this.src='../../../assets/images/course_default.png'" alt="{{courseItem._category}}"></div>
                                 <div class="courseItemRight">
-                                    <h2>{{courseItem.title}}</h2>
-                                    <div *ngIf="courseItem.markcontent" class="courseFlag">
-                                        <span *ngIf="courseItem.finishnum=='1'">已学</span><span *ngFor="let markcontentItem of courseItem.markcontent">{{markcontentItem}}</span>
+                                    <h2>{{courseItem._title}}</h2>
+                                    <div *ngIf="courseItem._markcontent" class="courseFlag">
+                                        <span *ngIf="courseItem._finishnum=='1'">已学</span><span *ngFor="let markcontentItem of [] | toArr:courseItem._markcontent">{{markcontentItem}}</span>
                                     </div>
                                     <p>
-                                        <span><i class="iconfont icon-comments"></i>{{courseItem.vc? courseItem.vc : '0'}}</span>
-                                        <span><i class="iconfont icon-code"></i>{{courseItem.pc? courseItem.pc : '0'}}</span>
+                                        <span><i class="iconfont icon-comments"></i>{{courseItem._vc? courseItem._vc : '0'}}</span>
+                                        <span><i class="iconfont icon-code"></i>{{courseItem._pc? courseItem._pc : '0'}}</span>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- 最近开班 -->
-                    <div class="swiper-slide">
+                    <div class="swiper-slide" [style.background]="classesList?'':'rgba(245, 245, 245,1)'">
                         <div *ngIf = '!showFirstTabCard' class="realshow">
-                            <div *ngFor="let classesItem of classesList;let i = index" class="recent-class-item">
-                                <h2>{{(1+i)+'. '+classesItem.title}}</h2>
+                        <!-- <div class="realshow"> -->
+                            {{classesList?'':'暂无消息'}}
+                            <div *ngFor="let classesItem of [] | toArr:classesList;let i = index" class="recent-class-item" (click)="linkTo(classesItem)">
+                                <h2>{{classesItem._title}}</h2>
                                 <p>
-                                    <span><i class="iconfont icon-account"></i>{{classesItem.principal}}</span>
-                                    <span><i class="iconfont icon-task-management"></i>{{classesItem.traintime}}</span>
+                                    <span><i class="iconfont icon-account"></i>{{classesItem._classteachername}}</span>
+                                    <span><i class="iconfont icon-task-management"></i>{{classesItem._traintime}}</span>
                                 </p>
                                 <div>
-                                    <img src="../../../assets/images/home/banner2.jpg" alt="默认图片"/>
-                                    <span *ngIf="classesItem.iscompletion == '0'">正在进行</span>
+                                    <img src="{{classesItem._icon}}" onerror="this.src='../../../assets/images/train_default.png'" alt="默认图片"/>
+                                    <!-- <span *ngIf="classesItem._flag == 'applytrain' && classesItem._state == '1' ">报名中</span>
+                                    <span *ngIf="classesItem._flag == 'applytrain' && classesItem._state == '0' ">正在进行</span>
+                                    <span *ngIf="classesItem._flag == 'applytrain'">您是班主任</span> -->
+                                    <span *ngIf="classesItem._flag=='applytrain'&&classesItem._state">{{classesItem._state == '1'?'即将开班':(classesItem._state == '0'?'正在进行':'已结束')}}</span>
                                 </div>
-                                <p><i class="iconfont icon-map"></i>{{'位置：'+classesItem.address}}</p>
+                                <p><i class="iconfont icon-map"></i>{{'位置：'+classesItem._address}}</p>
                             </div>
                         </div>
                     </div>
@@ -57,3 +66,82 @@
         <footer></footer>
     </div>
 </div>
+<spinner *ngIf="showSpinner"></spinner>
+
+
+
+
+
+<!-- 
+{
+    "_id":"20180514085610e06a4f349694dd00cd8366","_flag":"course","_title":"testmp4","_image":"http://218.13.4.182:28002/mlp/api/resources/img/01.png","_thumbs":"http://218.13.4.182:28002/mlp/api/resources/img/01.png","_largeimage":"",
+    "_type":"",
+    "_coursewarecount":"1",
+    "_finishnum":"0",
+    "_url":"",
+    "_pubdate":"3天前",
+    "_vc":"5",
+    "_pv":"1",
+    "_sc":"0",
+    "_commentcount":"2",
+    "_enablecomment":"1",
+    "_enabledownload":"0",
+    "_enablerating":"1",
+    "_enableshare":"0",
+    "_credit":"5.0",
+    "_description":"",
+    "_category":"管理能力",
+    "_tag":"",
+    "_specialtopic":"",
+    "_mycompany":"1",
+    "_studyduration":"0",
+    "_studyprogress":"0",
+    "_laststudydate":"0",
+    "_israted":"0",
+    "_model":"0",
+    "_markid":"",
+    "_markcontent":"",
+    "_commonstar":"5",
+    "_mystar":"0",
+    "_author":"",
+    "_language":"",
+    "_coursetype":"管理能力",
+    "_courselevel":"",
+    "_developtime":"",
+    "_courseversion":"",
+    "_starcount":"1",
+    "_isfavorited":"0",
+    "_isStepOned":"0",
+    "_shareurl":"http://218.13.4.182:28002/mlp/api/share!shareCourse.do?id=20180514085610e06a4f349694dd00cd8366"
+}
+ -->
+
+
+
+
+ <!-- {
+     "_trainid":"201805110959250605184aaeac0c1b7f7aa1",
+     "_applyid":"20180511095937bc1a3294717b004c81f168",
+     "_title":"测试专用TEST",
+     "_appliednum":"2",
+     "_planperson":"11",
+     "_address":"QQ",
+     "_iscompletion":"0",
+     "_state":"0",
+     "_tablist":"公告,签到,课程,练习,考试,调研,评估,评论,作业|info,sign,course,exercise,exam,survey,evaluation,comment,homework",
+     "_validtime":"13",
+     "_flag":"noapplytrain",
+     "_icon":"http://218.13.4.182:28002/mlp/api/resources/img/peixunban_01.png",
+     "_classteachername":"管理员^",
+     "_traintime":"2018-05-11 09:59~2018-05-23 09:59"
+    }
+ -->
+
+
+
+
+
+
+
+
+

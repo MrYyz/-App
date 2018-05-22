@@ -1,5 +1,27 @@
 <div class="swiper-container" id="swiper-container0">
     <div class="swiper-wrapper">
+        <ng-template ngFor let-carouselItem [ngForOf]='carouselDataFromHomePage' let-i='index'>
+            <div class="swiper-slide" (click)="linkTo(carouselItem)">
+                <div class="carousel">
+                    <img src="{{carouselItem._image}}" onerror="this.src='../../../../assets/images/home/banner_default.jpg'" alt="">
+                    <p *ngIf="carouselItem._title">{{carouselItem._title}}</p>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+    
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+    
+    <!-- 如果需要导航按钮 -->
+    <!-- <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div> -->
+    
+    <!-- 如果需要滚动条 -->
+    <!-- <div class="swiper-scrollbar"></div> -->
+
+    <!-- 万一没有数据传过来 -->
+    <div class="swiper-wrapper" *ngIf="!carouselDataFromHomePage">
         <div class="swiper-slide">
             <img src="../../../../assets/images/home/kvrole_3.png" alt="pic1">
             <img src="../../../../assets/images/home/kvrole_1.png" alt="pic2">
@@ -9,13 +31,4 @@
             <img src="../../../../assets/images/home/kvrole_4.png" alt="pic4">
         </div>
     </div>
-    <!-- 如果需要分页器 -->
-    <div class="swiper-pagination"></div>
-    
-    <!-- 如果需要导航按钮 -->
-    <!-- <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div> -->
-    
-    <!-- 如果需要滚动条 -->
-    <!-- <div class="swiper-scrollbar"></div> -->
 </div>

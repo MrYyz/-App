@@ -14,7 +14,7 @@ export class CustomUlComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    console.log(this.data)
+    // console.log(this.data)
   }
   getRoute(_route){
     this.router.navigate(['/'+_route]);

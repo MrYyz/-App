@@ -6,8 +6,11 @@ import { ClassifyComponent } from '../components/classify/classify.component';
 import { CartComponent } from '../components/cart/cart.component';
 import { MineComponent } from '../components/mine/mine.component';
 import { SearchComponent } from '../components/search/search.component';
-import { CoursewareComponent } from '../components/courseware/courseware.component';
+import { CourseDetailComponent } from '../components/course-detail/course-detail.component';
 import { SpinnerComponent } from '../components/public/spinner/spinner.component';
+import { AdvertisingComponent } from '../components/public/advertising/advertising.component';
+import { RulesComponent } from '../components/rules/rules.component';
+import { UserInfoComponent } from '../components/user-info/user-info.component';
 
 const appRoutes: Routes = [
     { path:'',component:HomeComponent },
@@ -18,7 +21,10 @@ const appRoutes: Routes = [
     { path:'login',component:LoginComponent },
     { path:'search',component:SearchComponent },
     { path:'spinner',component:SpinnerComponent },
-    { path:'courseware/:id/:name',component:CoursewareComponent },
+    { path:'coursedetail/:id/:name',component:CourseDetailComponent },
+    { path:'advertising',component:AdvertisingComponent },
+    { path:'rules',component:RulesComponent },
+    { path:'userinfo',component:UserInfoComponent },
     { path:'**',component:NotFoundComponent },
 ]
 

@@ -3,277 +3,227 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as fromHomeActions from '../../redux/actions/home.actions'
-import { AppState, Title } from '../../redux/app.states'
+import { AppState, Title, getState } from '../../redux/app.states'
 import * as titleReducer from '../../redux/reducers/title.reducer'
 
 import * as Swiper from '../../../assets/js/swiper-4.1.0.min.js';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router'
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
+import { firstChoice,getMinHeight } from '../../utils/util'
+import { httpRequest,BaseComponent } from '../../utils/http'
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  providers:[httpRequest]
 })
-export class HomeComponent implements OnInit {
-  // homes:Observable<Home[]>;
+export class HomeComponent extends BaseComponent implements OnInit {
+
   title:Observable<Title[]>;
+
+  @ViewChild('pagination1') pagination1: ElementRef;
   
-  // 喜爱的文章--测试
-  // article = [ {id:1,title:'test article 1',category:'java'}];
+  constructor(private store:Store<AppState>,private route:ActivatedRoute,private router:Router,private request:httpRequest) {
+    super()
+    this.title = store.select(titleReducer.getTitle);
+  }
+
+  // 轮播图数据
+  carouselData:[{}] = [{}];
   // 导航内容
-  navTexts:string[] = ['未完成课程','收藏的课程','考试中心','培训班'];
   navContent:object[] = [
-    {txt:'未完成课程',route:'notlearned'},
-    {txt:'收藏的课程',route:'collectcourse'},
-    {txt:'考试中心',route:'testcenter'},
-    {txt:'培训班',route:'trainingclass'},
+    {_title:'未完成课程',route:'unfinishedcourse',_flag: 'unfinished_course'},
+    {_title:'收藏的课程',route:'collectcourse',_flag: 'collect'},
+    {_title:'考试中心',route:'examcenter',_flag: 'exam'},
+    {_title:'培训班',route:'traincourse',_flag: 'train'},
   ];
   // 头部参数
   homeTitle: [{}] =[ {
     isShowTitle:true,
-    isShowBack: true,
+    isShowBack: false,
     titleContent: '主页',
     isShowQrCode: true,
     isShowSearch: true,
   }];
+  // 是否需要显示第一张tabcard
   showFirstTabCard:boolean = true;
-  t:any;
 
   // 【新课抢先看】模拟数据
   courseList:object[] = [
     {
-      author:'梁馨灵',
-      category:'管理能力',
-      commentcount:'5',
-      commontstar:'0',
-      courselevel:'',
-      coursetype:'管理能力',
-      courseversion:'',
-      coursewarecount:'1',
-      credit:'10.0',
-      description:'小灵提示您，本信息为测试专用',
-      developtime:'',
-      enablecomment:'1',
-      enabledownload:'0',
-      enablerating:'1',
-      enableshare:'0',
-      finishnum:'1',
-      flag:'course',
-      id:'20180404swafo831k25lj19ufas98efy1241k4hk1',
-      image:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1011752784,1088584800&fm=27&gp=0.jpg',
-      isfavorited:'0',
-      israted:'0',
-      issteponed:'0',
-      language:'',
-      largeimage:'',
-      laststudydate:'0',
-      markcontent:['选修','重点','测试','好好练习'],
+      _author:'梁馨灵',
+      _category:'管理能力',
+      _commentcount:'5',
+      _commontstar:'0',
+      _courselevel:'',
+      _coursetype:'管理能力',
+      _courseversion:'',
+      _coursewarecount:'1',
+      _credit:'10.0',
+      _description:'小灵提示您，本信息为测试专用',
+      _developtime:'',
+      _enablecomment:'1',
+      _enabledownload:'0',
+      _enablerating:'1',
+      _enableshare:'0',
+      _finishnum:'1',
+      _flag:'course',
+      _id:'20180404swafo831k25lj19ufas98efy1241k4hk1',
+      _image:'../../../assets/images/home/kvrole_2.png',
+      _isfavorited:'0',
+      _israted:'0',
+      _issteponed:'0',
+      _language:'',
+      _largeimage:'',
+      _laststudydate:'0',
+      _markcontent:['选修','重点','测试','好好练习'],
       // markcontent:['选修','重点'],
-      markid:'20171q23nl19a0sq1n2p129311l8795',
-      model:'0',
-      mycompany:'1',
-      mystar:'0',
-      pubdate:'18小时前',
-      pv:'5',
-      sc:'0',
-      shareurl:'http:',
-      soecialtopic:'',
-      starcount:'0',
-      studyduration:'0',
-      stydyprogress:'0',
-      tag:'',
-      thumbs:'http:',
-      title:'测试专用标题',
-      type:'',
-      url:'',
-      vc:'94',
-    },{
-      author:'梁馨灵',
-      category:'管理能力',
-      commentcount:'5',
-      commontstar:'0',
-      courselevel:'',
-      coursetype:'管理能力',
-      courseversion:'',
-      coursewarecount:'1',
-      credit:'10.0',
-      description:'小灵提示您，本信息为测试专用',
-      developtime:'',
-      enablecomment:'1',
-      enabledownload:'0',
-      enablerating:'1',
-      enableshare:'0',
-      finishnum:'1',
-      flag:'course',
-      id:'20180404swafo831k25lj19ufas98efy1241k4hk1',
-      image:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1011752784,1088584800&fm=27&gp=0.jpg',
-      isfavorited:'0',
-      israted:'0',
-      issteponed:'0',
-      language:'',
-      largeimage:'',
-      laststudydate:'0',
-      markcontent:['选修','重点','测试','好好练习'],
+      _markid:'20171q23nl19a0sq1n2p129311l8795',
+      _model:'0',
+      _mycompany:'1',
+      _mystar:'0',
+      _pubdate:'18小时前',
+      _pv:'5',
+      _sc:'0',
+      _shareurl:'http:',
+      _soecialtopic:'',
+      _starcount:'0',
+      _studyduration:'0',
+      _stydyprogress:'0',
+      _tag:'',
+      _thumbs:'http:',
+      _title:'测试专用标题',
+      _type:'',
+      _url:'',
+      _vc:'94',
+    },
+    {
+      _author:'梁馨灵',
+      _category:'管理能力',
+      _commentcount:'5',
+      _commontstar:'0',
+      _courselevel:'',
+      _coursetype:'管理能力',
+      _courseversion:'',
+      _coursewarecount:'1',
+      _credit:'10.0',
+      _description:'小灵提示您，本信息为测试专用',
+      _developtime:'',
+      _enablecomment:'1',
+      _enabledownload:'0',
+      _enablerating:'1',
+      _enableshare:'0',
+      _finishnum:'1',
+      _flag:'course',
+      _id:'20180404swafo831k25lj19ufas98efy1241k4hk1',
+      _image:'../../../assets/images/home/kvrole_2.png',
+      _isfavorited:'0',
+      _israted:'0',
+      _issteponed:'0',
+      _language:'',
+      _largeimage:'',
+      _laststudydate:'0',
+      _markcontent:['选修','重点','测试','好好练习'],
       // markcontent:['选修','重点'],
-      markid:'20171q23nl19a0sq1n2p129311l8795',
-      model:'0',
-      mycompany:'1',
-      mystar:'0',
-      pubdate:'18小时前',
-      pv:'5',
-      sc:'0',
-      shareurl:'http:',
-      soecialtopic:'',
-      starcount:'0',
-      studyduration:'0',
-      stydyprogress:'0',
-      tag:'',
-      thumbs:'http:',
-      title:'测试专用标题',
-      type:'',
-      url:'',
-      vc:'94',
-    },{
-      author:'梁馨灵',
-      category:'管理能力',
-      commentcount:'5',
-      commontstar:'0',
-      courselevel:'',
-      coursetype:'管理能力',
-      courseversion:'',
-      coursewarecount:'1',
-      credit:'10.0',
-      description:'小灵提示您，本信息为测试专用',
-      developtime:'',
-      enablecomment:'1',
-      enabledownload:'0',
-      enablerating:'1',
-      enableshare:'0',
-      finishnum:'1',
-      flag:'course',
-      id:'20180404swafo831k25lj19ufas98efy1241k4hk1',
-      image:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1011752784,1088584800&fm=27&gp=0.jpg',
-      isfavorited:'0',
-      israted:'0',
-      issteponed:'0',
-      language:'',
-      largeimage:'',
-      laststudydate:'0',
-      markcontent:['选修','重点','测试','好好练习'],
+      _markid:'20171q23nl19a0sq1n2p129311l8795',
+      _model:'0',
+      _mycompany:'1',
+      _mystar:'0',
+      _pubdate:'18小时前',
+      _pv:'5',
+      _sc:'0',
+      _shareurl:'http:',
+      _soecialtopic:'',
+      _starcount:'0',
+      _studyduration:'0',
+      _stydyprogress:'0',
+      _tag:'',
+      _thumbs:'http:',
+      _title:'测试专用标题',
+      _type:'',
+      _url:'',
+      _vc:'94',
+    },
+    {
+      _author:'梁馨灵',
+      _category:'管理能力',
+      _commentcount:'5',
+      _commontstar:'0',
+      _courselevel:'',
+      _coursetype:'管理能力',
+      _courseversion:'',
+      _coursewarecount:'1',
+      _credit:'10.0',
+      _description:'小灵提示您，本信息为测试专用',
+      _developtime:'',
+      _enablecomment:'1',
+      _enabledownload:'0',
+      _enablerating:'1',
+      _enableshare:'0',
+      _finishnum:'1',
+      _flag:'course',
+      _id:'20180404swafo831k25lj19ufas98efy1241k4hk1',
+      _image:'../../../assets/images/home/kvrole_2.png',
+      _isfavorited:'0',
+      _israted:'0',
+      _issteponed:'0',
+      _language:'',
+      _largeimage:'',
+      _laststudydate:'0',
+      _markcontent:['选修','重点','测试','好好练习'],
       // markcontent:['选修','重点'],
-      markid:'20171q23nl19a0sq1n2p129311l8795',
-      model:'0',
-      mycompany:'1',
-      mystar:'0',
-      pubdate:'18小时前',
-      pv:'5',
-      sc:'0',
-      shareurl:'http:',
-      soecialtopic:'',
-      starcount:'0',
-      studyduration:'0',
-      stydyprogress:'0',
-      tag:'',
-      thumbs:'http:',
-      title:'测试专用标题',
-      type:'',
-      url:'',
-      vc:'94',
-    },{
-      author:'梁馨灵',
-      category:'管理能力',
-      commentcount:'5',
-      commontstar:'0',
-      courselevel:'',
-      coursetype:'管理能力',
-      courseversion:'',
-      coursewarecount:'1',
-      credit:'10.0',
-      description:'小灵提示您，本信息为测试专用',
-      developtime:'',
-      enablecomment:'1',
-      enabledownload:'0',
-      enablerating:'1',
-      enableshare:'0',
-      finishnum:'1',
-      flag:'course',
-      id:'20180404swafo831k25lj19ufas98efy1241k4hk1',
-      image:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1011752784,1088584800&fm=27&gp=0.jpg',
-      isfavorited:'0',
-      israted:'0',
-      issteponed:'0',
-      language:'',
-      largeimage:'',
-      laststudydate:'0',
-      markcontent:['选修','重点','测试','好好练习'],
-      // markcontent:['选修','重点'],
-      markid:'20171q23nl19a0sq1n2p129311l8795',
-      model:'0',
-      mycompany:'1',
-      mystar:'0',
-      pubdate:'18小时前',
-      pv:'5',
-      sc:'0',
-      shareurl:'http:',
-      soecialtopic:'',
-      starcount:'0',
-      studyduration:'0',
-      stydyprogress:'0',
-      tag:'',
-      thumbs:'http:',
-      title:'测试专用标题',
-      type:'',
-      url:'',
-      vc:'94',
-    }
+      _markid:'20171q23nl19a0sq1n2p129311l8795',
+      _model:'0',
+      _mycompany:'1',
+      _mystar:'0',
+      _pubdate:'18小时前',
+      _pv:'5',
+      _sc:'0',
+      _shareurl:'http:',
+      _soecialtopic:'',
+      _starcount:'0',
+      _studyduration:'0',
+      _stydyprogress:'0',
+      _tag:'',
+      _thumbs:'http:',
+      _title:'测试专用标题',
+      _type:'',
+      _url:'',
+      _vc:'94',
+    },
   ];
   // 【最近开班】模拟数据
   classesList:object[] = [
     {
-      trainid:'20180403asd213297430sdf4524',
-      applyid:'abc123',
-      title:'跟IT互联网大牛一齐学技术',
-      appliednum:'0',
-      plannum:'0',
-      address:'佛山南海区海八路广发金融中心信息中心16档案室',
-      iscompletion:'0',
-      state:'1',
-      tablist:'签到，课程|sign,course',
-      validtime:'0',
-      flag:'applytrain',
-      image:'',
-      principal:'张晓萍',
-      traintime:'2018-04-20 14:30~2018-04-24 17:30'
-    },
-    {
-      trainid:'20180403asd213297430sdf4524',
-      applyid:'abc123',
-      title:'跟IT互联网大牛一齐学技术',
-      appliednum:'0',
-      plannum:'0',
-      address:'佛山南海区海八路广发金融中心信息中心16档案室',
-      iscompletion:'0',
-      state:'1',
-      tablist:'签到，课程|sign,course',
-      validtime:'0',
-      flag:'applytrain',
-      image:'',
-      principal:'张晓萍',
-      traintime:'2018-04-20 14:30~2018-04-24 17:30'
+      _trainid:'20180403asd213297430sdf4524',
+      _applyid:'abc123',
+      _title:'跟IT互联网大牛一齐学技术',
+      _appliednum:'0',//已申请人数
+      _planperson:"11",//限制总人数
+      _plannum:'0',
+      _address:'佛山南海区海八路广发金融中心信息中心16档案室',
+      _iscompletion:'0',
+      _state:'1',
+      _tablist:'签到，课程|sign,course',
+      _validtime:'0',
+      _flag:'applytrain',
+      _icon:'',
+      _classteachername:'张晓萍',
+      _traintime:'2018-04-20 14:30~2018-04-24 17:30'
     }
   ];
-
-  @ViewChild('pagination1') pagination1: ElementRef;
-  
-  constructor(private store:Store<AppState>,private route:ActivatedRoute,private router:Router) {
-    // this.homes = store.select(homeReducer.getHomes);
-    this.title = store.select(titleReducer.getTitle);
-  }
+  // 是否需要加载中
+  showSpinner:boolean=true;
 
   ngOnInit() {
-    // this.store.dispatch(new fromHomeActions.FavoriteArticleAction(this.article));
     this.store.dispatch({type:'setTitle',payload: this.homeTitle});
     this.showHomeTabCard();
-    this.firstChoice();
+    firstChoice(this.pagination1.nativeElement);
+    this.getHomeData();
+  }
+  ngAfterViewInit() {
+    // getMinHeight('#swiper-container1',['#swiper-container0','.nav','.swiper-pagination1','.footer']);//实现被调用的元素获取最小高度
   }
   /**
    * 功能简介：为选项卡增加[新课抢先看]and[最近开班]
@@ -285,52 +235,106 @@ export class HomeComponent implements OnInit {
       on: {
         slideChange: function () {
           this.showFirstTabCard = !this.showFirstTabCard;
-          console.log(this.showFirstTabCard);
-          this.firstChoice();
-        }.bind(this),
+          firstChoice(this.pagination1.nativeElement);
+        }.bind(this)
+        
       },
       pagination: {
-          el: '.swiper-pagination1',
-          clickable: true,
-          renderBullet: function (index, className) {
-            var contentList:string[] = ['新课抢先看','最近开班'];
-            var spanStyle:string = 'display:inline-block;width:50%;text-align:center;height:2.5rem;line-height:2.5rem;';
-              return '<span class="' + className + '" style="'+spanStyle+'">' + contentList[index] + '</span>';//这操作，scss无法获取到(失效)
-          },
+        el: '.swiper-pagination1',
+        clickable: true,
+        renderBullet: function (index, className) {
+          var contentList:string[] = ['新课抢先看','最近开班'];
+          var spanStyle:string = 'display:inline-block;width:50%;text-align:center;height:2.5rem;line-height:2.5rem;';
+            return '<span class="' + className + '" style="'+spanStyle+'">' + contentList[index] + '</span>';//这操作，scss无法获取到(失效)
+        },
       },
+
     });
   }
+
   /**
-   * 功能简介：默认选中[新课抢先看]
+   * 功能简介：Home页面数据处理
    * @memberof HomeComponent
    */
-  firstChoice(){// T_T?为什么会变成操纵dome节点?
-    var pagination = this.pagination1.nativeElement;
-    var spans = pagination.children;
-    for(let i=0;i<spans.length;i++){
-        spans[i].style['border-bottom'] = 'none';
+  getHomeData(){
+    let homeData = getState(this.store)['dataListState']['homePage2010'];
+    // console.log('homeData=',homeData)
+    if(!homeData){
+      this.protect(this.request.http(2010,'').subscribe(js=>{
+        if(!js) return;
+        this.store.dispatch({type:'CREATE_DATA',payload:{homePage2010:js['service']}})
+        this.updatedHomeDate(js['service']);
+        this.showSpinner = false;
+      },e=>{
+        this.errorMsg(e);
+        this.showSpinner = false;
+      }))
+    }else{
+      this.updatedHomeDate(homeData);
+      this.showSpinner = false;
     }
-    for(let i=0;i<spans.length;i++){
-      if(spans[i].className == 'swiper-pagination-bullet swiper-pagination-bullet-active'){
-        spans[i].style['border-bottom'] = '0.15rem solid #E52425';
+  }
+  /**
+   * 同步：首页中 轮播图、导航内容、【新课抢先看】、【最近开班】 数据
+   * @param {object} _data 需要同步过来的数据
+   * @memberof HomeComponent
+   */
+  updatedHomeDate(_data:object){
+    // 同步：导航内容
+    let curnavContent = _data['category'][1]['category']
+    for(let i=0;i<curnavContent.length;i++){
+      for(let j=0;j<this.navContent.length;j++){
+        if(this.navContent[j]['_flag'] == curnavContent[i]['_flag']){
+          let title = curnavContent[i]['_title'];
+          curnavContent[i] = Object.assign(curnavContent[i],this.navContent[j]);
+          curnavContent[i]['_title'] = title;//尽量还原最新请求的内容
+        }
       }
     }
+    this.navContent = curnavContent;
+  
+    // 同步：【轮播图】数据
+    this.carouselData = _data['category'][0]['item'];
+    // 同步：【新课抢先看】数据
+    this.courseList = _data['category'][2]['item'];
+    // 同步：【最近开班】数据 --处理数据?如果条数据是传{}过来的
+    this.classesList = _data['category'][3]['item'];
+
+    // console.log('轮播图数据',this.carouselData)
   }
+  
   /**
-   * 功能简介：为选中的【新课抢先看】or【最近开班】增加border-bottom
+   * 根据 参数 跳转路由
+   * @param {object} itemObj 参数
    * @memberof HomeComponent
    */
-  choose(){// T_T?为什么会变成操纵dome节点?
-    var e = e || window.event;
-    var parent = e.target.parentNode;
-    var spans = parent.children;
-    for(var i=0;i<spans.length;i++){
-      spans[i].style['border-bottom'] = 'none';
+  linkTo(itemObj:object){
+    console.log('---itemObj---',itemObj)
+    // 实现 导航栏-['未完成课程','收藏的课程','考试中心','培训班'] 路由跳转
+    switch(itemObj['_flag']){
+      case "unfinished_course":
+        this.router.navigate(['/'+itemObj['route']]);//unfinishedcourse
+        break;
+      case "collect":
+        this.router.navigate(['/'+itemObj['route']]);//collectcourse
+        break;
+      case "exam":
+        this.router.navigate(['/'+itemObj['route']]);//examcenter
+        break;
+      case "train":
+        this.router.navigate(['/'+itemObj['route']]);//traincourse
+        break;
+      case "course":
+        // this.router.navigate(['/'+itemObj['route']]);
+        this.router.navigate(['/coursedetail/'+itemObj['_id']+'/'+itemObj['_title']])
+        break;
+      case "noapplytrain":
+        this.router.navigate(['/traincoursedetail/'+itemObj['_applyid']]);//请求2101
+        break;
+      case "applytrain":
+      this.router.navigate(['/traincoursedetail/'+itemObj['_applyid']]);//请求2101
+        // this.router.navigate(['/'+itemObj['route']]);
+        break;
     }
-    e.target.style['border-bottom'] = '0.15rem solid #E52425';
-  }
-  linkTo(_route:string){
-    console.log(_route)
-    this.router.navigate([_route]);
   }
 }
