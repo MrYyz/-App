@@ -36,7 +36,7 @@
  * @export 实现swiper标题分类首选样式
  * @param {*} _pagination 父元素
  */
-export function firstChoice(_pagination:any){
+export function firstChoice(_pagination:any,activefontColor?:string,borderColor?:string){
   var spans = _pagination.children;
   for(let i=0;i<spans.length;i++){
       spans[i].style['border-bottom'] = 'none';
@@ -44,8 +44,8 @@ export function firstChoice(_pagination:any){
   }
   for(let i=0;i<spans.length;i++){
     if(spans[i].className == 'swiper-pagination-bullet swiper-pagination-bullet-active'){
-      spans[i].style['border-bottom'] = '0.15rem solid #E52425';
-      spans[i].style['color'] = '#CC2F2A';
+      spans[i].style['border-bottom'] = borderColor?'0.15rem solid'+borderColor:'0.15rem solid #E52425';
+      spans[i].style['color'] = activefontColor?activefontColor:'#CC2F2A';
     }
   }
 }
@@ -166,3 +166,15 @@ export function errorMsg(errNo:string){
     alert(msg)
   }
 }
+
+// /**
+//  * @export 指定时间，计算距离培训班报名结束时间
+//  * @param {string} [_str] 需要转换的时间参数
+//  */
+// export function calculateDays(_str?:string,num1?:string,num2?:string){
+//   console.log(111)
+//   if(!_str) _str = '2018/05/22 18:49~2018/06/01 18:49';
+//   const days = Math.floor(((new Date(_str.slice(_str.indexOf('~')+1)).getTime() - new Date().getTime()))/(24*3600*1000));
+//   const preson = Math.abs(Number(num1) - Number(num2));
+//   return '剩余'+days+'天 | 剩'+preson+'名额';
+// }

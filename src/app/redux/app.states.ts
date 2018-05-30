@@ -8,8 +8,10 @@ export interface Title {              //方式(二)
     titleContent: string;
     isShowQrCode?: boolean;
     isShowSearch?: boolean;
+    isShowSearchDiv?:boolean;
     isShowPosition?: boolean;
     isShowCollect?: boolean;
+    isCollected?: boolean;//若ture表示已收藏课程
 }
 export interface UserInfo {
     _fullname:string,

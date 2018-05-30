@@ -87,6 +87,7 @@
                                     position:relative;
                                     h2{
                                         font-size:1.0rem;
+                                        font-size:.9rem;
                                         font-weight: normal;
                                         overflow: hidden;/*内容超出后隐藏*/
                                         text-overflow: ellipsis;/* 超出内容显示为省略号*/
@@ -132,6 +133,7 @@
                                     font-size:1rem;
                                 }
                                 p{
+                                    text-align: left;
                                     height:1.5rem;
                                     line-height:1.5rem;
                                     font-size:0.8rem;

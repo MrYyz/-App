@@ -4,18 +4,22 @@ import { Store } from '@ngrx/store';
 import { Observable } from "rxjs/observable";
 import { AppState, Title } from '../../redux/app.states';
 import * as titleReducer from '../../redux/reducers/title.reducer';
+import { Router,ActivatedRoute,ParamMap } from '@angular/router'
 
 import * as Swiper from '../../../assets/js/swiper-4.1.0.min.js';
 
-import { firstChoice } from '../../utils/util';
+import { firstChoice,getMinHeight } from '../../utils/util';
+import { httpRequest,BaseComponent } from '../../utils/http'
+
 declare var require: any;
 
 @Component({
   selector: 'app-classify',
   templateUrl: './classify.component.html',
-  styleUrls: ['./classify.component.scss']
+  styleUrls: ['./classify.component.scss'],
+  providers:[httpRequest]
 })
-export class ClassifyComponent implements OnInit {
+export class ClassifyComponent extends BaseComponent implements OnInit {
 
   title:Observable<Title[]>
   // 头部参数
@@ -245,10 +249,15 @@ export class ClassifyComponent implements OnInit {
   mostLike:object[];
   // 无数据，选项卡图片路径
   emptyImg:string = require('../../../assets/images/empty.png');
-  // 当前选项卡对应的index
-  curTabCardIdx:number = 0;
 
-  constructor(private store:Store<AppState>) { 
+  showSpinner:boolean = true;
+
+  // theLatestReleaseData:object[];
+  // theMostBrowseData:object[];
+  // theMorePraiseData:object[];
+
+  constructor(private store:Store<AppState>,private router:Router,private route:ActivatedRoute,private request:httpRequest) { 
+    super()
     this.title = store.select(titleReducer.getTitle);
   }
 
@@ -256,8 +265,14 @@ export class ClassifyComponent implements OnInit {
     this.store.dispatch({type:'setTitle',payload:this.classifyTitle});
     this.showClassifyTabCard();
     firstChoice(this.pagination2.nativeElement);
-    this.setEmptyHeight();
+    // this.setEmptyHeight();
+    this.getCourseData();
   }
+
+  ngAfterViewInit(){
+    getMinHeight('#swiper-container2',['.swiper-pagination2','#footer']);//实现被调用的元素获取最小高度
+  }
+
   /**
    * 功能简介：为选项卡增加['最新发布','最多浏览','最多点赞']
    * @memberof HomeComponent
@@ -267,11 +282,9 @@ export class ClassifyComponent implements OnInit {
       autoplay:false,
       on:{
         slideChange: function () {
-          this.curTabCardIdx = swiper2['activeIndex'];
-          console.log('curTabCardIdx=',this.curTabCardIdx)
-          // this.showFirstTabCard = !this.showFirstTabCard;
-          // console.log(this.showFirstTabCard);
+          // console.log(swiper2['activeIndex'])
           firstChoice(this.pagination2.nativeElement);
+          this.getCourseData(swiper2['activeIndex'])
         }.bind(this),
       },
       pagination:{
@@ -299,13 +312,47 @@ export class ClassifyComponent implements OnInit {
   }
 
   /**
-   * 无数据时，设置选项卡显示效果
+   * 根据选项卡不同 显示不同内容,考虑是否需要将以下的数据存放到store里面再获取?
+   * @param {number} idx 选项卡序号
    * @memberof ClassifyComponent
    */
-  setEmptyHeight(){
-    var empty = document.getElementsByClassName('empty');
-    var main = document.getElementById('main');
-    var classesBox = document.getElementsByClassName('classesBox')[0];
-    var slice = document.getElementsByClassName('classifytabcard')[0];
+  getCourseData(idx?:number){
+
+    this.showSpinner = true;
+
+    let params = 'order=new';
+    if(idx){
+      switch(idx){
+        case 0:params = 'order=new';//【试题库】
+          break;
+        case 1:params = 'order=view';//【考试记录】
+          break;
+        case 2:params = 'order=like';//【习题库】
+          break;
+      }
+    } 
+    params = params + '&flag=course&categoryid=all&pageno=1&pagesize=15';
+
+    this.protect(this.request.http(210,params).subscribe(js=>{
+      
+      // console.log('js210=',js['service']['item'])
+
+      this.showSpinner = false;
+      if(!js) return;
+      switch(idx){
+        case 1://【最多浏览】
+          this.mostBrowse = js['service']['item'];
+          break;
+        case 2://【最多点赞】
+        this.mostLike = js['service']['item'];
+          break;
+        default://【最新发布】
+          this.lastistRelease = js['service']['item'];
+      }
+    },e=>{
+      this.errorMsg(e);
+      this.showSpinner = false;
+    }))
+
   }
 }

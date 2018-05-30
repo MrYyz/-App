@@ -1,0 +1,42 @@
+<div id="studyrecord">
+  <div class="studyrecordTabCard">
+      <div class="swiper-pagination8" #pagination8></div>
+      <div class="swiper-container" id="swiper-container8">
+        <div class="swiper-wrapper">
+          <!-- 课程记录 -->
+          <div class="swiper-slide">
+            <ul class="content">
+              {{courseRecordData?'':'暂无内容'}}
+              <li *ngFor="let courseItem of [] | toArr:courseRecordData;let i = index" class="clearfix" (click)="linkTo(courseItem)">
+                <div class="left">
+                  <p *ngIf="(courseRecordData[i-1] && (courseRecordData[i]._pubdate != courseRecordData[i-1]._pubdate)) ||i==0"><span>{{courseItem._pubdate.slice(-2)+'/'}}</span>{{courseItem._pubdate.slice(5,7)+'月'}}</p>
+                </div>
+                <div class="right">
+                  <h2>{{courseItem._title}}</h2>
+                  <p><span *ngFor="let item of courseItem._markcontent.split('|')">{{item}}</span></p>
+                  <i *ngIf="courseItem._islearned == '1'">已学</i>
+                </div>
+              </li>
+            </ul>            
+          </div>
+          <!-- 培训班记录 -->
+          <div class="swiper-slide">
+            <ul class="content">
+              {{courseRecordData?'':'暂无内容'}}
+              <li *ngFor="let trainItem of [] | toArr:trainRecordData;let i = index" class="clearfix" (click)="linkTo(trainItem)">
+                <div class="left">
+                  <p *ngIf="(trainRecordData[i-1] && (trainRecordData[i]._pubdate != trainRecordData[i-1]._pubdate)) ||i==0"><span>{{trainItem._pubdate.slice(-2)+'/'}}</span>{{trainItem._pubdate.slice(5,7)+'月'}}</p>
+                </div>
+                <div class="right">
+                  <h2>{{trainItem._title}}</h2>
+                  <p><span *ngFor="let item of trainItem._trainmethod.split('|')">{{item}}</span></p>
+                </div>
+              </li>
+            </ul>            
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<spinner *ngIf="showSpinner"></spinner>

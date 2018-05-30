@@ -1,0 +1,19 @@
+<div id="collection">
+  {{!collectData?'暂无内容':''}}
+  <div class="content" *ngIf="collectData">
+    <div *ngFor="let collectionItem of [] | toArr:collectData;let i = index" class="collectionItem clearfix"  (click)="linkTo(collectionItem)">
+      <div class="collectionItemLeft"><img src="{{collectionItem._image}}" onerror="this.src='../../../assets/images/course_default.png'" alt="{{collectionItem._category}}"></div>
+      <div class="collectionItemRight">
+          <h2>{{collectionItem._title}}</h2>
+          <div *ngIf="collectionItem._markcontent" class="courseFlag">
+            <span *ngIf="collectionItem._finishnum=='1'">已学</span><ng-template ngFor let-markcontentItem [ngForOf]="collectionItem['_markcontent'].split('|')" *ngIf="collectionItem._markcontent"><span>{{markcontentItem}}</span></ng-template>
+          </div>
+          <p>
+            <span><i class="iconfont icon-comments"></i>{{collectionItem._vc? collectionItem._vc : '0'}}</span>
+            <span><i class="iconfont icon-code"></i>{{collectionItem._pc? collectionItem._pc : '0'}}</span>
+          </p>
+      </div>
+    </div>
+  </div>
+</div>
+<spinner *ngIf="showSpinner"></spinner>

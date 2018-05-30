@@ -19,14 +19,13 @@
                     <!-- 新课抢先看 -->
                     <div class="swiper-slide" [style.background]="courseList?'':'rgba(245, 245, 245,1)'">
                         <div *ngIf="showFirstTabCard" class="newcourse">
-                        <!-- <div class="newcourse"> -->
                             {{courseList?'':'暂无消息'}}
                             <div *ngFor="let courseItem of [] | toArr:courseList;let i = index" class="newcourse-item clearfix"  (click)="linkTo(courseItem)">
                                 <div class="courseItemLeft"><img src="{{courseItem._image}}" onerror="this.src='../../../assets/images/course_default.png'" alt="{{courseItem._category}}"></div>
                                 <div class="courseItemRight">
                                     <h2>{{courseItem._title}}</h2>
                                     <div *ngIf="courseItem._markcontent" class="courseFlag">
-                                        <span *ngIf="courseItem._finishnum=='1'">已学</span><span *ngFor="let markcontentItem of [] | toArr:courseItem._markcontent">{{markcontentItem}}</span>
+                                        <span *ngIf="courseItem._finishnum=='1'">已学</span><ng-template ngFor let-markcontentItem [ngForOf]="courseItem['_markcontent'].split('|')" *ngIf="courseItem._markcontent"><span>{{markcontentItem}}</span></ng-template>
                                     </div>
                                     <p>
                                         <span><i class="iconfont icon-comments"></i>{{courseItem._vc? courseItem._vc : '0'}}</span>
@@ -39,20 +38,17 @@
                     <!-- 最近开班 -->
                     <div class="swiper-slide" [style.background]="classesList?'':'rgba(245, 245, 245,1)'">
                         <div *ngIf = '!showFirstTabCard' class="realshow">
-                        <!-- <div class="realshow"> -->
                             {{classesList?'':'暂无消息'}}
                             <div *ngFor="let classesItem of [] | toArr:classesList;let i = index" class="recent-class-item" (click)="linkTo(classesItem)">
                                 <h2>{{classesItem._title}}</h2>
-                                <p>
+                                <p [ngSwitch]="classesItem._state">
                                     <span><i class="iconfont icon-account"></i>{{classesItem._classteachername}}</span>
-                                    <span><i class="iconfont icon-task-management"></i>{{classesItem._traintime}}</span>
+                                    <span *ngSwitchCase="'0'"><i class="iconfont icon-task-management"></i>{{classesItem._traintime}}</span>
+                                    <span *ngSwitchCase="'1'"><i class="iconfont icon-task-management"></i>{{'报名时间：剩余 '+classesItem._validtime+' 天 | 剩 '+(classesItem._planperson - classesItem._appliednum)+' 名额'}}</span>
                                 </p>
                                 <div>
                                     <img src="{{classesItem._icon}}" onerror="this.src='../../../assets/images/train_default.png'" alt="默认图片"/>
-                                    <!-- <span *ngIf="classesItem._flag == 'applytrain' && classesItem._state == '1' ">报名中</span>
-                                    <span *ngIf="classesItem._flag == 'applytrain' && classesItem._state == '0' ">正在进行</span>
-                                    <span *ngIf="classesItem._flag == 'applytrain'">您是班主任</span> -->
-                                    <span *ngIf="classesItem._flag=='applytrain'&&classesItem._state">{{classesItem._state == '1'?'即将开班':(classesItem._state == '0'?'正在进行':'已结束')}}</span>
+                                    <span *ngIf="classesItem._state">{{classesItem._state == '1'?'即将开班':(classesItem._state == '0'?'正在进行':'已结束')}}</span>
                                 </div>
                                 <p><i class="iconfont icon-map"></i>{{'位置：'+classesItem._address}}</p>
                             </div>

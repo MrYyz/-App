@@ -28,17 +28,18 @@ export class CartComponent implements OnInit {
       url:'1',
       txt:'考试中心',
       showIcon:true,
-      route:'examination'
+      route:'examcenter'
     },{
       url:'2',
       txt:'培训班',
       showIcon:true,
-      route:'trainingcourse'
+      route:'trainlist'
     },{
       url:'3',
       txt:'在线调研',
       showIcon:true,
-      route:'survey'
+      route:'survey',
+      rightTxt:'暂未开发'
     }
   ];
   dataset2:object[] = [
@@ -46,17 +47,18 @@ export class CartComponent implements OnInit {
       url:'1',
       txt:'我的收藏',
       showIcon:true,
-      route:'myfavorite'
+      route:'collection'
     },{
       url:'2',
       txt:'下载的课程',
       showIcon:true,
-      route:'downloadcourse'
+      route:'downloadcourse',
+      rightTxt:'暂未开发'
     },{
       url:'3',
       txt:'学习记录',
       showIcon:true,
-      route:'studyrecord'
+      route:'studyrecord',
     }
   ];
   dataset3:object[] = [
@@ -64,12 +66,14 @@ export class CartComponent implements OnInit {
       url:'4',
       txt:'摇一摇',
       showIcon:true,
-      route:'wobble'
+      route:'wobble',
+      rightTxt:'暂未开发'
     },{
       url:'5',
       txt:'WE微课工具',
       showIcon:true,
-      route:'wetool'
+      route:'wetool',
+      rightTxt:'暂未开发'
     }
   ]
 

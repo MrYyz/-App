@@ -1,0 +1,56 @@
+<!-- 选项卡 -->
+<div id="trainClass">
+  <div class="trainClassTabCard">
+    <div class="swiper-pagination6" #pagination6>
+      <ng-template ngFor let-item [ngForOf]="programa_cn" let-idx="index">
+        <span class="swiper-pagination-bullet" *ngIf="programa_en.indexOf(programa[idx])>=0">{{item}}</span>
+      </ng-template>
+    </div>
+    <div class="swiper-container" id="swiper-container6">
+      <div class="swiper-wrapper">
+
+
+        <!-- <ng-template ngFor let-programaItem [ngForOf]="programa_cn" let-i=index>
+          <div [class]="i==0?'swiper-slide swiper-slide-active':(i==1)?'swiper-slide swiper-slide-next':'swiper-slide'">
+            <div class="box">
+              {{programa_cn[i]}}
+            </div>
+          </div>
+        </ng-template> -->
+        <!-- <div class="swiper-slide" *ngFor="let item of programa_cn">
+          <div class="box">
+            {{item}}
+          </div>
+        </div> -->
+
+
+        <!-- 备注：swiper不能动态配置，否则只会显示第一页的信息 -->
+
+
+        <div class="swiper-slide" *ngIf="programa.indexOf('info')>=0">
+          <div class="box">
+            {{'备注：swiper不能动态配置，否则只会显示第一页的信息'}}
+          </div>
+        </div>
+        <div class="swiper-slide" *ngIf="false">
+          <div class="box">
+            {{'签到'}}
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="box">
+            {{'课程'}}
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <spinner *ngIf="showSpinner"></spinner> -->
+

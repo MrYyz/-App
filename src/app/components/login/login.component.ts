@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';//这个跟下面getData()可以不要了
-import 'rxjs/add/operator/toPromise';
-import * as X2JS from '../../../assets/js/xml2json.js'
+import 'rxjs/add/operator/toPromise';//这个跟下面getData()可以不要了
+import * as X2JS from '../../../assets/js/xml2json.js';
 import * as CryptoJS from 'crypto-js';
 import { Router,ActivatedRoute,ParamMap } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -75,7 +75,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
     let pwd = CryptoJS.MD5(this.psw).toString().toUpperCase().substr(1,30);
     this.protect(this.request.http(100,"loginname="+this.user+"&pwd="+pwd).subscribe(js=>{
-      console.log('js100',js)
+      // console.log('js100',js)
       clearTimeout(this.loginTimer);
       if(!js){//以下的操作均基于正常请求回数据
         this.showSpinner = false;

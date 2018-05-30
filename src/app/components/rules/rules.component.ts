@@ -41,10 +41,10 @@ export class RulesComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch({type:'setTitle',payload:this.rulestitle});
     this.curUserInfo = getState(this.store)['userInfoState']['userInfo'][0];
-    console.log(this.curUserInfo)
+    // console.log(this.curUserInfo)
     this.integralUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.curUserInfo['_integralurl']); 
     this.rankUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.curUserInfo['_detailurl']); 
-    console.log('curUserInfo=>',this.curUserInfo)
+    // console.log('curUserInfo=>',this.curUserInfo)
     // 功能简介：为选项卡增加['我的头衔','我的积分']
     this.showRulesTabCard();  
     //实现swiper标题分类首选样式

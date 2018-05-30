@@ -1,7 +1,7 @@
 <div id="classify">
   <div class="main" (click)="hideShowMore()">
     <!-- 小标签 -->
-    <ul class="classesBox clearfix">
+    <ul class="classesBox clearfix" *ngIf="false">
       <ng-template ngFor let-classItem [ngForOf]='classes' let-idx='index'>
         <li *ngIf="idx < 9">{{classItem+idx}}</li>
       </ng-template>
@@ -24,75 +24,72 @@
         <div class="swiper-wrapper">
           <!-- 最新发布 -->
           <div class="swiper-slide">
-            <div class="empty" *ngIf='!lastistRelease' [style.backgroundColor]="lastistRelease? '': 'rgba(245, 245, 245,1)'">
-              <img [src]="emptyImg" alt=""/>
+            <div class="content">
+              <ng-template ngFor let-lastistItem [ngForOf]='lastistRelease' let-i="index">
+                <div class="lastistRelease clearfix" flag="tabcard1">
+                  <div class="itemLeft">
+                    <img onerror="this.src='../../../assets/images/home/kvrole_2.png'" src="{{lastistItem._image}}" alt="{{lastistItem._category}}">
+                    <span *ngIf="lastistItem._finishnum=='1'">已学</span>
+                  </div>
+                  <div class="itemRight">
+                      <h2>{{lastistItem._title}}</h2>
+                      <div *ngIf="lastistItem._markcontent" class="courseFlag">
+                          <span *ngFor="let markcontentItem of lastistItem._markcontent.split('|')">{{markcontentItem}}</span>
+                      </div>
+                      <p>
+                          <span><i class="iconfont icon-comments"></i>{{lastistItem._vc? lastistItem._vc : '0'}}</span>
+                          <span><i class="iconfont icon-code"></i>{{lastistItem._pc? lastistItem._pc : '0'}}</span>
+                      </p>
+                  </div>
+                </div>
+              </ng-template>
             </div>
-            <ng-template ngFor let-lastistItem [ngForOf]='lastistRelease' let-i="index" *ngIf="curTabCardIdx == 0">
-              <div class="lastistRelease clearfix" flag="tabcard1">
-                <div class="itemLeft">
-                  <img src="{{lastistItem.image? '../../../assets/images/home/kvrole_2.png' : ''}}" alt="{{lastistItem.category}}">
-                  <span *ngIf="lastistItem.finishnum=='1'">已学</span>
-                </div>
-                <div class="itemRight">
-                    <h2>{{lastistItem.title}}</h2>
-                    <div *ngIf="lastistItem.markcontent" class="courseFlag">
-                        <span *ngFor="let markcontentItem of lastistItem.markcontent">{{markcontentItem}}</span>
-                    </div>
-                    <p>
-                        <span><i class="iconfont icon-comments"></i>{{lastistItem.vc? lastistItem.vc : '0'}}</span>
-                        <span><i class="iconfont icon-code"></i>{{lastistItem.pc? lastistItem.pc : '0'}}</span>
-                    </p>
-                </div>
-              </div>
-            </ng-template>
           </div>
           <!-- 最多浏览 -->
           <div class="swiper-slide">
-            <div class="empty" *ngIf='!mostBrowse' [style.backgroundColor]="mostBrowse? '': 'rgba(245, 245, 245,1)'">
-              <img [src]="emptyImg" alt=""/>
+            <div class="content">
+              <ng-template ngFor let-browseItem [ngForOf]='mostBrowse' let-i="index">
+                <div class="mostBrowse clearfix" flag="tabcard2">
+                  <div class="itemLeft">
+                    <img onerror="this.src='../../../assets/images/home/kvrole_2.png'" src="{{browseItem._image}}" alt="{{browseItem._category}}">
+                    <span *ngIf="browseItem._finishnum=='1'">已学</span>
+                  </div>
+                  <div class="itemRight">
+                      <h2>{{browseItem._title}}</h2>
+                      <div *ngIf="browseItem._markcontent" class="courseFlag">
+                          <span *ngFor="let markcontentItem of browseItem._markcontent.split('|')">{{markcontentItem}}</span>
+                      </div>
+                      <p>
+                          <span><i class="iconfont icon-comments"></i>{{browseItem._vc? browseItem._vc : '0'}}</span>
+                          <span><i class="iconfont icon-code"></i>{{browseItem._pc? browseItem._pc : '0'}}</span>
+                      </p>
+                  </div>
+                </div>
+              </ng-template>
             </div>
-            <ng-template ngFor let-browseItem [ngForOf]='mostBrowse' let-i="index" *ngIf="curTabCardIdx == 1">
-              <div class="mostBrowse clearfix" flag="tabcard2">
-                <div class="itemLeft">
-                  <img src="{{browseItem.image? '../../../assets/images/home/kvrole_2.png' : ''}}" alt="{{browseItem.category}}">
-                  <span *ngIf="browseItem.finishnum=='1'">已学</span>
-                </div>
-                <div class="itemRight">
-                    <h2>{{browseItem.title}}</h2>
-                    <div *ngIf="browseItem.markcontent" class="courseFlag">
-                        <span *ngFor="let markcontentItem of browseItem.markcontent">{{markcontentItem}}</span>
-                    </div>
-                    <p>
-                        <span><i class="iconfont icon-comments"></i>{{browseItem.vc? browseItem.vc : '0'}}</span>
-                        <span><i class="iconfont icon-code"></i>{{browseItem.pc? browseItem.pc : '0'}}</span>
-                    </p>
-                </div>
-              </div>
-            </ng-template>
           </div>
           <!-- 最多点赞 -->
-          <div class="swiper-slide" [style.backgroundColor]="mostLike? '': 'rgba(245, 245, 245,1)'">
-            <div class="empty" *ngIf='!mostLike'>
-              <img [src]="emptyImg" alt=""/>
+          <div class="swiper-slide">
+            <div class="content">
+              <ng-template ngFor let-likeItem [ngForOf]='mostLike' let-i="index">
+                <div class="mostLike clearfix" flag="tabcard3">
+                  <div class="itemLeft">
+                    <img onerror="this.src='../../../assets/images/home/kvrole_2.png'" src="{{likeItem._image}}" alt="{{likeItem._category}}">
+                    <span *ngIf="likeItem._finishnum=='1'">已学</span>
+                  </div>
+                  <div class="itemRight">
+                      <h2>{{likeItem._title}}</h2>
+                      <div *ngIf="likeItem._markcontent" class="courseFlag">
+                          <span *ngFor="let markcontentItem of likeItem._markcontent.split('|')">{{markcontentItem}}</span>
+                      </div>
+                      <p>
+                          <span><i class="iconfont icon-comments"></i>{{likeItem._vc? likeItem._vc : '0'}}</span>
+                          <span><i class="iconfont icon-code"></i>{{likeItem._pc? likeItem._pc : '0'}}</span>
+                      </p>
+                  </div>
+                </div>
+              </ng-template>
             </div>
-            <ng-template ngFor let-likeItem [ngForOf]='mostLike' let-i="index" *ngIf="curTabCardIdx == 2">
-              <div class="mostLike clearfix" flag="tabcard3">
-                <div class="itemLeft">
-                  <img src="{{likeItem.image? '../../../assets/images/home/kvrole_2.png' : ''}}" alt="{{likeItem.category}}">
-                  <span *ngIf="likeItem.finishnum=='1'">已学</span>
-                </div>
-                <div class="itemRight">
-                    <h2>{{likeItem.title}}</h2>
-                    <div *ngIf="likeItem.markcontent" class="courseFlag">
-                        <span *ngFor="let markcontentItem of likeItem.markcontent">{{markcontentItem}}</span>
-                    </div>
-                    <p>
-                        <span><i class="iconfont icon-comments"></i>{{likeItem.vc? likeItem.vc : '0'}}</span>
-                        <span><i class="iconfont icon-code"></i>{{likeItem.pc? likeItem.pc : '0'}}</span>
-                    </p>
-                </div>
-              </div>
-            </ng-template>
           </div>
         </div>
       </div>
@@ -102,3 +99,4 @@
       <footer></footer>
   </div>
 </div>
+<spinner *ngIf="showSpinner"></spinner>

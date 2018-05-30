@@ -2,30 +2,34 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { AppState, Title } from '../../../redux/app.states';
+import { AppState, Title, getState } from '../../../redux/app.states';
 import * as titleReducer from '../../../redux/reducers/title.reducer'
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { httpRequest,BaseComponent } from '../../../utils/http';
 
 @Component({
   selector: 'appHeader',
   templateUrl:'./head.component.html',
-  styleUrls: ['./head.component.scss']
+  styleUrls: ['./head.component.scss'],
+  providers:[httpRequest]
 })
-export class HeadComponent implements OnInit {
+export class HeadComponent extends BaseComponent implements OnInit {
 
   title:Observable<Title[]>;
 
-  constructor(private store:Store<AppState>,private route: ActivatedRoute, private router: Router) { 
+  constructor(private store:Store<AppState>,private route: ActivatedRoute, private router: Router, private request:httpRequest) { 
+    super()
     this.title = store.select(titleReducer.getTitle);
   }
 
-  isSearch:boolean = false;
-  searchText:string;
+  // isSearch:boolean = false;
+  searchText:string = '';
+  isCollect:string = getState(this.store)['dataListState']['curCourse215']?getState(this.store)['dataListState']['curCourse215']['_isfavorited']:'0';
 
   ngOnInit() {
     // this.getLocation();
-    this.isSearchComponent();
+    // this.isSearchComponent();
   }
   AfterViewInit() { }
   
@@ -34,9 +38,9 @@ export class HeadComponent implements OnInit {
     // this.route.params.subscribe((params) => {
     //   console.log('路由参数：',params)
     // });
-    if(window.location.pathname.indexOf('search')>=0){
-      this.isSearch = true;
-    } 
+    // if(window.location.pathname.indexOf('search')>=0){
+    //   this.isSearch = true;
+    // } 
   }
 
   onClickHeader(e){
@@ -60,32 +64,90 @@ export class HeadComponent implements OnInit {
         break;
       // 执行搜索功能
       case 'btnSearch':
-        
+        this.search();
         break;
-      // 执行收藏功能
-      case 'iconfont icon-favorite':
-        
+      // 执行收藏功能 --> 目前对课程开放收藏功能(故只在head里面发请求)
+      case 'iconfont icon-favorite'://未收藏
+      case 'iconfont icon-favoritesfilling'://已收藏
+      this.hateAndLike(e);
       break;
       default:
-        console.log(e.target.className)
+        // console.log(e.target.className)
     }
   }
   
   routeBack(){
-    this.isSearch = false;
-    this.searchText = '';
+    // this.isSearch = false;
+    // this.searchText = '';
+    if(getState(this.store)['dataListState']['SearchText']){ // 存在就删掉store里面的数据
+      this.store.dispatch({type:'UPDATE_DATA',payload:{courseSearchData223:undefined}})
+      this.store.dispatch({type:'UPDATE_DATA',payload:{SearchText:''}})
+    }
     history.back();
   }
 
   openSearch(){
-    this.isSearch = true;
+    // this.isSearch = true;
     this.router.navigate(['/search'])
   }
 
   cleanSearchText(){
     this.searchText = '';
+    this.store.dispatch({type:'UPDATE_DATA',payload:{courseSearchData223:''}})//清空内容
+    this.store.dispatch({type:'UPDATE_DATA',payload:{SearchText:''}})//清空内容
   }
 
+  hateAndLike(e){
+    e= e || window.event;
+    
+    switch(e.target.className){
+      case 'iconfont icon-favorite':
+      var _isCollect = '0';
+      break;
+      case 'iconfont icon-favoritesfilling':
+      var _isCollect = '1';
+      break;
+    }
+    
+    let _id = getState(this.store)['dataListState']['curCourse215']['_id'];
+    let _titleContent = getState(this.store)['titleState']['title'][0]['titleContent']//其实这里也只能是‘课程详情’（T_T ，不知道自己为什么兜这么打个圈?）
+    console.log(_titleContent)
+    this.protect(this.request.http(260,'isfavorited='+_isCollect+'&id='+_id).subscribe(js=>{
+      if(!js)return;
+      // 最好弹窗提示收藏成功还是取消收藏
+      this.store.dispatch({type:'setTitle',payload:[{
+        titleContent:_titleContent,
+        isShowCollect: true,
+        isCollected:_isCollect == '0'?true:false
+      }]})
+    },e=>this.errorMsg(e)))
+  }
+
+  search(){
+    if(this.searchText == ''){
+      alert('搜索内容不能为空！');
+      return;
+    }else{
+      var txt;
+      txt = this.searchText.replace(/(^\s+)|(\s+$)/g,"");
+      txt = txt.replace(/\s/g,"");
+    }
+
+    this.protect(this.request.http(223,'flag=course&pageno=1&pagesize=15&key='+txt).subscribe(js=>{
+      // console.log(JSON.stringify(js['service']['item']))
+      if(!js) return;
+      var dataList = getState(this.store)['dataListState'];
+      if(dataList && dataList['courseSearchData223']){
+        var _type = 'UPDATE_DATA';
+      }else{
+        var _type = 'CREATE_DATA';
+      }
+      this.store.dispatch({type:_type,payload:{courseSearchData223:js['service']['item']}})
+      this.store.dispatch({type:_type,payload:{SearchText:this.searchText}})
+      this.searchText = '';
+    },e=>{this.errorMsg(e)}))
+
+  }
 
 
   // 获取设备当前所在的地理位置

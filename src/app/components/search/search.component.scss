@@ -1,0 +1,211 @@
+@import '../../../assets/css/swiper-4.1.0.min.css';
+
+#search{
+    //选项卡
+    .searchTabCard{
+        font-size:0.9rem;
+        .swiper-pagination7{
+            width:100%;
+        }
+        .swiper-container{
+            .swiper-wrapper{
+                .swiper-slide{
+                    padding:0 .8rem;
+                    background-color:#fff;
+                    overflow-y:auto;
+                    .content{
+                        font-size:.9rem;
+                        text-align: center;
+                        li{text-align: left;}
+                        // 课程
+                        li.course-item{
+                            height:7.5rem;
+                            border-bottom:0.2rem dashed rgba(245, 245, 245,1);
+                            .courseItemLeft{
+                                float:left;
+                                width:7.5rem;
+                                height:7.5rem;
+                                position:relative;
+                                // background-color:#ccc;
+                                img{
+                                    width:6.25rem;
+                                    height:6.25rem;
+                                    position:absolute;
+                                    top:50%;
+                                    left: 50%;
+                                    transform:translate(-50%,-50%);
+                                }
+                            }
+                            .courseItemRight{
+                                height:100%;
+                                width:calc(100% - 7.5rem);
+                                padding-top:0.625rem;
+                                float:left;
+                                position:relative;
+                                h2{
+                                    font-size:1.0rem;
+                                    font-size:.9rem;
+                                    font-weight: normal;
+                                    overflow: hidden;/*内容超出后隐藏*/
+                                    text-overflow: ellipsis;/* 超出内容显示为省略号*/
+                                    white-space: nowrap;/*文本不进行换行*/
+                                }
+                                .courseFlag{
+                                    padding-top:5px;
+                                    display: -webkit-box;
+                                    -webkit-box-orient: vertical;
+                                    -webkit-line-clamp: 2;//两行溢出自动省略号隐藏
+                                    overflow: hidden;
+                                    span{
+                                        display: inline-block;
+                                        padding:0 0.625rem;
+                                        height:1.625rem;
+                                        line-height:1.625rem;
+                                        text-align: center;
+                                        border:1px solid #ccc;
+                                        border-radius:0.9375rem;
+                                        margin-right:2px;
+                                        font-size:0.9rem;
+                                        margin-bottom:2px;
+                                    }
+                                }
+                                p{
+                                    position:absolute;
+                                    bottom:0.3125rem;
+                                    span{
+                                        font-size:0.9rem;
+                                        i{
+                                            margin-right:4px;
+                                            font-size:1rem;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        // 课件
+                        li.courseware-item{
+                            border-bottom:1px solid rgba(216, 216, 216, 0.5);
+                            // border:1px solid rgba(204, 204, 204, 0.5);
+                            padding:0.3125rem 0;
+                            position: relative;
+                            h3{//标题
+                                font-weight: normal;
+                                max-width:88%;
+                                font-size:0.9rem;
+                                font-weight: normal;
+                                overflow: hidden;/*内容超出后隐藏*/
+                                text-overflow: ellipsis;/* 超出内容显示为省略号*/
+                                white-space: nowrap;/*文本不进行换行*/
+                                span{
+                                    display: inline-block;
+                                    color:#888;
+                                    width:1.2rem;
+                                    font-size:0.8rem;
+                                }
+                            }
+                            p.remarks{//备注
+                                padding-left:1.2rem;
+                                span{
+                                    // border:1px solid rgba(204, 204, 204, 0.5);
+                                    font-size:0.8rem;
+                                    i,em{
+                                        font-size:0.8rem;
+                                        font-style:normal;
+                                    }
+                                }
+                            }
+                            div.kind{//种类
+                                position: absolute;
+                                right:0;
+                                top:0.3125rem;
+                                span{
+                                    display: block;
+                                    border:1px solid rgba(204, 204, 204, 0.5);
+                                    border-radius:0.7rem;
+                                    height:1.4rem;
+                                    line-height:1.3rem;
+                                    padding: 0 0.25rem;
+                                    color:rgba(204, 204, 204, 0.5);
+                                    background-color:#fff;
+                                    font-size:0.9rem;
+                                }
+                            }
+                        }
+                        // 考试
+                        li.exam-item{
+                            padding:0.5rem 0;
+                            border-bottom:1px solid rgba(201,201,201,0.3);
+                            position: relative;
+                            h2{} 
+                            p{
+                                font-size:.8rem;
+                                padding-top:0.2rem;
+                                color:#ccc;
+                                span{
+                                   padding-left:.2rem;
+                               }
+                            }
+                            div{
+                                font-size:0.9rem;
+                                position: absolute;
+                                right:0;
+                                bottom:0.5rem;
+                            }
+                            .orange{color:orange;}
+                            .green{color:green;}
+                            .red{color:red;}
+                        }
+                        // 培训班
+                        li.recent-class-item{
+                            width:100%;
+                            padding-top:0.625rem;
+                            // padding-bottom: 0.625rem;
+                            border-bottom:0.2rem dashed rgba(245, 245, 245,1);
+                            h2{
+                                height:1.4rem;
+                                line-height:1.4rem;
+                                font-size:1rem;
+                            }
+                            p{
+                                text-align: left;
+                                height:1.5rem;
+                                line-height:1.5rem;
+                                font-size:0.8rem;
+                                color:#aaa;
+                                overflow: hidden;/*内容超出后隐藏*/
+                                text-overflow: ellipsis;/* 超出内容显示为省略号*/
+                                white-space: nowrap;/*文本不进行换行*/
+                                span{i{font-size:0.8rem;margin-right:4px;}}
+                                span:nth-child(1){float:left;}
+                                span:nth-child(2){float:right;}
+                            }
+                            div{
+                                width:100%;
+                                max-height:8.75rem;
+                                min-height:6.5625rem;
+                                overflow:hidden;
+                                position:relative;
+                                img{
+                                    width:100%;
+                                }
+                                span{
+                                    display: block;
+                                    height:1.875rem;
+                                    line-height:1.875rem;
+                                    position:absolute;
+                                    bottom:5%;
+                                    right:3%;
+                                    border-radius:8px;
+                                    background-color:rgba(92, 87, 87, 0.5);
+                                    padding:0 3%;
+                                    color:#fff;
+                                    font-size:0.8rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

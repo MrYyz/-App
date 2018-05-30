@@ -1,0 +1,38 @@
+<div id="applytrain" *ngIf="applytrainData">
+  <header>{{applytrainData._title}}</header>
+  <main>
+    <div>
+      <!-- <label>报名简介：</label> -->
+      <label>{{applytrainData._flag != 'isPower'?'报名简介：':'培训班简介：'}}</label>
+      <p>{{applytrainData._description}}</p>
+    </div>
+    <div>
+      <label>培训时间：</label>
+      <p>{{applytrainData._traintime}}</p>
+    </div>
+    <div>
+      <label>培训地点：</label>
+      <p>{{applytrainData._address}}</p>
+    </div>
+    <div>
+      <label>计划人数：</label>
+      <span>{{applytrainData._planperson}}</span>
+    </div>
+    <div>
+      <label>报名时间：</label>
+      <p>{{applytrainData._applytime}}</p>
+    </div>
+
+  </main>
+  <div class="button" *ngIf="applytrainData._flag != 'isPower'">
+    <div class="{{applytrainData._enableapply == applytrainData._planperson && (applytrainData._flag != 'applied' && applytrainData._isteacher != '1') || applytrainData._ispass == '2' || applytrainData._flag == 'over' ?'cannotapply':''}}" (click)="jumpToTrainClass()">
+      {{applytrainData._isteacher == '1' ? '您是班主任，进入培训班' : ((applytrainData._flag == 'noapply' && (applytrainData._planperson - applytrainData._enableapply >= 0)) ? '我要报名（'+applytrainData._enableapply+'人已报名）':(applytrainData._flag == 'over'?'报名已结束':(applytrainData._ispass == '1' ? '报名成功，进入培训班':(applytrainData._ispass == '2' ? '已被管理员取申请消资格':'报名正在审核中'))))}}
+    </div>
+  </div>
+</div>
+<div class="quxiao" *ngIf="applytrainData && applytrainData._flag == 'applied'&& applytrainData._isteacher != '1' && applytrainData._ispass != '2'" (click)="jumpToTrainClass()">取消报名</div>
+<div id="applytrain" *ngIf="!applytrainData">暂无内容</div>
+<spinner *ngIf="showSpinner"></spinner>
+
+<!-- '报名成功，进入培训班' -->
+<!-- (applytrainData._enableapply == applytrainData._planperson && (applytrainData._flag != 'applied' || applytrainData._isteacher != '1')) || applytrainData._ispass == '2' -->

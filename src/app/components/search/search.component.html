@@ -1,3 +1,91 @@
-<p>
-  search works!
-</p>
+<div id="search">
+  <div class="searchTabCard">
+      <div class="swiper-pagination9" #pagination9></div>
+      <div class="swiper-container" id="swiper-container9">
+        <div class="swiper-wrapper">
+          <!-- 搜索：课程 -->
+          <div class="swiper-slide">
+            <ul class="content">
+              {{courseData?'':'暂无内容'}}
+              <li *ngFor="let courseItem of [] | toArr:courseData;let i = index" class="course-item clearfix" (click)="linkTo(courseItem)">
+                <div class="courseItemLeft"><img src="{{courseItem._image}}" onerror="this.src='../../../assets/images/course_default.png'" alt="{{courseItem._category}}"></div>
+                <div class="courseItemRight">
+                    <h2>{{courseItem._title}}</h2>
+                    <div *ngIf="courseItem._markcontent" class="courseFlag">
+                        <span *ngIf="courseItem._finishnum=='1'">已学</span><ng-template ngFor let-markcontentItem [ngForOf]="courseItem['_markcontent'].split('|')" *ngIf="courseItem._markcontent"><span>{{markcontentItem}}</span></ng-template>
+                    </div>
+                    <p>
+                        <span><i class="iconfont icon-comments"></i>{{courseItem._vc? courseItem._vc : '0'}}</span>
+                        <span><i class="iconfont icon-code"></i>{{courseItem._pc? courseItem._pc : '0'}}</span>
+                    </p>
+                </div>
+              </li>
+            </ul>            
+          </div>
+          <!-- 搜索：课件 -->
+          <div class="swiper-slide">
+            <ul class="content">
+              {{coursewareData?'':'暂无内容'}}
+              <li *ngFor="let coursewareItem of [] | toArr:coursewareData;let i = index" class="courseware-item clearfix" (click)="linkTo(coursewareItem)">
+                <h3><span>{{i+1 + '.'}}</span>{{coursewareItem._title}}</h3>
+                <p [ngSwitch]="coursewareItem._islearned" class="remarks">
+                  <span *ngSwitchCase='1' style="color:green;">
+                    <i>已学</i>
+                    <i *ngIf='coursewareItem._userscore != ""'>{{'，考试成绩'+coursewareItem._userscore+'分'}}</i>
+                  </span>
+                  <span *ngSwitchCase='0' style="color:#888;">
+                    <i *ngIf="coursewareItem._learnedtime == '0'" style="color:rgb(250, 200, 120);">未学过</i>
+                    <i *ngIf="coursewareItem._learnedtime != '0'">{{'课件时长'+coursewareItem._playtime+'秒，已学'+coursewareItem._learnedtime+'秒，剩余'+(coursewareItem._playtime-coursewareItem._learnedtime)+'秒'}}</i>
+                    
+                  </span>
+                </p>
+                <div [ngSwitch]="coursewareItem._type" class="kind clearfix">
+                  <span *ngSwitchCase="'text/we'">微课</span>
+                  <span *ngSwitchCase="'text/ppt'">PPT</span>
+                  <span *ngSwitchCase="'video/mp4'">视频</span>
+                  <span *ngSwitchCase="'audio/mp3'">MP3</span>
+                  <span *ngSwitchCase="'text/html'">图文</span>
+                  <span *ngSwitchCase="'application/pdf'">PDF</span>
+                  <span *ngSwitchDefault>{{coursewareItem._type}}</span>
+                </div>
+              </li>
+            </ul>            
+          </div>
+          <!-- 搜索：考试 -->
+          <div class="swiper-slide">
+            <ul class="content">
+              {{examData?'':'暂无内容'}}
+              <li *ngFor="let examinationItem of [] | toArr:examData;let i = index" class="exam-item clearfix" (click)="linkTo(examinationItem)">
+                  <h2>{{examinationItem._title}}</h2>
+                  <p>
+                    {{'时长：' + examinationItem._duration + '分钟'}}
+                    <span>{{'截止时间：' + examinationItem._expiredate}}</span>
+                  </p>
+              </li>
+            </ul>            
+          </div>
+          <!-- 搜索：培训班 -->
+          <div class="swiper-slide">
+            <ul class="content">
+              {{trainData?'':'暂无内容'}}
+              <li *ngFor="let classesItem of [] | toArr:trainData;let i = index" class="recent-class-item clearfix" (click)="linkTo(classesItem)">
+                    <h2>{{classesItem._title}}</h2>
+                    <p [ngSwitch]="classesItem._state">
+                        <span><i class="iconfont icon-account"></i>{{classesItem._classteachername}}</span>
+                        <span *ngSwitchCase="'0'"><i class="iconfont icon-task-management"></i>{{classesItem._traintime}}</span>
+                        <span *ngSwitchCase="'1'"><i class="iconfont icon-task-management"></i>{{'报名时间：剩余 '+classesItem._validtime+' 天 | 剩 '+(classesItem._planperson - classesItem._appliednum)+' 名额'}}</span>
+                    </p>
+                    <div>
+                        <img src="{{classesItem._image}}" onerror="this.src='../../../assets/images/train_default.png'" alt="默认图片"/>
+                        <span *ngIf="classesItem._state">{{classesItem._state == '1'?'即将开班':(classesItem._state == '0'?'正在进行':'已结束')}}</span>
+                    </div>
+                    <p><i class="iconfont icon-map"></i>{{'位置：'+classesItem._address}}</p>
+              </li>
+            </ul>            
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- <spinner *ngIf="showSpinner"></spinner> -->

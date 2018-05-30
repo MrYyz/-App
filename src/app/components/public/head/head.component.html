@@ -1,15 +1,15 @@
 <div *ngFor="let T of title | async">
-    <div id="header" *ngIf="T.isShowTitle && !isSearch" (click)="onClickHeader()">
+    <div id="header" *ngIf="T.isShowTitle && !T.isShowSearchDiv" (click)="onClickHeader()">
         <i *ngIf='T.isShowBack' class="iconfont icon-back"></i>
         <p class="context">{{T.titleContent}}</p>
         <span class="clearfix">
                 <em *ngIf='T.isShowQrCode' class="iconfont icon-qrcode"></em>
                 <em *ngIf='T.isShowPosition' class="iconfont icon-compass">定位</em>
                 <em *ngIf='T.isShowSearch' class="iconfont icon-search"></em>
-                <em *ngIf='T.isShowCollect' class="iconfont icon-favorite"></em>
+                <em *ngIf='T.isShowCollect' class="{{T.isCollected?'iconfont icon-favoritesfilling':'iconfont icon-favorite'}}"></em>
         </span>
     </div>
-    <div class="search" *ngIf="isSearch" (click)="onClickHeader()">
+    <div class="search" *ngIf="T.isShowSearchDiv" (click)="onClickHeader()">
         <i *ngIf='T.isShowBack' class="iconfont icon-back"></i>
         <div class="searchText">
             <i class="iconfont icon-search i"></i>
@@ -19,3 +19,5 @@
         <div class="btnSearch">搜索</div>
     </div>
 </div>
+
+<!-- icon-favoritesfilling -->

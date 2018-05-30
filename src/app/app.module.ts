@@ -26,6 +26,13 @@ import { AdvertisingComponent } from './components/public/advertising/advertisin
 import { RulesComponent } from './components/rules/rules.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { CourseDetailComponent } from './components/course-detail/course-detail.component';
+import { TrainClassComponent } from './components/train-class/train-class.component';
+import { ApplytrainComponent } from './components/applytrain/applytrain.component';
+import { TrainListComponent } from './components/train-list/train-list.component';
+import { CollectionComponent } from './components/collection/collection.component';
+import { UnfinishedCourseComponent } from './components/unfinished-course/unfinished-course.component';
+import { ExamcenterComponent } from './components/examcenter/examcenter.component';
+import { StudyRecordComponent } from './components/study-record/study-record.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +56,13 @@ import { CourseDetailComponent } from './components/course-detail/course-detail.
 
     RangePipe,
     ToArrPipe,
+    TrainClassComponent,
+    ApplytrainComponent,
+    TrainListComponent,
+    CollectionComponent,
+    UnfinishedCourseComponent,
+    ExamcenterComponent,
+    StudyRecordComponent,
   ],
   imports: [
     BrowserModule,

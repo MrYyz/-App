@@ -33,6 +33,7 @@ export class AdvertisingComponent extends BaseComponent implements OnInit {
     this.jumpToHomePage()
     this.getHomePageData()
     this.getSkeletonData()
+    this.getUserData()
   }
 
     /**
@@ -43,7 +44,7 @@ export class AdvertisingComponent extends BaseComponent implements OnInit {
     this.protect(this.request.http(130,'').subscribe(js=>{
       if(!js) return;
       this.advertisingUrl = js.service.item._image;
-    }))
+    },e=>this.errorMsg(e)))
   }
 
   /**
@@ -54,7 +55,7 @@ export class AdvertisingComponent extends BaseComponent implements OnInit {
     this.protect(this.request.http(2001,'').subscribe(js=>{
       if(!js) return; 
       this.store.dispatch({type:'CREATE_DATA',payload:{'skeleton2001':js.service}})
-    }))
+    },e=>this.errorMsg(e)))
   }
 
   /**
@@ -65,7 +66,18 @@ export class AdvertisingComponent extends BaseComponent implements OnInit {
     this.protect(this.request.http(2010,'').subscribe(js=>{
       if(!js) return; 
       this.store.dispatch({type:'CREATE_DATA',payload:{'homePage2010':js.service}})
-    }))
+    },e=>this.errorMsg(e)))
+  }
+
+  /**
+   * 获取用户信息，存到store里
+   * @memberof AdvertisingComponent
+   */
+  getUserData(){
+    this.protect(this.request.http(600,'').subscribe(js=>{
+      if(!js) return; 
+      this.store.dispatch({type:'setUserInfo',payload:[js['service']['item']]})
+    },e=>this.errorMsg(e)))
   }
 
   /**

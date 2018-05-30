@@ -1,0 +1,56 @@
+<div id="examcenter">
+  <div class="examCenterTabCard">
+      <div class="swiper-pagination7" #pagination7></div>
+      <div class="swiper-container" id="swiper-container7">
+        <div class="swiper-wrapper">
+          <!-- 试题库 -->
+          <div class="swiper-slide">
+            <div class="content">
+              <ul class="exam">
+                {{examinationData?'':'暂无内容'}}
+                <li *ngFor="let examinationItem of [] | toArr:examinationData">
+                  <h2>{{examinationItem._title}}</h2>
+                  <p>
+                    {{'时长：' + examinationItem._duration + '分钟'}}
+                    <span>{{'截止时间：' + examinationItem._expiredate}}</span>
+                  </p>
+                </li>
+              </ul>
+            </div>            
+          </div>
+          <!-- 考试记录 -->
+          <div class="swiper-slide">
+            <div class="content">
+              <ul class="record">
+                {{examRecordData?'':'暂无内容'}}
+                <li *ngFor="let examRecordItem of [] | toArr:examRecordData">
+                  <h2>{{examRecordItem._title}}</h2>
+                  <p>{{'交卷时间：' + examRecordItem._completetime}}</p>
+                  <p>
+                  得分：<span style="color:orange;">{{examRecordItem._testscores>=0?examRecordItem._testscores:'***'}}</span><span>{{'，还可以补考' + (examRecordItem._totalnumber - examRecordItem._currnumber) + '次'}}</span>
+                  </p>
+                  <div class="{{examRecordItem._testscores == '-1.0'?'orange':((examRecordItem._testscores*1 >= examRecordItem._passmark*1)?'green':'red')}}">
+                    {{examRecordItem._testscores == '-1.0'?'阅卷中':((examRecordItem._testscores*1 >= examRecordItem._passmark*1)?'已通过':'未通过')}}
+                  </div>
+                </li>
+              </ul>
+            </div>            
+          </div>
+          <!-- 习题库 -->
+          <div class="swiper-slide">
+            <div class="content">
+              <ul class="text">
+                {{exerciseData?'':'暂无内容'}}
+                <li *ngFor="let exerciseItem of [] | toArr:exerciseData">
+                  <h2>{{exerciseItem._title}}</h2>
+                  <p>{{'已答 ' + 0 + '/' + exerciseItem._questioncount}}</p>
+                </li>
+              </ul>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<spinner *ngIf="showSpinner"></spinner>

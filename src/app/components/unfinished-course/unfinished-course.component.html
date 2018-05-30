@@ -1,0 +1,22 @@
+<div id="unfinishedCourse">
+  <!-- 未学完课程列表，内容从home拷贝过来，部分calssname没改动 -->
+  <div class="newcourse" [style.background]="unfinishedCourseData?'':'transparent'">
+      {{unfinishedCourseData?'':'暂无内容'}}
+    <div *ngFor="let courseItem of [] | toArr:unfinishedCourseData;let i = index" class="newcourse-item clearfix"  (click)="linkTo(courseItem)">
+      <div class="courseItemLeft"><img src="{{courseItem._image}}" onerror="this.src='../../../assets/images/course_default.png'" alt="{{courseItem._category}}"></div>
+      <div class="courseItemRight">
+        <h2>{{courseItem._title}}</h2>
+        <div *ngIf="courseItem._markcontent" class="courseFlag">
+          <span *ngIf="courseItem._finishnum=='1'">已学</span><ng-template ngFor let-markcontentItem [ngForOf]="courseItem['_markcontent'].split('|')" *ngIf="courseItem._markcontent"><span>{{markcontentItem}}</span></ng-template>
+        </div>
+        <p>
+          <span><i class="iconfont icon-comments"></i>{{courseItem._vc? courseItem._vc : '0'}}</span>
+          <span><i class="iconfont icon-code"></i>{{courseItem._pc? courseItem._pc : '0'}}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <p>--- 我也是有底线的 ---</p>
+</div>
+<spinner *ngIf="showSpinner"></spinner>

@@ -1,0 +1,85 @@
+#unfinishedCourse{ // 以下样式是从home拷贝过来的，所以部分calssname没改动
+    padding: 0rem 2% 0.2rem 2%;
+    padding-bottom: 0;
+    font-size:0.9rem;
+    text-align: center;
+    .newcourse{
+        padding-bottom:.1rem;
+        background-color:#fff;
+        padding:0 .8rem;
+        padding-bottom:0.1rem;
+        // 新课抢先看
+        .newcourse-item{
+            // padding-top:10px;
+            height:7.5rem;
+            border-bottom:0.2rem dashed rgba(245, 245, 245,1);
+            .courseItemLeft{
+                float:left;
+                width:7.5rem;
+                height:7.5rem;
+                position:relative;
+                // background-color:#ccc;
+                img{
+                    width:6.25rem;
+                    height:6.25rem;
+                    position:absolute;
+                    top:50%;
+                    left: 50%;
+                    transform:translate(-50%,-50%);
+                }
+            }
+            .courseItemRight{
+                height:100%;
+                width:calc(100% - 7.5rem);
+                padding-top:0.625rem;
+                float:left;
+                position:relative;
+                text-align: left;
+                h2{
+                    font-size:1.0rem;
+                    font-size:.9rem;
+                    font-weight: normal;
+                    overflow: hidden;/*内容超出后隐藏*/
+                    text-overflow: ellipsis;/* 超出内容显示为省略号*/
+                    white-space: nowrap;/*文本不进行换行*/
+                }
+                .courseFlag{
+                    padding-top:5px;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;//两行溢出自动省略号隐藏
+                    overflow: hidden;
+                    span{
+                        display: inline-block;
+                        padding:0 0.625rem;
+                        height:1.625rem;
+                        line-height:1.625rem;
+                        text-align: center;
+                        border:1px solid #ccc;
+                        border-radius:0.9375rem;
+                        margin-right:2px;
+                        font-size:0.9rem;
+                        margin-bottom:2px;
+                    }
+                }
+                p{
+                    position:absolute;
+                    bottom:0.3125rem;
+                    span{
+                        font-size:0.9rem;
+                        i{
+                            margin-right:4px;
+                            font-size:1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    >p{
+        font-size:0.8rem;
+        padding:.2rem 0 ;
+        color:#ccc;
+        font-family: 'KaiTi_GB2312';
+    }
+}

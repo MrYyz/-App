@@ -6,6 +6,7 @@
     <p>
         {{dataItem.txt}}
         <i class="iconfont icon-more" *ngIf="dataItem.showIcon? dataItem.showIcon : true"></i>
+        <span>{{dataItem.rightTxt?dataItem.rightTxt:''}}</span>
     </p>
   </li>
 </ul>

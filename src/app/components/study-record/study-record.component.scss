@@ -1,0 +1,34 @@
+@import '../../../assets/css/swiper-4.1.0.min.css';
+
+#studyrecord{
+    //选项卡
+    .studyrecordTabCard{
+        font-size:0.9rem;
+        .swiper-pagination7{
+            width:100%;
+        }
+        .swiper-container{
+            .swiper-wrapper{
+                .swiper-slide{
+                    padding:0 .8rem;
+                    background-color:#fff;
+                    overflow-y:auto;
+                    .content{
+                        font-size:.9rem;
+                        li{
+                            border-bottom:1px solid #ccc;
+                            .left{
+                                width:30%;
+                                float:left;
+                            }
+                            .right{
+                                width:70%;
+                                float:right;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

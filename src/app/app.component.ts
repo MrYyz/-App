@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
     if(_res.source.value){
       _res = _res.source.value;
       var result = _res[_shoose];
-      console.log('result=',result)
+      // console.log('result=',result)
       return result;
     }else{
       if(_num<0) return '找不到对应的state';

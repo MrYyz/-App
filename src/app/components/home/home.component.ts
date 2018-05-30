@@ -34,9 +34,9 @@ export class HomeComponent extends BaseComponent implements OnInit {
   // 导航内容
   navContent:object[] = [
     {_title:'未完成课程',route:'unfinishedcourse',_flag: 'unfinished_course'},
-    {_title:'收藏的课程',route:'collectcourse',_flag: 'collect'},
+    {_title:'收藏的课程',route:'collection',_flag: 'collect'},
     {_title:'考试中心',route:'examcenter',_flag: 'exam'},
-    {_title:'培训班',route:'traincourse',_flag: 'train'},
+    {_title:'培训班',route:'trainlist',_flag: 'train'},
   ];
   // 头部参数
   homeTitle: [{}] =[ {
@@ -77,7 +77,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
       _language:'',
       _largeimage:'',
       _laststudydate:'0',
-      _markcontent:['选修','重点','测试','好好练习'],
+      _markcontent:'aaa|vvvvv',
       // markcontent:['选修','重点'],
       _markid:'20171q23nl19a0sq1n2p129311l8795',
       _model:'0',
@@ -124,7 +124,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
       _language:'',
       _largeimage:'',
       _laststudydate:'0',
-      _markcontent:['选修','重点','测试','好好练习'],
+      _markcontent:'aaa|vvvvv',
       // markcontent:['选修','重点'],
       _markid:'20171q23nl19a0sq1n2p129311l8795',
       _model:'0',
@@ -171,7 +171,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
       _language:'',
       _largeimage:'',
       _laststudydate:'0',
-      _markcontent:['选修','重点','测试','好好练习'],
+      _markcontent:'aaa|vvvvv',
       // markcontent:['选修','重点'],
       _markid:'20171q23nl19a0sq1n2p129311l8795',
       _model:'0',
@@ -243,7 +243,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
         el: '.swiper-pagination1',
         clickable: true,
         renderBullet: function (index, className) {
-          var contentList:string[] = ['新课抢先看','最近开班'];
+          var contentList:string[] = ['新课抢先看','培训班动态'];
           var spanStyle:string = 'display:inline-block;width:50%;text-align:center;height:2.5rem;line-height:2.5rem;';
             return '<span class="' + className + '" style="'+spanStyle+'">' + contentList[index] + '</span>';//这操作，scss无法获取到(失效)
         },
@@ -309,7 +309,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
    * @memberof HomeComponent
    */
   linkTo(itemObj:object){
-    console.log('---itemObj---',itemObj)
+    // console.log('---itemObj---',itemObj)
     // 实现 导航栏-['未完成课程','收藏的课程','考试中心','培训班'] 路由跳转
     switch(itemObj['_flag']){
       case "unfinished_course":
@@ -329,12 +329,14 @@ export class HomeComponent extends BaseComponent implements OnInit {
         this.router.navigate(['/coursedetail/'+itemObj['_id']+'/'+itemObj['_title']])
         break;
       case "noapplytrain":
-        this.router.navigate(['/traincoursedetail/'+itemObj['_applyid']]);//请求2101
+        this.router.navigate(['/applytrain/'+itemObj['_applyid']]);//请求2101
         break;
       case "applytrain":
-      this.router.navigate(['/traincoursedetail/'+itemObj['_applyid']]);//请求2101
+      case "noisPower":
+        this.router.navigate(['/applytrain/'+itemObj['_applyid']]);//请求2101
         // this.router.navigate(['/'+itemObj['route']]);
         break;
     }
   }
+
 }

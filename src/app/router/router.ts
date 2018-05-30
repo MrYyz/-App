@@ -11,6 +11,13 @@ import { SpinnerComponent } from '../components/public/spinner/spinner.component
 import { AdvertisingComponent } from '../components/public/advertising/advertising.component';
 import { RulesComponent } from '../components/rules/rules.component';
 import { UserInfoComponent } from '../components/user-info/user-info.component';
+import { TrainClassComponent } from '../components/train-class/train-class.component';
+import { ApplytrainComponent } from '../components/applytrain/applytrain.component';
+import {TrainListComponent } from '../components/train-list/train-list.component';
+import {CollectionComponent} from '../components/collection/collection.component'
+import {UnfinishedCourseComponent} from '../components/unfinished-course/unfinished-course.component'
+import {ExamcenterComponent} from '../components/examcenter/examcenter.component'
+import {StudyRecordComponent} from '../components/study-record/study-record.component'
 
 const appRoutes: Routes = [
     { path:'',component:HomeComponent },
@@ -25,6 +32,13 @@ const appRoutes: Routes = [
     { path:'advertising',component:AdvertisingComponent },
     { path:'rules',component:RulesComponent },
     { path:'userinfo',component:UserInfoComponent },
+    { path:'trainclass/:id/:title',component:TrainClassComponent },
+    { path:'applytrain/:id',component:ApplytrainComponent },
+    { path:'trainlist',component:TrainListComponent },
+    { path:'collection',component:CollectionComponent },
+    { path:'unfinishedcourse',component:UnfinishedCourseComponent },
+    { path:'examcenter',component:ExamcenterComponent },
+    { path:'studyrecord',component:StudyRecordComponent },
     { path:'**',component:NotFoundComponent },
 ]
 

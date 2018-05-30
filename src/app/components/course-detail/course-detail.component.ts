@@ -35,7 +35,6 @@ export class CourseDetailComponent extends BaseComponent implements OnInit {
   }
   // 头部参数
   coursewareTitle:[{}] = [{
-    isShowBack: true,
     titleContent: '课程详情',
     isShowCollect: true,
   }]
@@ -80,7 +79,7 @@ export class CourseDetailComponent extends BaseComponent implements OnInit {
   getUrlParams(){
     // 路由参数 -- 转换成对象
     this.route.params.subscribe((params)=>{
-      console.log(params)
+      // console.log(params)
       this.routeParams = params;
     })
     // 路由参数 -- 单个接收
@@ -91,11 +90,25 @@ export class CourseDetailComponent extends BaseComponent implements OnInit {
     let courseID = this.routeParams['id'];
     this.protect(this.request.http(215,'id='+courseID).subscribe(js=>{
       if(!js) return;
+      
+      let curCourse215 = getState(this.store)['dataListState']['curCourse215'];
+      // 以下判断为课程收藏功能做铺垫
+      if(curCourse215){//更新
+        this.store.dispatch({type:'UPDATE_DATA',payload:{curCourse215:js['service']['item']}})
+      }else{//创建
+        this.store.dispatch({type:'CREATE_DATA',payload:{curCourse215:js['service']['item']}})
+      }
+
       this.protect(this.request.http(240,'flag=course&pageno=1&pagesize=15&id='+courseID).subscribe(res=>{
+
         this.showSpinner = false;
+        
         if(!res) return ;
-        this.needSimulatedData(js.service,res.service)
+
+        this.needSimulatedData(js.service,res.service)// 数据处理
+
       },e=>{this.errorMsg(e);this.showSpinner = false;}))
+
     },e=>{this.errorMsg(e);this.showSpinner = false;}))
   }
 
@@ -116,6 +129,10 @@ export class CourseDetailComponent extends BaseComponent implements OnInit {
     }else{
       this.courseComment = _data240;
     }
+
+    // 此处处理课程是否收藏
+    let favo = this.courseHeaderData['_isfavorited']=='0'?false:true;
+    this.store.dispatch({type:'setTitle',payload:[{titleContent: '课程详情',isCollected: favo,isShowCollect: true}]})
   }
   // 实现点赞和踩的动态效果 -- 未在此方法内添加请求 将数据传回后端
   hateAndLike(e){
@@ -181,7 +198,7 @@ export class CourseDetailComponent extends BaseComponent implements OnInit {
       autoplay:false,
       on:{
         slideChange:function(){
-          console.log('activeIndex=',this.swiper3.activeIndex);
+          // console.log('activeIndex=',this.swiper3.activeIndex);
 
           firstChoice(this.pagination3.nativeElement);
         }.bind(this)
@@ -217,8 +234,8 @@ export class CourseDetailComponent extends BaseComponent implements OnInit {
   }
   // 当前用户评价等级
   yourStars(index:string,starNo:string){
-    console.log('starNo=',starNo)
-    console.log('starNo2=',this.courseHeaderData)
+    // console.log('starNo=',starNo)
+    // console.log('starNo2=',this.courseHeaderData)
     if(Number(starNo)>0) return ;
     // 此时应有提示框
     this.protect(this.request.http(252,'id='+this.routeParams['id']+'&mystar='+(index+1)).subscribe(js=>{
@@ -257,13 +274,9 @@ export class CourseDetailComponent extends BaseComponent implements OnInit {
       }
     }
   }
-  // 给某条评论点个赞 -- 暂未实现，请求地址存在问题
+  // 给某条评论点个赞
   likeThisComment(isLike:string,curMsg:any){
     let userInfo = getState(this.store)['userInfoState'];
-    // console.log('curMsg=',curMsg)
-    // console.log('用户信息：',userInfo)
-    // console.log('用户信息：',userInfo['userInfo'])
-    // console.log('用户信息：',userInfo['userInfo']['_xmppid'])
     if(isLike == '1'){
       alert('您已点过赞了!')
       return;

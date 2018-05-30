@@ -53,12 +53,14 @@ export class MineComponent extends BaseComponent implements OnInit {
       url:'1',
       txt:'设置',
       showIcon:true,
-      route:'setting'
+      route:'setting',
+      rightTxt:'暂未开发'
     },{
       url:'2',
       txt:'意见反馈',
       showIcon:true,
-      route:'feedback'
+      route:'feedback',
+      rightTxt:'暂未开发'
     }
   ]
   // 当前用户打败同级伙伴的txt

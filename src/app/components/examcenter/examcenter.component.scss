@@ -1,0 +1,50 @@
+@import '../../../assets/css/swiper-4.1.0.min.css';
+
+#examcenter{
+    //选项卡
+    .examCenterTabCard{
+        font-size:0.9rem;
+        .swiper-pagination7{
+            width:100%;
+        }
+        .swiper-container{
+            .swiper-wrapper{
+                .swiper-slide{
+                    padding:0 .8rem;
+                    background-color:#fff;
+                    overflow-y:auto;
+                    .content{
+                        font-size:.9rem;
+                        // 试题库
+                        ul.exam,ul.record,ul.text{
+                            li{
+                                padding:0.5rem 0;
+                                border-bottom:1px solid rgba(201,201,201,0.3);
+                                position: relative;
+                                h2{} 
+                                p{
+                                    font-size:.8rem;
+                                    padding-top:0.2rem;
+                                    color:#ccc;
+                                    span{
+                                       padding-left:.2rem;
+                                   }
+                                }
+                                div{
+                                    font-size:0.9rem;
+                                    position: absolute;
+                                    right:0;
+                                    bottom:0.5rem;
+                                }
+                                .orange{color:orange;}
+                                .green{color:green;}
+                                .red{color:red;}
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}

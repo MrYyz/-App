@@ -23,8 +23,10 @@ export function reducer(state = initialState, action:SetTitleAction): TitleState
                 titleContent: 'test专用',
                 isShowQrCode: false,
                 isShowSearch: false,
+                isShowSearchDiv: false,
                 isShowPosition: false,
                 isShowCollect: false,
+                isCollected: false,//若ture表示已收藏课程
             }
             var lastPayload:object = action.payload[0];
             action.payload = [];
