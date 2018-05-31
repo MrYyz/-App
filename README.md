@@ -1,4 +1,4 @@
-# NgProject
+<!-- # NgProject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.2.
 
@@ -24,4 +24,12 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md). -->
+
+
+## 请先在终端输入npm i 安装所要的模块，然后再再终端输入npm start运行。
+## `备注：`
+    项目里面除备注了`暂未开发`之外，其他如课件、培训班、考试、个人信息、调用设备硬件...都未完善，若后续有时间再补上。
+
+    `建议使用：Visual Studio Code编辑器。`
+    

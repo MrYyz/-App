@@ -36,7 +36,7 @@ export class MineComponent extends BaseComponent implements OnInit {
     isShowSearch: false,
   }];
   // 【用户信息】：模拟数据
-  userInfo:object = {
+  userInfo:any = {
     _fullname:'姓名',
     _department:'总行广州分行',
     _position:'总经理',
@@ -78,6 +78,8 @@ export class MineComponent extends BaseComponent implements OnInit {
   getUserInformation(){
     let userInfoInState = getState(this.store)['userInfoState'];
     let _user = userInfoInState.userInfo;
+
+    // console.log('userState=',_user)
     if(userInfoInState && _user.length>0 && _user[0]._fullname){
       this.userInfo = _user[0];
       this.defeatPeer(this.userInfo);//打败了多少小伙伴
@@ -86,6 +88,7 @@ export class MineComponent extends BaseComponent implements OnInit {
       this.protect(this.request.http(600,'').subscribe(js=>{
         if(!js) return;
         let userData:[object] = [js.service.item];
+        // console.log('userData=',userData)
         this.store.dispatch({type:'setUserInfo',payload:userData})
         this.defeatPeer(js);//打败了多少小伙伴
         this.calculateWidth();//动态显示用户经验值

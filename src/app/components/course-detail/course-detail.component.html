@@ -92,8 +92,8 @@
               </div>
             </div>
             <div class="secondFloor">
-              <p *ngIf="courseComment && !courseComment.item">暂无内容</p>
-              <ng-template *ngIf="courseComment && courseComment.item" ngFor let-courseCommentItem [ngForOf]="[] | toArr:courseComment.item" let-i="index">
+              <p *ngIf="courseComment && !courseComment['item']">暂无内容</p>
+              <ng-template *ngIf="courseComment && courseComment['item']" ngFor let-courseCommentItem [ngForOf]="[] | toArr:courseComment['item']" let-i="index">
                 <!-- 单个评论div -->
                 <div class="courseCommentDiv clearfix">
                   <div class="left">

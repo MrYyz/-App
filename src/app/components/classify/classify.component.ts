@@ -303,7 +303,7 @@ export class ClassifyComponent extends BaseComponent implements OnInit {
    * @param {any} e 事件源对象
    * @memberof ClassifyComponent
    */
-  hideShowMore(e){
+  hideShowMore(e?:any){
     e = e || window.event;
     var target = e.target;
     if(target.className.indexOf('watchMore')<0){
@@ -354,5 +354,14 @@ export class ClassifyComponent extends BaseComponent implements OnInit {
       this.showSpinner = false;
     }))
 
+  }
+
+  /**
+   * 根据 参数 跳转路由
+   * @param {object} itemObj 参数
+   * @memberof ClassifyComponent
+   */
+  linkTo(itemObj:object){
+    this.router.navigate(['/coursedetail/'+itemObj['_id']+'/'+itemObj['_title']])
   }
 }
