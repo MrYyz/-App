@@ -25,7 +25,7 @@ export class HeadComponent extends BaseComponent implements OnInit {
 
   // isSearch:boolean = false;
   searchText:string = '';
-  isCollect:string = getState(this.store)['dataListState']['curCourse215']?getState(this.store)['dataListState']['curCourse215']['_isfavorited']:'0';
+  // isCollect:string = getState(this.store)['dataListState']['curCourse215']?getState(this.store)['dataListState']['curCourse215']['_isfavorited']:'0';
 
   ngOnInit() {
     // this.getLocation();
@@ -80,7 +80,7 @@ export class HeadComponent extends BaseComponent implements OnInit {
     // this.isSearch = false;
     // this.searchText = '';
     if(getState(this.store)['dataListState']['SearchText']){ // 存在就删掉store里面的数据
-      this.store.dispatch({type:'UPDATE_DATA',payload:{courseSearchData223:undefined}})
+      this.store.dispatch({type:'UPDATE_DATA',payload:{courseSearchData223:true}})
       this.store.dispatch({type:'UPDATE_DATA',payload:{SearchText:''}})
     }
     history.back();
@@ -134,9 +134,10 @@ export class HeadComponent extends BaseComponent implements OnInit {
     }
 
     this.protect(this.request.http(223,'flag=course&pageno=1&pagesize=15&key='+txt).subscribe(js=>{
-      // console.log(JSON.stringify(js['service']['item']))
+
       if(!js) return;
       var dataList = getState(this.store)['dataListState'];
+
       if(dataList && dataList['courseSearchData223']){
         var _type = 'UPDATE_DATA';
       }else{
@@ -145,6 +146,7 @@ export class HeadComponent extends BaseComponent implements OnInit {
       this.store.dispatch({type:_type,payload:{courseSearchData223:js['service']['item']}})
       this.store.dispatch({type:_type,payload:{SearchText:this.searchText}})
       this.searchText = '';
+      // console.log('header=',getState(this.store)['dataListState'])
     },e=>{this.errorMsg(e)}))
 
   }

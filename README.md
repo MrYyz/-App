@@ -28,8 +28,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 ## 请先在终端输入npm i 安装所要的模块，然后再再终端输入npm start运行。
-## `备注：`
+
     项目里面除备注了`暂未开发`之外，其他如课件、培训班、考试、个人信息、调用设备硬件...都未完善，若后续有时间再补上。
+
+    另外，因为初入angular，本项目主要涉及到页面渲染、路由、http请求、store、Observables。
     
 ## angular4.0 配置打包路径以及资源文件404问题
     
@@ -46,10 +48,15 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     解决办法：修改index.html中的<base href='/'>,改成<base href='./'>
 
 参考:
+
     [angular4.0 配置打包路径以及资源文件404问题](https://www.cnblogs.com/minigrasshopper/p/7692888.html)
+
     [angular2 ng build部署后base文件路径问题详细解答](http://www.jb51.net/article/118763.htm)
+
     [NgRx/Store 4 + Angular 5使用教程](https://www.jianshu.com/p/c2d61fc76128)
+
     [swiper中文网](http://www.swiper.com.cn/)
+
     [用于 JavaScript 的 ReactiveX 库](https://cn.rx.js.org/)
 
-`最后：建议使用：Visual Studio Code编辑器。`
+`备注：建议使用：Visual Studio Code编辑器。`
