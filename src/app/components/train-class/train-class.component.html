@@ -1,56 +1,177 @@
 <!-- 选项卡 -->
 <div id="trainClass">
   <div class="trainClassTabCard">
-    <div class="swiper-pagination6" #pagination6>
-      <ng-template ngFor let-item [ngForOf]="programa_cn" let-idx="index">
-        <span class="swiper-pagination-bullet" *ngIf="programa_en.indexOf(programa[idx])>=0">{{item}}</span>
-      </ng-template>
-    </div>
+    <div class="swiper-pagination6" #pagination6></div>
     <div class="swiper-container" id="swiper-container6">
       <div class="swiper-wrapper">
-
-
-        <!-- <ng-template ngFor let-programaItem [ngForOf]="programa_cn" let-i=index>
-          <div [class]="i==0?'swiper-slide swiper-slide-active':(i==1)?'swiper-slide swiper-slide-next':'swiper-slide'">
-            <div class="box">
-              {{programa_cn[i]}}
+        <!-- <p class="loading" *ngIf="showSpinner"><img src="../../../assets/images/loading.gif" alt="">加载中</p> -->
+        <!-- 公告 -->
+        <div class="swiper-slide" *ngIf="programa_en.indexOf('info') >= 0">
+          <p class="loading" *ngIf="showSpinner && !info_data"><img src="../../../assets/images/loading.gif" alt="">加载中</p>
+          <p *ngIf="!info_data && !showSpinner">暂无内容</p>
+          <ng-template ngFor let-item [ngForOf]="[] | toArr: info_data" let-idx="index">
+            <div class="infoBox clearfix">
+              <div class="left"><img [src]="item._image" onerror="this.src='assets/images/course_default.png'"></div>
+              <div class="right">
+                <h5 class="overOneLine">{{item._title}}</h5>
+                <p class="overTwoLine">{{item._brief}}</p>
+                <div>
+                  <span>{{item._vc+'人浏览'}}</span>
+                  <span>{{item._pubdate}}</span>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+        <!-- 签到 -->
+        <div class="swiper-slide" *ngIf="programa_en.indexOf('sign') >= 0">
+          <p class="loading" *ngIf="showSpinner && !sign_data"><img src="../../../assets/images/loading.gif" alt="">加载中</p>
+          <p *ngIf="!sign_data && !showSpinner">暂无内容</p>
+          <ng-template ngFor let-item [ngForOf]="[] | toArr: sign_data" let-idx="index">
+            <div class="signBox">
+              <h5 class="overOneLine">{{item._title}}</h5>
+              <p>{{'签到时间：'+item._time}}</p>
+              <p class="overOneLine">{{'培训地点：'+item._address}}</p>
+            </div>
+          </ng-template>
+        </div>
+        <!-- 课程 -->
+        <div class="swiper-slide" *ngIf="programa_en.indexOf('course') >= 0">
+          <p class="loading" *ngIf="showSpinner && !course_data"><img src="../../../assets/images/loading.gif" alt="">加载中</p>
+          <p *ngIf="!course_data && !showSpinner">暂无内容</p>
+          <ng-template ngFor let-item [ngForOf]="[] | toArr: course_data" let-idx="index">
+            <div class="courseBox clearfix">
+              <div class="courseItemLeft"><img src="{{item._image}}" onerror="this.src='assets/images/course_default.png'" alt="{{item._category}}"></div>
+              <div class="courseItemRight">
+                <h2>{{item._title}}</h2>
+                <div *ngIf="item._markcontent" class="courseFlag">
+                  <span *ngIf="item._finishnum=='1'">已学</span><ng-template ngFor let-markcontentItem [ngForOf]="item['_markcontent'].split('|')" *ngIf="item._markcontent"><span>{{markcontentItem}}</span></ng-template>
+                </div>
+                <p>
+                  <span><i class="iconfont icon-comments"></i>{{item._vc? item._vc : '0'}}</span>
+                  <span><i class="iconfont icon-code"></i>{{item._pc? item._pc : '0'}}</span>
+                </p>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+        <!-- 练习 -->
+        <div class="swiper-slide" *ngIf="programa_en.indexOf('exercise') >= 0">
+          <p class="loading" *ngIf="showSpinner && !exercise_data"><img src="../../../assets/images/loading.gif" alt="">加载中</p>
+          <p *ngIf="!exercise_data && !showSpinner">暂无内容</p>
+          <ul class="exerciseBox">
+            <li *ngFor="let item of [] | toArr:exercise_data">
+              <h2>{{item._title}}</h2>
+              <p>已答 <span class="orange">0</span>{{'/' + item._questioncount}}</p>
+            </li>
+          </ul>
+        </div>
+        <!-- 考试 -->
+        <div class="swiper-slide" *ngIf="programa_en.indexOf('exam') >= 0">
+          <p class="loading" *ngIf="showSpinner && !exam_data"><img src="../../../assets/images/loading.gif" alt="">加载中</p>
+          <p *ngIf="!exam_data && !showSpinner">暂无内容</p>
+          <ul class="examBox">
+            <li *ngFor="let item of [] | toArr:exam_data">
+              <h2>{{item._title}}</h2>
+              <p>
+                {{'时长：' + item._duration + '分钟'}}
+                <span>{{'截止时间：' + item._expiredate}}</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <!-- 调研 -->
+        <div class="swiper-slide" *ngIf="programa_en.indexOf('survey') >= 0">
+          <p class="loading" *ngIf="showSpinner && !survey_data"><img src="../../../assets/images/loading.gif" alt="">加载中</p>
+          <p *ngIf="!survey_data && !showSpinner">暂无内容</p>
+          <ul class="surveyBox">
+            <li *ngFor="let item of [] | toArr:survey_data">
+              <h2>{{item._title}}</h2>
+              <p>
+                {{'共' + item._questioncount + '题'}}
+                <span>{{'截止时间：' + item._expiredate}}</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <!-- 评估 -->
+        <div class="swiper-slide" *ngIf="programa_en.indexOf('evaluation') >= 0">
+          <p class="loading" *ngIf="showSpinner && !evaluation_data"><img src="../../../assets/images/loading.gif" alt="">加载中</p>
+          <p *ngIf="!evaluation_data && !showSpinner">暂无内容</p>
+          <ul class="evaluationBox">
+            <li *ngFor="let item of [] | toArr:evaluation_data">
+              <h2>{{item._title}}</h2>
+              <p>
+                {{'共' + item._questioncount + '题'}}
+                <span>{{'截止时间：' + item._expiredate}}</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <!-- 评论 -->
+        <div class="swiper-slide" *ngIf="programa_en.indexOf('comment') >= 0">
+          <p class="loading" *ngIf="showSpinner && !comment_data"><img src="../../../assets/images/loading.gif" alt="">加载中</p>
+          <p *ngIf="!comment_data && !showSpinner">暂无内容</p>
+          <div class="commentBox">
+            <div class="secondFloor">
+              <!-- <p *ngIf="courseComment && !courseComment['item']">暂无内容</p> -->
+              <ng-template ngFor let-courseCommentItem [ngForOf]="[] | toArr:comment_data" let-i="index">
+                <!-- 单个评论div -->
+                <div class="courseCommentDiv clearfix">
+                  <div class="left">
+                    <img [src]="default_buddha" alt="默认头像">
+                    <p>{{courseCommentItem._datetime
+                      }}</p>
+                  </div>
+                  <div class="right">
+                    <div class="clearfix">
+                      <span>{{courseCommentItem._fullname}}</span>
+                      <div class="likeAndReply">
+                        <span [style.color]="courseCommentItem._isliked==1?'#CC2F2A':''" [style.borderColor]="courseCommentItem._isliked==1?'#CC2F2A':''" (click)="likeThisComment(courseCommentItem._isliked,courseCommentItem)"
+                        ><i class="iconfont icon-good-filling"></i>{{courseCommentItem._pv}}</span>
+                        <span (click)="submitTheComment(courseCommentItem)"><i class="iconfont icon-code"></i>{{courseCommentItem._reply}}</span>
+                        </div>
+                      </div>
+                    <div class="courseComment">
+                      <u>
+                        {{courseCommentItem._comment}}
+                        <i *ngIf="courseCommentItem.item"></i>
+                      </u>
+                      <!-- 评论回复 -->
+                      <ul *ngIf="courseCommentItem.item">
+                        <ng-template ngFor let-commentLi [ngForOf]="[] | toArr:courseCommentItem.item">
+                          <li>
+                            <div>
+                                <p>{{commentLi._fullname}}<span>{{commentLi._datetime}}</span>
+                                </p>
+                                <p>{{commentLi._comment}}</p>
+                            </div>
+                          </li>
+                        </ng-template>
+                      </ul>
+                    </div>
+                    
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+            <div class="thirdFloor clearfix">
+              <div>
+                <input class="myComment" type="text" placeholder="{{replyComments?'回复:'+replyComments:'我来评论(这里只做样式没给方法，所以报错是正常的)'}}" [(ngModel)]="commentMsg">
+              </div>
+              <div class="submitComment" [class.red]="commentMsg" (click)="submitTheComment()">发送</div>
             </div>
           </div>
-        </ng-template> -->
-        <!-- <div class="swiper-slide" *ngFor="let item of programa_cn">
-          <div class="box">
-            {{item}}
-          </div>
-        </div> -->
-
-
-        <!-- 备注：swiper不能动态配置，否则只会显示第一页的信息 -->
-
-
-        <div class="swiper-slide" *ngIf="programa.indexOf('info')>=0">
-          <div class="box">
-            {{'备注：swiper不能动态配置，否则只会显示第一页的信息'}}
-          </div>
         </div>
-        <div class="swiper-slide" *ngIf="false">
-          <div class="box">
-            {{'签到'}}
-          </div>
+        <div class="swiper-slide" *ngIf="programa_en.indexOf('homework') >= 0">
+          <p class="loading" *ngIf="showSpinner && !homework_data"><img src="../../../assets/images/loading.gif" alt="">加载中</p>
+          <p *ngIf="!homework_data && !showSpinner">暂无内容</p>
         </div>
-        <div class="swiper-slide">
-          <div class="box">
-            {{'课程'}}
-          </div>
-        </div>
-
-
 
       </div>
     </div>
   </div>
 </div>
-
-
 
 <!-- <spinner *ngIf="showSpinner"></spinner> -->
 

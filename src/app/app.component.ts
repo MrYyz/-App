@@ -9,6 +9,8 @@ import * as homeReducer from './redux/reducers/home.reducer'
 
 import { Router,ActivatedRoute } from '@angular/router';
 
+import * as VConsole from 'vconsole';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit {
   ngOnInit(){
     // setTimeout(this.giveAppHeight());
     this.isNotLogined();
+    var vconsole = new VConsole();
   }
   ngAfterViewInit() {setTimeout(this.giveAppHeight());}
 

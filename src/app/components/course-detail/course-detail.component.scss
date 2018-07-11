@@ -27,12 +27,16 @@
                 font-weight:normal;
                 // font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 // font-family: 'Hiragino Sans GB';
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;/*两行溢出自动省略号隐藏*/
             }
             .boxleft{
                 position:absolute;
                 bottom:0;
                 left:0.625rem;
-                // border:1px solid rgba(204, 204, 204, 0.5);
+                p:first-child{padding-bottom:0;}
                 p{
                     color:rgb(107, 107, 107);
                     padding-bottom:0.3125rem;
@@ -92,6 +96,7 @@
         }
         .swiper-container{
             // padding-bottom:0.4rem;
+            margin-top:1px;
             .swiper-wrapper{
                 .swiper-slide{
                     // width:100%;

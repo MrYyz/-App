@@ -8,7 +8,7 @@ import * as titleReducer from '../../../redux/reducers/title.reducer';
 
 import { httpRequest,BaseComponent } from '../../../utils/http';
 
-declare var require:string;
+declare var require:any;
 @Component({
   selector: 'app-advertising',
   templateUrl: './advertising.component.html',
@@ -18,9 +18,10 @@ declare var require:string;
 export class AdvertisingComponent extends BaseComponent implements OnInit {
   
   title:Observable<Title[]>;//可观察的对象
-  advertisingUrl:string = '../../../../assets/images/loading/loading2.png';
-  gfLogoUrl:string = '../../../../assets/images/loading/loading1.png';
-  Countdown:number = 1;//广告时间()
+  // advertisingUrl:string = require('../../../../assets/images/loading/loading2.png');//默认
+  // gfLogoUrl:string = require('../../../../assets/images/loading/loading1.png');//默认
+  advUrl:string = '../../../../assets/images/loading/loading2.png';
+  Countdown:number = 1;//广告时间 -- 默认n+1s
 
   constructor(private router:Router,private store:Store<AppState>,private request:httpRequest) {
     super();
@@ -43,7 +44,7 @@ export class AdvertisingComponent extends BaseComponent implements OnInit {
   jumpToHomePage(){
     this.protect(this.request.http(130,'').subscribe(js=>{
       if(!js) return;
-      this.advertisingUrl = js.service.item._image;
+      this.advUrl = js.service.item._image;
     },e=>this.errorMsg(e)))
   }
 

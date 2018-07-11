@@ -2,7 +2,9 @@
   <div class="main">
       <div class="userInfo">
             <div class="userPortrait">
-                <img src="{{userInfo.portrait?userInfo.portrait : '../../../assets/images/mine/kvrole_1.png'}}" alt="">
+                <div>
+                    <img src="{{userInfo.portrait?userInfo.portrait : defaultPortrait}}" alt="">
+                </div>
                 <i class="iconfont icon-gerenzhongxin" (click)="jumpToUserInfo()"></i>
             </div>
             <p>{{userInfo._fullname}}</p>
@@ -20,8 +22,8 @@
             <p>{{defeatPeerText}}</p>
       </div>
       <custom-ul [data]='dataset'></custom-ul>
-      <div class="exitCurUser" (click)="toExitApp()">
-          <div>安全退出</div>
+      <div class="exitCurUser">
+          <div (click)="toExitApp()">安全退出</div>
       </div>
   </div>
   <div class="footer">

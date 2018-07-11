@@ -6,14 +6,28 @@
     background-color:rgba(245, 245, 245,1);
     // 选项卡
     .trainCourseTabCard{
-        .swiper-pagination5{}
+        .swiper-pagination5{
+            // border:1px solid #ccc;
+            position: relative;
+        }
+        // .swiper-pagination5::before{
+        //     content:'';
+        //     display: block;
+        //     width:100%;
+        //     border-bottom:1px solid #ccc;
+        //     position: absolute;
+        //     bottom:0;
+        //     // z-index: -1;
+        // }
         .swiper-container{
+            margin-top:1px;
             .swiper-wrapper{
                 .swiper-slide{
                     padding: 0rem 2% 0.2rem 2%;
                     padding-bottom: 0;
                     font-size:0.9rem;
                     overflow-y:auto;
+                    background:#fff;
                     // 未报名
                     .train{
                         text-align: center;
@@ -21,6 +35,7 @@
                         background-color:#fff;
                         padding:0 .8rem;
                         padding-bottom:0.1rem;
+                        margin-top:1px;
                         .train-item{
                             padding-top:0.625rem;
                             width:100%;

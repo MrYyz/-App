@@ -1,6 +1,6 @@
 ﻿/*重置样式表*/
 /*==========样式重置===========*/
-body,h1,h2,h3,h4,p,a,input,img,ul,li,ol,dl,dt,dd,i{
+body,h1,h2,h3,h4,h5,p,a,input,img,ul,li,ol,dl,dt,dd,i{
 	padding:0;
 	margin:0;
 	font-size:0.346667rem;/*默认字体26px*/
@@ -41,3 +41,14 @@ a,button,input,optgroup,select,textarea{
 	-webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
+.overOneLine{
+	overflow: hidden;/*内容超出后隐藏*/
+	text-overflow: ellipsis;/* 超出内容显示为省略号*/
+	white-space: nowrap;/*文本不进行换行*/
+}
+.overTwoLine{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;/*两行溢出自动省略号隐藏*/
+	overflow: hidden;
+}

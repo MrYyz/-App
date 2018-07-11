@@ -38,6 +38,8 @@ export class httpRequest {
         let params;
         if(_no==100){
             params = '?no=' + _no + '&' + _params + '&ver=484&os=50&wh=480X800&eid=&accept=text/html,text/vnd.wap.wml,video/3mv,audio/3ma,audio/aac&timestamp=1523622948909';
+        }else if(_no==120){
+            params = '?no=' + _no + '&' + _params + '&ver=484';
         }else{
             let curUser = window.localStorage.getItem('user');
             let _sid:string;

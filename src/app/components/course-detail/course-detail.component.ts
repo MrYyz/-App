@@ -61,6 +61,9 @@ export class CourseDetailComponent extends BaseComponent implements OnInit {
   // 指定回复的评论
   specifyTheReply:object;
 
+  // 评论区默认头像
+  default_buddha:string = require('../../../assets/images/user.png');
+
   swiper3:any;
   ngOnInit() {
     this.store.dispatch({type:'setTitle',payload:this.coursewareTitle});

@@ -26,7 +26,7 @@ export class UnfinishedCourseComponent extends BaseComponent implements OnInit {
   constructor(private router:Router,private store:Store<AppState>,private route:ActivatedRoute,private request:httpRequest) { super() }
 
   ngOnInit() {
-    this.store.dispatch({type:'setTitle',payload:[{titleContent:'为学课程',isShowSearch:true}]})
+    this.store.dispatch({type:'setTitle',payload:[{titleContent:'未学课程',isShowSearch:true}]})
     this.getUnfinishedCourseData();
   }
 

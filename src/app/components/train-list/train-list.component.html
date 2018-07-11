@@ -6,7 +6,7 @@
       <div class="swiper-wrapper">
         <!-- 未报名 -->
         <div class="swiper-slide">
-          <div class="train" [style.background]="notApplyData&&notApplyData.length?'':'rgba(245, 245, 245,1)'">
+          <div class="train">
             {{notApplyData&&notApplyData.length?'':'暂无消息'}}
             <div *ngFor="let item of notApplyData;let i = index" class="train-item" (click)="routeLink(item,0)">
               <h2>{{item._title}}</h2>
@@ -24,7 +24,7 @@
         </div>
         <!-- 已开班 -->
         <div class="swiper-slide">
-          <div class="train" [style.background]="classRunning&&classRunning.length?'':'rgba(245, 245, 245,1)'">
+          <div class="train">
               {{classRunning&&classRunning.length?'':'暂无消息'}}
               <div *ngFor="let item of classRunning;let i = index" class="train-item" (click)="routeLink(item,1)">
                 <h2>{{item._title}}</h2>
@@ -44,7 +44,7 @@
         </div>
         <!-- 已结束 -->
         <div class="swiper-slide">
-          <div class="train" [style.background]="classOver&&classOver.length?'':'rgba(245, 245, 245,1)'">
+          <div class="train">
               {{classOver&&classOver.length?'':'暂无消息'}}
               <div *ngFor="let item of classOver;let i = index" class="train-item" (click)="routeLink(item,2)">
                 <h2>{{item._title}}</h2>

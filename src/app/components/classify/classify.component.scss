@@ -10,6 +10,7 @@
         // word-wrap: break-word;
         height:100%;
         .classesBox{
+            display:none;
             li{
                 width:33%;
                 height:3rem;
@@ -65,6 +66,7 @@
                 
             }
             .swiper-container{
+                margin-top:1px;
                 .swiper-wrapper{
                     .swiper-slide{
                         // width:100%;
@@ -87,6 +89,10 @@
                                     top:50%;
                                     left:50%;
                                     transform:translate(-50%,-50%);
+                                    background-image:url('../../../assets/images/course_default.png');
+                                    background-repeat: no-repeat;
+                                    background-size:100%;
+                                    background-position:50%;
                                 }
                             }
                             // 最新发布,最多浏览，最多点赞
@@ -107,6 +113,10 @@
                                         top:50%;
                                         left: 50%;
                                         transform:translate(-50%,-50%);
+                                        background-image:url('../../../assets/images/course_default.png');
+                                        background-repeat: no-repeat;
+                                        background-size:100%;
+                                        background-position:50%;
                                     }
                                     span{
                                         display: block;
@@ -135,12 +145,12 @@
                                     .courseFlag{
                                         padding-top:5px;
                                         display: -webkit-box;
-                                        -webkit-box-orient: vertical;
-                                        -webkit-line-clamp: 2;//两行溢出自动省略号隐藏
                                         overflow: hidden;
+                                        -webkit-box-orient: vertical;
+                                        -webkit-line-clamp: 2;/*两行溢出自动省略号隐藏*/
                                         span{
                                             display: inline-block;
-                                            padding:0 0.375rem;
+                                            padding:0 0.625rem;
                                             height:1.5rem;
                                             line-height:1.5rem;
                                             text-align: center;

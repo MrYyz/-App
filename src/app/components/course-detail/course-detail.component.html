@@ -1,7 +1,7 @@
 <div id="courseDetail">
   <div class="courseHeader clearfix" *ngIf="courseHeaderData">
     <div class="left">
-      <img src="{{courseHeaderData._image}}" alt="图片"  onerror="this.src='../../../assets/images/empty.png'">
+      <img src="{{courseHeaderData._image}}" alt="图片"  onerror="this.src='assets/images/empty.png'">
     </div>
     <div class="right clearfix">
       <h2>{{courseHeaderData._title}}</h2>
@@ -97,7 +97,7 @@
                 <!-- 单个评论div -->
                 <div class="courseCommentDiv clearfix">
                   <div class="left">
-                    <img src="../../../assets/images/user.png" alt="默认头像">
+                    <img [src]="default_buddha" alt="默认头像">
                     <p>{{courseCommentItem._datetime
                       }}</p>
                   </div>

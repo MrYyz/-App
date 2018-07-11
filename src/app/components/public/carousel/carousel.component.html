@@ -3,7 +3,7 @@
         <ng-template ngFor let-carouselItem [ngForOf]='carouselDataFromHomePage' let-i='index'>
             <div class="swiper-slide" (click)="linkTo(carouselItem)">
                 <div class="carousel">
-                    <img src="{{carouselItem._image}}" onerror="this.src='../../../../assets/images/home/banner_default.jpg'" alt="">
+                    <img src="{{carouselItem._image}}" onerror="this.src='assets/images/home/banner_default.jpg'" alt="">
                     <p *ngIf="carouselItem._title">{{carouselItem._title}}</p>
                 </div>
             </div>
@@ -21,14 +21,14 @@
     <!-- <div class="swiper-scrollbar"></div> -->
 
     <!-- 万一没有数据传过来 -->
-    <div class="swiper-wrapper" *ngIf="!carouselDataFromHomePage">
+    <!-- <div class="swiper-wrapper" *ngIf="!carouselDataFromHomePage">
         <div class="swiper-slide">
-            <img src="../../../../assets/images/home/kvrole_3.png" alt="pic1">
-            <img src="../../../../assets/images/home/kvrole_1.png" alt="pic2">
+            <img src="assets/images/home/kvrole_3.png" alt="pic1">
+            <img src="assets/images/home/kvrole_1.png" alt="pic2">
         </div>
         <div class="swiper-slide">
-            <img src="../../../../assets/images/home/kvrole_2.png" alt="pic3">
-            <img src="../../../../assets/images/home/kvrole_4.png" alt="pic4">
+            <img src="assets/images/home/kvrole_2.png" alt="pic3">
+            <img src="assets/images/home/kvrole_4.png" alt="pic4">
         </div>
-    </div>
+    </div> -->
 </div>

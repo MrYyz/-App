@@ -28,7 +28,7 @@
               <ng-template ngFor let-lastistItem [ngForOf]='lastistRelease' let-i="index">
                 <div class="lastistRelease clearfix" flag="tabcard1" (click)="linkTo(lastistItem)">
                   <div class="itemLeft">
-                    <img onerror="this.src='../../../assets/images/home/kvrole_2.png'" src="{{lastistItem._image}}" alt="{{lastistItem._category}}">
+                    <img onerror="this.src='assets/images/course_default.png'" src="{{lastistItem._image}}" alt="{{lastistItem._category}}">
                     <span *ngIf="lastistItem._finishnum=='1'">已学</span>
                   </div>
                   <div class="itemRight">
@@ -51,7 +51,7 @@
               <ng-template ngFor let-browseItem [ngForOf]='mostBrowse' let-i="index">
                 <div class="mostBrowse clearfix" flag="tabcard2" (click)="linkTo(browseItem)">
                   <div class="itemLeft">
-                    <img onerror="this.src='../../../assets/images/home/kvrole_2.png'" src="{{browseItem._image}}" alt="{{browseItem._category}}">
+                    <img onerror="this.src='assets/images/course_default.png'" src="{{browseItem._image}}" alt="{{browseItem._category}}">
                     <span *ngIf="browseItem._finishnum=='1'">已学</span>
                   </div>
                   <div class="itemRight">
@@ -74,7 +74,7 @@
               <ng-template ngFor let-likeItem [ngForOf]='mostLike' let-i="index">
                 <div class="mostLike clearfix" flag="tabcard3" (click)="linkTo(likeItem)">
                   <div class="itemLeft">
-                    <img onerror="this.src='../../../assets/images/home/kvrole_2.png'" src="{{likeItem._image}}" alt="{{likeItem._category}}">
+                    <img onerror="this.src='assets/images/course_default.png'" src="{{likeItem._image}}" alt="{{likeItem._category}}">
                     <span *ngIf="likeItem._finishnum=='1'">已学</span>
                   </div>
                   <div class="itemRight">

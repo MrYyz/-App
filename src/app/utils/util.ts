@@ -46,6 +46,8 @@ export function firstChoice(_pagination:any,activefontColor?:string,borderColor?
     if(spans[i].className == 'swiper-pagination-bullet swiper-pagination-bullet-active'){
       spans[i].style['border-bottom'] = borderColor?'0.15rem solid'+borderColor:'0.15rem solid #E52425';
       spans[i].style['color'] = activefontColor?activefontColor:'#CC2F2A';
+    }else{
+      spans[i].style['border-bottom'] = '2px solid rgb(240,240,240)';
     }
   }
 }

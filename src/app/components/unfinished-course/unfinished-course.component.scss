@@ -46,14 +46,14 @@
                 .courseFlag{
                     padding-top:5px;
                     display: -webkit-box;
-                    -webkit-box-orient: vertical;
-                    -webkit-line-clamp: 2;//两行溢出自动省略号隐藏
                     overflow: hidden;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;/*两行溢出自动省略号隐藏*/
                     span{
                         display: inline-block;
                         padding:0 0.625rem;
-                        height:1.625rem;
-                        line-height:1.625rem;
+                        height:1.5rem;
+                        line-height:1.5rem;
                         text-align: center;
                         border:1px solid #ccc;
                         border-radius:0.9375rem;

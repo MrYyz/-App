@@ -44,6 +44,9 @@ export class LoginComponent extends BaseComponent implements OnInit {
   // 登陆定时器
   loginTimer:any;
 
+  // 是否登陆超时
+  isTimeoutLogin:boolean = false;
+
   api:string = 'http://218.13.4.182:28002/mlp/api/api.do?no=100&ver=484&os=50&wh=480X800&eid=&';
   params:string = '&accept=text/html,text/vnd.wap.wml,video/3mv,audio/3ma,audio/aac&timestamp=1523622948909';
 
@@ -56,16 +59,17 @@ export class LoginComponent extends BaseComponent implements OnInit {
     if(this.loginTimer){clearTimeout(this.loginTimer)}
     // let regxPsw =/^(?!([a-zA-Z]+|\d+)$)[a-zA-Z\d]{6,20}$/;
     let regx =/^[0-9a-zA-Z]{5,20}$/;
-    if(this.user && this.psw){//未加首尾去空?判断
+    if(this.user && this.psw){//未加首尾去空 -- 判断
       if(this.user.match(regx)==null || this.psw.match(regx)==null){
         alert("用户名或密码格式不正确");
         return;
       }else{
         this.loginTimer = setTimeout(()=>{
           this.showSpinner = false;
+          this.isTimeoutLogin = true;
           alert('请求超时，请稍后再登陆')
           this.psw = '123456';
-        },5000)
+        },10000)
       }
     }else{
       alert('账号或密码不能为空')
@@ -75,30 +79,32 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
     let pwd = CryptoJS.MD5(this.psw).toString().toUpperCase().substr(1,30);
     this.protect(this.request.http(100,"loginname="+this.user+"&pwd="+pwd).subscribe(js=>{
-      // console.log('js100',js)
+
       clearTimeout(this.loginTimer);
-      if(!js){//以下的操作均基于正常请求回数据
+      
+      if(!js || this.isTimeoutLogin){//以下的操作均基于正常请求回数据
         this.showSpinner = false;
-        this.psw = '123456';
+        this.isTimeoutLogin = false;
+        this.psw = 'qwe123123';
         return;
       };
-      let res = js.service;
-      let storageObj = {eid:'',name:'',id:'',sid:'',changepwd:''};
-      // console.log(res)
-      // if(res._errno >= 0){
-        storageObj.eid = res._eid || '';
-        storageObj.name = res._username || '';
-        storageObj.id = res._id || '';
-        storageObj.sid = res._sid || '';
-        storageObj.changepwd = res._changepwd || '';
-        
-        clearTimeout(this.loginTimer)
-        window.localStorage.setItem('user',JSON.stringify(storageObj))
-        window.localStorage.setItem('server',res.server['_url'])
-        this.store.dispatch({type:'setUserInfo',payload:js['service']})
-        this.router.navigate(['/advertising']);
 
-        this.showSpinner = false;
+      let res = js.service;
+
+      let storageObj = {eid:'',name:'',id:'',sid:'',changepwd:''};
+      storageObj.eid = res._eid || '';
+      storageObj.name = res._username || '';
+      storageObj.id = res._id || '';
+      storageObj.sid = res._sid || '';
+      storageObj.changepwd = res._changepwd || '';
+      
+      clearTimeout(this.loginTimer)
+      window.localStorage.setItem('user',JSON.stringify(storageObj))
+      window.localStorage.setItem('server',res.server['_url'])
+      this.store.dispatch({type:'setUserInfo',payload:js['service']})
+      
+      this.showSpinner = false;
+      this.router.navigate(['/advertising']);
     },e=>{
       this.errorMsg(e)
       this.showSpinner = false;

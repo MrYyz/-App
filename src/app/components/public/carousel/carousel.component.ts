@@ -5,6 +5,8 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { AppState,getState } from '../../../redux/app.states';
 import { Observable } from 'rxjs/observable'
 
+declare var require : any;
+
 @Component({
   selector: 'carousel',
   templateUrl: './carousel.component.html',
@@ -16,6 +18,10 @@ export class CarouselComponent implements OnInit {
 
   swiper:any;
   timer:any;
+
+  // banner_default:string = require('../../../../assets/images/home/banner_default.jpg')
+  banner_default:string = require('../../../../assets/images/home/banner_default.jpg')
+
   constructor(private route:ActivatedRoute,private router:Router,private store:Store<AppState>) { }
 
   ngOnInit() {
@@ -59,8 +65,8 @@ export class CarouselComponent implements OnInit {
       //拖动Swiper时阻止click事件
       preventLinksPropagation : false,
       //用户操作swiper之后自动切换不会停止，每次都会重新启动autoplay
-      // autoplay: {disableOnInteraction: false},
-      autoplay: true,
+      autoplay: {disableOnInteraction: false},
+      // autoplay: true,
       //事件
       on: {
         slideChange: function () {

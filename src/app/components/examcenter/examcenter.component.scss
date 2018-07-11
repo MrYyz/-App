@@ -8,6 +8,7 @@
             width:100%;
         }
         .swiper-container{
+            margin-top:1px;
             .swiper-wrapper{
                 .swiper-slide{
                     padding:0 .8rem;
@@ -21,7 +22,12 @@
                                 padding:0.5rem 0;
                                 border-bottom:1px solid rgba(201,201,201,0.3);
                                 position: relative;
-                                h2{} 
+                                h2{
+                                    font-weight: normal;
+                                    overflow: hidden;/*内容超出后隐藏*/
+                                    text-overflow: ellipsis;/* 超出内容显示为省略号*/
+                                    white-space: nowrap;/*文本不进行换行*/
+                                } 
                                 p{
                                     font-size:.8rem;
                                     padding-top:0.2rem;

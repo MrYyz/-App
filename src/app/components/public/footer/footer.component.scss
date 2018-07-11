@@ -3,20 +3,19 @@ $num : 4;//当前footer中li个数
     background-color:#fff;
     ul{
         display:flex;
-        // border-bottom:1px solid #ccc;
         li{
             flex:1;
-            height:3.125rem;
+            height:46px;
             display:flex;
             flex-direction:column;
             justify-content: center;
             align-items:center;
-            border-top:1px solid #ccc;
-            font-size:0.9rem;
+            border-top:0.0625rem solid #ccc;
+            font-size:0.75rem;
             i{
                 display: block;
-                width: 1.80rem;
-                height:1.60rem;
+                width: 1.375rem;
+                height:1.25rem;
                 background-image:url(../../../../assets/images/footer.png);
                 background-size:100% * $num 200%;
             }

@@ -1,7 +1,12 @@
 <ul class="custom-ul">
   <li *ngFor="let dataItem of data;let idx = index;" (click)="getRoute(dataItem.route)">
-    <div>
-      <img src="{{dataItem.url ? '../../../../assets/images/adhibition/c'+dataItem.url+'.png' : ''}}" alt="">
+    <div [ngSwitch]="dataItem.url">
+      <img *ngSwitchCase="'1'" [src]="pic1" alt="">
+      <img *ngSwitchCase="'2'" [src]="pic2" alt="">
+      <img *ngSwitchCase="'3'" [src]="pic3" alt="">
+      <img *ngSwitchCase="'4'" [src]="pic4" alt="">
+      <img *ngSwitchCase="'5'" [src]="pic5" alt="">
+      <img *ngSwitchCase="'6'" [src]="pic6" alt="">
     </div>
     <p>
         {{dataItem.txt}}
@@ -10,3 +15,10 @@
     </p>
   </li>
 </ul>
+
+<!-- 
+<p [ngSwitch]="classesItem._state">
+  <span><i class="iconfont icon-account"></i>{{classesItem._classteachername}}</span>
+  <span *ngSwitchCase="'0'"><i class="iconfont icon-task-management"></i>{{classesItem._traintime}}</span>
+  <span *ngSwitchCase="'1'"><i class="iconfont icon-task-management"></i>{{'报名时间：剩余 '+classesItem._validtime+' 天 | 剩 '+(classesItem._planperson - classesItem._appliednum)+' 名额'}}</span>
+</p> -->

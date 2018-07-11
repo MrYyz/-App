@@ -10,6 +10,8 @@ import {Router} from '@angular/router';
 
 import { httpRequest,BaseComponent } from '../../utils/http';
 
+declare var require : any;
+
 @Component({
   selector: 'app-mine',
   templateUrl: './mine.component.html',
@@ -65,6 +67,10 @@ export class MineComponent extends BaseComponent implements OnInit {
   ]
   // 当前用户打败同级伙伴的txt
   defeatPeerText:string = '打败本部门0%的小伙伴';
+
+  // 默认头像
+  defaultPortrait:string = require('../../../assets/images/mine/wangzi.png');
+
   ngOnInit() {
     this.store.dispatch({type:'setTitle',payload:this.mineTitle});
     this.getUserInformation();

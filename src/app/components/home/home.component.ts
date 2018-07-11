@@ -12,6 +12,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { firstChoice,getMinHeight } from '../../utils/util'
 import { httpRequest,BaseComponent } from '../../utils/http'
 
+declare var require:any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -223,7 +225,13 @@ export class HomeComponent extends BaseComponent implements OnInit {
     this.getHomeData();
   }
   ngAfterViewInit() {
-    // getMinHeight('#swiper-container1',['#swiper-container0','.nav','.swiper-pagination1','.footer']);//实现被调用的元素获取最小高度
+    // getMinHeight('.swiper-container',['.carousel','.nav','.swiper-pagination1']);//实现被调用的元素获取最小高度
+    // console.log('11111=',document.getElementsByClassName('swiper-slide'))
+
+  }
+  AfterContentInit(){
+    // getMinHeight('.swiper-container',['.carousel','.nav','.swiper-pagination1']);//实现被调用的元素获取最小高度
+    
   }
   /**
    * 功能简介：为选项卡增加[新课抢先看]and[最近开班]
@@ -234,8 +242,11 @@ export class HomeComponent extends BaseComponent implements OnInit {
       autoplay:false,
       on: {
         slideChange: function () {
+          
           this.showFirstTabCard = !this.showFirstTabCard;
           firstChoice(this.pagination1.nativeElement);
+          document.getElementById('swiper-container1')['style']['min-height'] = document.getElementsByClassName('main')[0]['offsetHeight'] - 318 + 'px';
+          console.log(document.getElementById('swiper-container1')['style']['height'])
         }.bind(this)
         
       },
@@ -258,20 +269,20 @@ export class HomeComponent extends BaseComponent implements OnInit {
    */
   getHomeData(){
     let homeData = getState(this.store)['dataListState']['homePage2010'];
-    // console.log('homeData=',homeData)
+    console.log('homeData=',homeData)
     if(!homeData){
       this.protect(this.request.http(2010,'').subscribe(js=>{
         if(!js) return;
+        this.showSpinner = false;
         this.store.dispatch({type:'CREATE_DATA',payload:{homePage2010:js['service']}})
         this.updatedHomeDate(js['service']);
-        this.showSpinner = false;
       },e=>{
-        this.errorMsg(e);
         this.showSpinner = false;
+        this.errorMsg(e);
       }))
     }else{
-      this.updatedHomeDate(homeData);
       this.showSpinner = false;
+      this.updatedHomeDate(homeData);
     }
   }
   /**

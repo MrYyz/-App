@@ -5,7 +5,7 @@
   <form>
     <div class="usAndPwd">
       <div class="curUserName">
-          <label for="username">用户名:</label><input type="text" placeholder="请输入您的用户名" [(ngModel)]="user" id="username" autofocus name='username'/>
+          <label for="username">用户名:</label><input type="text" placeholder="请输入您的用户名" [(ngModel)]="user" id="username" name='username'/>
       </div>
       <div class="curPwd">
           <label for="password">密<em></em>码:</label>
@@ -17,7 +17,7 @@
     <div class="submit" (click)="toLogin()">登录</div>
     <div class="other clearfix">
         <span class="register">新用户注册</span>
-        <span class="redeem">找回密码</span>
+        <span class="redeem" (click)="router.navigate(['/retrievepwd'])">找回密码</span>
     </div>
   </div>
   <!-- <p>{{user+','+psw}}</p> -->

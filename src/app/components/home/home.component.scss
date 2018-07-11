@@ -10,6 +10,7 @@
         .nav{//导航
             position: relative;
             padding: 0.5rem 2%;
+            padding-bottom: 0;
             border-bottom:1px solid rgba(204, 204, 204, 0.3);
             ul.navUL{
                 display:flex;
@@ -50,15 +51,25 @@
             padding-bottom: 0;
             font-size:0.9rem;
             .swiper-container{
+                margin-top:1px;
                 .swiper-wrapper{
                     .swiper-slide{
+                        // min-height: calc(100% - 418px);
                         // overflow-y:scroll; 
-                        // [新课抢先看]、[最近开班]
+                        // [新课抢先看]、[培训班动态]
                         .newcourse,.realshow{
                             padding-bottom:.1rem;
                             background-color:#fff;
                             padding:0 .8rem;
                             padding-bottom:0.1rem;
+                            // min-height: 250px; // 这里是有问题的  怎么解决?
+                            // min-height: calc(100% - 418px);
+                            height:100%;
+                            p{
+                                text-align: center;
+                                font-size:0.9rem;
+                                padding:0.3125rem 0;
+                            }
                             // 新课抢先看
                             .newcourse-item{
                                 // padding-top:10px;
@@ -95,11 +106,15 @@
                                     }
                                     .courseFlag{
                                         padding-top:5px;
+                                        display: -webkit-box;
+                                        overflow: hidden;
+                                        -webkit-box-orient: vertical;
+                                        -webkit-line-clamp: 2;/*两行溢出自动省略号隐藏*/
                                         span{
                                             display: inline-block;
                                             padding:0 0.625rem;
-                                            height:1.625rem;
-                                            line-height:1.625rem;
+                                            height:1.5rem;
+                                            line-height:1.5rem;
                                             text-align: center;
                                             border:1px solid #ccc;
                                             border-radius:0.9375rem;

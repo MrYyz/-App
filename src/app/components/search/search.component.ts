@@ -62,7 +62,7 @@ export class SearchComponent extends BaseComponent implements OnInit {
   }
   ngDoCheck(){//监测 数据是否发生变化
     this.courseData = getState(this.store)['dataListState']['courseSearchData223'];
-console.log('ngDoCheck=',this.courseData)
+// console.log('ngDoCheck=',this.courseData)
     let nextSearchText = getState(this.store)['dataListState']['SearchText'];
 
     if(this.curSearchText != nextSearchText){this.swiper9.slideTo(0, 300, false)}
@@ -91,7 +91,7 @@ console.log('ngDoCheck=',this.courseData)
   }
 
   getData(idx?:number){
-    
+    console.log('1111111111=',this.showSpinner)
     this.showSpinner = true;
 
     let params = 'flag=course';
@@ -110,14 +110,18 @@ console.log('ngDoCheck=',this.courseData)
 
     let dataArr = [this.courseData,this.coursewareData,this.examData,this.trainData];
 
-    if(dataArr[idx]) return;//如果有结果就不再查询了
+    if(dataArr[idx]) {
+      //如果有结果就不再查询了
+      this.showSpinner = false;
+      return;
+    };
 
     let dataList = getState(this.store)['dataListState'];
     // console.log(dataList)
     if(dataList && dataList['SearchText']){
       params = params + '&pageno=1&pagesize=15&key=' + dataList['SearchText'];
     }else{
-      alert('搜索内容不能为空！')
+      console.log('搜索内容不能为空！')
       return;
     }
     
@@ -154,10 +158,10 @@ console.log('ngDoCheck=',this.courseData)
         this.router.navigate(['/coursedetail/'+itemObj['_id']+'/'+itemObj['_title']])
       break;
       case 'courseware':
-        alert('暂不开发查看课件')
+        alert('暂不支持查看课件')
       break;
       case 'exam':
-        alert('暂未开发考试详情')
+        alert('暂不支持考试详情')
       break;
       default://培训班
         this.router.navigate(['/applytrain/'+itemObj['_applyid']]);

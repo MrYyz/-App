@@ -33,6 +33,8 @@ import { CollectionComponent } from './components/collection/collection.componen
 import { UnfinishedCourseComponent } from './components/unfinished-course/unfinished-course.component';
 import { ExamcenterComponent } from './components/examcenter/examcenter.component';
 import { StudyRecordComponent } from './components/study-record/study-record.component';
+import { RetrievePasswordComponent } from './components/retrieve-password/retrieve-password.component';
+
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { StudyRecordComponent } from './components/study-record/study-record.com
     UnfinishedCourseComponent,
     ExamcenterComponent,
     StudyRecordComponent,
+    RetrievePasswordComponent,
   ],
   imports: [
     BrowserModule,

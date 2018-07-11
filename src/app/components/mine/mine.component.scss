@@ -16,16 +16,20 @@
                 height:8rem;
                 // border:1px solid #ccc;
                 position:relative;
-                img{
-                    // height:70%;
+                >div{
                     width:5.3125rem;
                     height:5.3125rem;
                     position:absolute;
                     bottom:0.5rem;
                     left:50%;
                     transform:translateX(-50%);
-                    border:1px solid #ccc;
                     border-radius:50%;
+                    border:1px solid #ccc;
+                    overflow:hidden;
+                }
+                img{
+                    // height:70%;
+                    width:100%;
                 }
                 i{
                     width:1.8rem;
