@@ -13,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { httpRequest,BaseComponent } from '../../utils/http';
 
-// declare var require:any;
+declare var require:any;
 
 @Component({
   selector: 'app-train-class',

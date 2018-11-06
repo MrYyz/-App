@@ -222,7 +222,7 @@ export class CourseDetailComponent extends BaseComponent implements OnInit {
   changeTallyToHtml(_str){
      if(_str){
        var res = '';
-       var _style = 'padding:0 0.25rem;border:0.0625rem solid #ccc;border-radius:0.9375rem;margin-right:0.25rem;font-size:0.9rem;';
+       var _style = 'display:inline-block;height:1.375rem;line-height:1.375rem;padding:0 0.3125rem;border:0.0625rem solid #ccc;border-radius:0.6875rem;margin-right:0.3125rem;font-size:0.8rem;';
        if(_str.indexOf('|')>0){
           _str.split('|').forEach(item => {
             res += '<span style="'+_style+'">'+item+'</span>';

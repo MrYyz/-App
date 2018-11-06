@@ -17,9 +17,9 @@
     <div class="submit" (click)="toLogin()">登录</div>
     <div class="other clearfix">
         <span class="register">新用户注册</span>
-        <span class="redeem" (click)="router.navigate(['/retrievepwd'])">找回密码</span>
+        <span class="redeem" (click)="linkTo">找回密码</span>
     </div>
   </div>
-  <!-- <p>{{user+','+psw}}</p> -->
+  <p class="tips">{{user+','+psw}}</p>
 </div>
 <spinner *ngIf='showSpinner'></spinner>

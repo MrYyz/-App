@@ -34,6 +34,7 @@ import { UnfinishedCourseComponent } from './components/unfinished-course/unfini
 import { ExamcenterComponent } from './components/examcenter/examcenter.component';
 import { StudyRecordComponent } from './components/study-record/study-record.component';
 import { RetrievePasswordComponent } from './components/retrieve-password/retrieve-password.component';
+import { SurveyComponent } from './components/survey/survey.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { RetrievePasswordComponent } from './components/retrieve-password/retrie
     ExamcenterComponent,
     StudyRecordComponent,
     RetrievePasswordComponent,
+    SurveyComponent,
   ],
   imports: [
     BrowserModule,

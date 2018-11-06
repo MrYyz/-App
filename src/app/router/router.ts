@@ -19,6 +19,7 @@ import {UnfinishedCourseComponent} from '../components/unfinished-course/unfinis
 import {ExamcenterComponent} from '../components/examcenter/examcenter.component'
 import {StudyRecordComponent} from '../components/study-record/study-record.component'
 import {RetrievePasswordComponent} from '../components/retrieve-password/retrieve-password.component'
+import {SurveyComponent} from '../components/survey/survey.component'
 
 const appRoutes: Routes = [
     { path:'',component:HomeComponent },
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
     { path:'examcenter',component:ExamcenterComponent },
     { path:'studyrecord',component:StudyRecordComponent },
     { path:'retrievepwd',component:RetrievePasswordComponent },
+    { path:'survey',component:SurveyComponent },
     { path:'**',component:NotFoundComponent },
 ]
 

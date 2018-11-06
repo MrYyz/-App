@@ -136,4 +136,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
       return Promise.reject(error)
     })
   }
+  // 跳转到找回密码页面
+  linkTo(){
+    this.router.navigate(['/retrievepwd']);
+  }
 };

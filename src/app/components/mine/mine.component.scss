@@ -11,10 +11,10 @@
         .userInfo{
             background-color:rgba(245, 245, 245,1);
             padding-bottom:0.5rem;
-            // border:1px solid #f00;
+            // border:0.0625rem solid #f00;
             .userPortrait{
                 height:8rem;
-                // border:1px solid #ccc;
+                // border:0.0625rem solid #ccc;
                 position:relative;
                 >div{
                     width:5.3125rem;
@@ -24,7 +24,7 @@
                     left:50%;
                     transform:translateX(-50%);
                     border-radius:50%;
-                    border:1px solid #ccc;
+                    border:0.0625rem solid #ccc;
                     overflow:hidden;
                 }
                 img{
@@ -64,9 +64,10 @@
                     span{
                         display: block;
                         height:100%;
+                        height:1rem;
+                        line-height:1rem;
                         border-radius:0.75rem;
                         background-color:red;
-                        line-height:1rem;
                     }
                     strong{
                         position: absolute;
@@ -77,23 +78,24 @@
                         color:#fff;
                         height:1rem;
                         line-height:1rem;
+                        font-size:0.8rem;
                     }
                 }
                 i{
                     padding-left:83%;
                     font-style:normal;
-                    // font-size:0.9rem;
+                    font-size:0.9rem;
                     font-weight:bold;
                 }
             }
         }
         .exitCurUser{
             width:100%;
-            // border:1px solid #ccc;
+            // border:0.0625rem solid #ccc;
             position:absolute;
             bottom:0;
             div{
-                // border:1px solid #ccc;
+                // border:0.0625rem solid #ccc;
                 width:60%;
                 margin:1rem 20%;
                 padding:0.5rem;
@@ -102,7 +104,7 @@
                 font-size:0.9rem;
                 background-color:#f00;
                 color:#fff;
-                box-shadow:1px 1px 1px 0 #E6252A;
+                box-shadow:0.0625rem 0.0625rem 0.0625rem 0 #E6252A;
             }
         }
     }

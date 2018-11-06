@@ -25,7 +25,6 @@ export class HeadComponent extends BaseComponent implements OnInit {
 
   // isSearch:boolean = false;
   searchText:string = '';
-  // isCollect:string = getState(this.store)['dataListState']['curCourse215']?getState(this.store)['dataListState']['curCourse215']['_isfavorited']:'0';
 
   ngOnInit() {
     // this.getLocation();
@@ -83,6 +82,7 @@ export class HeadComponent extends BaseComponent implements OnInit {
       this.store.dispatch({type:'UPDATE_DATA',payload:{courseSearchData223:true}})
       this.store.dispatch({type:'UPDATE_DATA',payload:{SearchText:''}})
     }
+    console.error('已调用返回键');
     history.back();
   }
 
@@ -93,8 +93,8 @@ export class HeadComponent extends BaseComponent implements OnInit {
 
   cleanSearchText(){
     this.searchText = '';
-    this.store.dispatch({type:'UPDATE_DATA',payload:{courseSearchData223:''}})//清空内容
-    this.store.dispatch({type:'UPDATE_DATA',payload:{SearchText:''}})//清空内容
+    // this.store.dispatch({type:'UPDATE_DATA',payload:{courseSearchData223:''}})//清空内容
+    // this.store.dispatch({type:'UPDATE_DATA',payload:{SearchText:''}})//清空内容
   }
 
   hateAndLike(e){
@@ -111,7 +111,7 @@ export class HeadComponent extends BaseComponent implements OnInit {
     
     let _id = getState(this.store)['dataListState']['curCourse215']['_id'];
     let _titleContent = getState(this.store)['titleState']['title'][0]['titleContent']//其实这里也只能是‘课程详情’（T_T ，不知道自己为什么兜这么打个圈?）
-    console.log(_titleContent)
+    // console.log(_titleContent)
     this.protect(this.request.http(260,'isfavorited='+_isCollect+'&id='+_id).subscribe(js=>{
       if(!js)return;
       // 最好弹窗提示收藏成功还是取消收藏
@@ -133,6 +133,7 @@ export class HeadComponent extends BaseComponent implements OnInit {
       txt = txt.replace(/\s/g,"");
     }
 
+    this.loading = true;
     this.protect(this.request.http(223,'flag=course&pageno=1&pagesize=15&key='+txt).subscribe(js=>{
 
       if(!js) return;
@@ -145,16 +146,19 @@ export class HeadComponent extends BaseComponent implements OnInit {
       }
       this.store.dispatch({type:_type,payload:{courseSearchData223:js['service']['item']}})
       this.store.dispatch({type:_type,payload:{SearchText:this.searchText}})
-      this.searchText = '';
-      // console.log('header=',getState(this.store)['dataListState'])
-    },e=>{this.errorMsg(e)}))
+      // this.searchText = '';
+      this.loading = false;
+    },e=>{
+      this.loading = false;
+      this.errorMsg(e);
+    }))
 
   }
 
 
   // 获取设备当前所在的地理位置
   getLocation(){   
-    console.info('navigator=',navigator.geolocation)
+    // console.info('navigator=',navigator.geolocation)
     if (navigator.geolocation){   
         navigator.geolocation.getCurrentPosition(showPosition,showError);   
     }else{
@@ -186,7 +190,7 @@ export class HeadComponent extends BaseComponent implements OnInit {
 
       //google   谷歌地图接口交互 -- 要翻墙先可以用 -- 可能翻墙原因测了很多次都不准
       var url = 'http://maps.google.cn/maps/api/geocode/json?latlng='+latlon+'&language=CN';
-      console.log(url)
+      // console.log(url)
       // http://maps.google.cn/maps/api/geocode/json?latlng=23.0576151,113.16096870000001&language=CN
 
       //baidu   百度地图接口交互 -- 要设置Access-Control-Allow-Origin，建议依靠php实现

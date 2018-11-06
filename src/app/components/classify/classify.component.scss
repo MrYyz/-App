@@ -66,7 +66,7 @@
                 
             }
             .swiper-container{
-                margin-top:1px;
+                // margin-top:1px;
                 .swiper-wrapper{
                     .swiper-slide{
                         // width:100%;
@@ -144,6 +144,7 @@
                                     }
                                     .courseFlag{
                                         padding-top:5px;
+                                        padding-bottom:2px;
                                         display: -webkit-box;
                                         overflow: hidden;
                                         -webkit-box-orient: vertical;
@@ -157,7 +158,7 @@
                                             border:1px solid #ccc;
                                             border-radius:0.9375rem;
                                             margin-right:2px;
-                                            font-size:0.9rem;
+                                            font-size:0.8rem;
                                             margin-bottom:2px;
                                         }
                                     }

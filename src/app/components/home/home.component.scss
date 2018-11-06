@@ -11,7 +11,7 @@
             position: relative;
             padding: 0.5rem 2%;
             padding-bottom: 0;
-            border-bottom:1px solid rgba(204, 204, 204, 0.3);
+            border-bottom:0.0625rem solid rgba(204, 204, 204, 0.3);
             ul.navUL{
                 display:flex;
                 justify-content:space-between;
@@ -24,7 +24,7 @@
                     align-items:center;
                     align-self:center;
                     margin-right:.5%;
-                    padding:10px;
+                    padding:0.625rem;
                     i{
                         display: block;
                         width: 1.8rem;
@@ -51,10 +51,10 @@
             padding-bottom: 0;
             font-size:0.9rem;
             .swiper-container{
-                margin-top:1px;
+                // margin-top:0.0625rem;
                 .swiper-wrapper{
                     .swiper-slide{
-                        // min-height: calc(100% - 418px);
+                        // min-height: calc(100% - 41.125rem);
                         // overflow-y:scroll; 
                         // [新课抢先看]、[培训班动态]
                         .newcourse,.realshow{
@@ -62,8 +62,8 @@
                             background-color:#fff;
                             padding:0 .8rem;
                             padding-bottom:0.1rem;
-                            // min-height: 250px; // 这里是有问题的  怎么解决?
-                            // min-height: calc(100% - 418px);
+                            // min-height: 23.125rem; // 这里是有问题的  怎么解决?
+                            // min-height: calc(100% - 41.125rem);
                             height:100%;
                             p{
                                 text-align: center;
@@ -72,7 +72,7 @@
                             }
                             // 新课抢先看
                             .newcourse-item{
-                                // padding-top:10px;
+                                // padding-top:0.625rem;
                                 height:7.5rem;
                                 border-bottom:0.2rem dashed rgba(245, 245, 245,1);
                                 .courseItemLeft{
@@ -105,7 +105,8 @@
                                         white-space: nowrap;/*文本不进行换行*/
                                     }
                                     .courseFlag{
-                                        padding-top:5px;
+                                        padding-top:0.3125rem;
+                                        padding-bottom:2px;
                                         display: -webkit-box;
                                         overflow: hidden;
                                         -webkit-box-orient: vertical;
@@ -116,11 +117,11 @@
                                             height:1.5rem;
                                             line-height:1.5rem;
                                             text-align: center;
-                                            border:1px solid #ccc;
+                                            border:0.0625rem solid #ccc;
                                             border-radius:0.9375rem;
-                                            margin-right:2px;
-                                            font-size:0.9rem;
-                                            margin-bottom:2px;
+                                            margin-right:0.125rem;
+                                            font-size:0.8rem;
+                                            margin-bottom:0.125rem;
                                         }
                                     }
                                     p{
@@ -129,7 +130,7 @@
                                         span{
                                             font-size:0.9rem;
                                             i{
-                                                margin-right:4px;
+                                                margin-right:0.25rem;
                                                 font-size:1rem;
                                             }
                                         }
@@ -156,7 +157,7 @@
                                     overflow: hidden;/*内容超出后隐藏*/
                                     text-overflow: ellipsis;/* 超出内容显示为省略号*/
                                     white-space: nowrap;/*文本不进行换行*/
-                                    span{i{font-size:0.8rem;margin-right:4px;}}
+                                    span{i{font-size:0.8rem;margin-right:0.25rem;}}
                                     span:nth-child(1){float:left;}
                                     span:nth-child(2){float:right;}
                                 }
@@ -176,7 +177,7 @@
                                         position:absolute;
                                         bottom:5%;
                                         right:3%;
-                                        border-radius:8px;
+                                        border-radius:0.5rem;
                                         background-color:rgba(92, 87, 87, 0.5);
                                         padding:0 3%;
                                         color:#fff;

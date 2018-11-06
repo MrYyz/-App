@@ -52,169 +52,9 @@ export class HomeComponent extends BaseComponent implements OnInit {
   showFirstTabCard:boolean = true;
 
   // 【新课抢先看】模拟数据
-  courseList:object[] = [
-    {
-      _author:'梁馨灵',
-      _category:'管理能力',
-      _commentcount:'5',
-      _commontstar:'0',
-      _courselevel:'',
-      _coursetype:'管理能力',
-      _courseversion:'',
-      _coursewarecount:'1',
-      _credit:'10.0',
-      _description:'小灵提示您，本信息为测试专用',
-      _developtime:'',
-      _enablecomment:'1',
-      _enabledownload:'0',
-      _enablerating:'1',
-      _enableshare:'0',
-      _finishnum:'1',
-      _flag:'course',
-      _id:'20180404swafo831k25lj19ufas98efy1241k4hk1',
-      _image:'../../../assets/images/home/kvrole_2.png',
-      _isfavorited:'0',
-      _israted:'0',
-      _issteponed:'0',
-      _language:'',
-      _largeimage:'',
-      _laststudydate:'0',
-      _markcontent:'aaa|vvvvv',
-      // markcontent:['选修','重点'],
-      _markid:'20171q23nl19a0sq1n2p129311l8795',
-      _model:'0',
-      _mycompany:'1',
-      _mystar:'0',
-      _pubdate:'18小时前',
-      _pv:'5',
-      _sc:'0',
-      _shareurl:'http:',
-      _soecialtopic:'',
-      _starcount:'0',
-      _studyduration:'0',
-      _stydyprogress:'0',
-      _tag:'',
-      _thumbs:'http:',
-      _title:'测试专用标题',
-      _type:'',
-      _url:'',
-      _vc:'94',
-    },
-    {
-      _author:'梁馨灵',
-      _category:'管理能力',
-      _commentcount:'5',
-      _commontstar:'0',
-      _courselevel:'',
-      _coursetype:'管理能力',
-      _courseversion:'',
-      _coursewarecount:'1',
-      _credit:'10.0',
-      _description:'小灵提示您，本信息为测试专用',
-      _developtime:'',
-      _enablecomment:'1',
-      _enabledownload:'0',
-      _enablerating:'1',
-      _enableshare:'0',
-      _finishnum:'1',
-      _flag:'course',
-      _id:'20180404swafo831k25lj19ufas98efy1241k4hk1',
-      _image:'../../../assets/images/home/kvrole_2.png',
-      _isfavorited:'0',
-      _israted:'0',
-      _issteponed:'0',
-      _language:'',
-      _largeimage:'',
-      _laststudydate:'0',
-      _markcontent:'aaa|vvvvv',
-      // markcontent:['选修','重点'],
-      _markid:'20171q23nl19a0sq1n2p129311l8795',
-      _model:'0',
-      _mycompany:'1',
-      _mystar:'0',
-      _pubdate:'18小时前',
-      _pv:'5',
-      _sc:'0',
-      _shareurl:'http:',
-      _soecialtopic:'',
-      _starcount:'0',
-      _studyduration:'0',
-      _stydyprogress:'0',
-      _tag:'',
-      _thumbs:'http:',
-      _title:'测试专用标题',
-      _type:'',
-      _url:'',
-      _vc:'94',
-    },
-    {
-      _author:'梁馨灵',
-      _category:'管理能力',
-      _commentcount:'5',
-      _commontstar:'0',
-      _courselevel:'',
-      _coursetype:'管理能力',
-      _courseversion:'',
-      _coursewarecount:'1',
-      _credit:'10.0',
-      _description:'小灵提示您，本信息为测试专用',
-      _developtime:'',
-      _enablecomment:'1',
-      _enabledownload:'0',
-      _enablerating:'1',
-      _enableshare:'0',
-      _finishnum:'1',
-      _flag:'course',
-      _id:'20180404swafo831k25lj19ufas98efy1241k4hk1',
-      _image:'../../../assets/images/home/kvrole_2.png',
-      _isfavorited:'0',
-      _israted:'0',
-      _issteponed:'0',
-      _language:'',
-      _largeimage:'',
-      _laststudydate:'0',
-      _markcontent:'aaa|vvvvv',
-      // markcontent:['选修','重点'],
-      _markid:'20171q23nl19a0sq1n2p129311l8795',
-      _model:'0',
-      _mycompany:'1',
-      _mystar:'0',
-      _pubdate:'18小时前',
-      _pv:'5',
-      _sc:'0',
-      _shareurl:'http:',
-      _soecialtopic:'',
-      _starcount:'0',
-      _studyduration:'0',
-      _stydyprogress:'0',
-      _tag:'',
-      _thumbs:'http:',
-      _title:'测试专用标题',
-      _type:'',
-      _url:'',
-      _vc:'94',
-    },
-  ];
+  courseList:object[];
   // 【最近开班】模拟数据
-  classesList:object[] = [
-    {
-      _trainid:'20180403asd213297430sdf4524',
-      _applyid:'abc123',
-      _title:'跟IT互联网大牛一齐学技术',
-      _appliednum:'0',//已申请人数
-      _planperson:"11",//限制总人数
-      _plannum:'0',
-      _address:'佛山南海区海八路广发金融中心信息中心16档案室',
-      _iscompletion:'0',
-      _state:'1',
-      _tablist:'签到，课程|sign,course',
-      _validtime:'0',
-      _flag:'applytrain',
-      _icon:'',
-      _classteachername:'张晓萍',
-      _traintime:'2018-04-20 14:30~2018-04-24 17:30'
-    }
-  ];
+  classesList:object[];
   // 是否需要加载中
   showSpinner:boolean=true;
 
@@ -311,7 +151,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
     // 同步：【最近开班】数据 --处理数据?如果条数据是传{}过来的
     this.classesList = _data['category'][3]['item'];
 
-    // console.log('轮播图数据',this.carouselData)
   }
   
   /**
@@ -320,7 +159,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
    * @memberof HomeComponent
    */
   linkTo(itemObj:object){
-    // console.log('---itemObj---',itemObj)
     // 实现 导航栏-['未完成课程','收藏的课程','考试中心','培训班'] 路由跳转
     switch(itemObj['_flag']){
       case "unfinished_course":

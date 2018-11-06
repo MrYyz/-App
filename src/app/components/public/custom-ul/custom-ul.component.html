@@ -12,6 +12,7 @@
         {{dataItem.txt}}
         <i class="iconfont icon-more" *ngIf="dataItem.showIcon? dataItem.showIcon : true"></i>
         <span>{{dataItem.rightTxt?dataItem.rightTxt:''}}</span>
+        <u *ngIf="dataItem.count&&dataItem.count>0">{{dataItem.count}}</u>
     </p>
   </li>
 </ul>
