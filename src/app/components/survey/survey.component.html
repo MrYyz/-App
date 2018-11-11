@@ -1,0 +1,25 @@
+<div class="surveyTabCard">
+  <div class="swiper-pagination10" #pagination10></div>
+  <div class="swiper-container" id="swiper-container10">
+      <div class="swiper-wrapper">
+          <!-- 未完成 -->
+          <div class="swiper-slide">
+            <ul class="notComplete">
+              <h6 *ngIf="notCompleteData && !showLoading && notCompleteData['_count'] == 0 || !notCompleteData && !showLoading">暂无内容</h6>
+              <h6 class="loading" *ngIf="showLoading && !notCompleteData"><img src="../../../assets/images/loading.gif" alt="">加载中</h6>
+              <li *ngFor="let data of [] | toArr:notCompleteData;let idx = index" (click)="clickFunc()">
+                <h5>{{data._title}}</h5>
+                <p>{{'共'+ data._questioncount +'题,截至时间：'+ data._expiredate}}</p>
+              </li>
+            </ul>
+          </div>
+          <!-- 已完成 -->
+          <div class="swiper-slide">
+            <div class="isComplete">
+              <h6 *ngIf="completeData && !showLoading && completeData['_count'] == 0 || !completeData && !showLoading">暂无内容</h6>
+              <h6 class="loading" *ngIf="showLoading && !completeData"><img src="../../../assets/images/loading.gif" alt="">加载中</h6>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>

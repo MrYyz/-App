@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     this.isNotLogined();
     var vconsole = new VConsole();
   }
-  ngAfterViewInit() {setTimeout(this.giveAppHeight());}
+  ngAfterViewInit() {setTimeout(()=>{this.giveAppHeight()})}
 
   isNotLogined(){ 
     if(!window.localStorage.getItem('user')){
